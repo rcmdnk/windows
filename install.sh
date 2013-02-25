@@ -12,6 +12,8 @@ curdir=`pwd -P`
 # help
 HELP="Usage: $0 [-nd] [-b <backup file postfix>] [-e <exclude file>]
 
+Make links of windows related files/directories
+
 Arguments:
       -b  Set backup postfix (default: make *.bak file)
           Set \"\" if backups are not necessary
