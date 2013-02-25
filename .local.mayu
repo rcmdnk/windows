@@ -1,0 +1,7 @@
+ #window size
+ key C-A-Enter = &WindowMoveTo(NW,5,10) &WindowResizeTo(1360,880)
+ key C-A-S-Enter = &WindowMoveTo(NW,5,10) &WindowResizeTo(1000,680)
+ key A-S-h = &WindowMoveTo(NW,5,10) &WindowResizeTo(680,880)
+ key A-S-l = &WindowMoveTo(NW,685,10) &WindowResizeTo(680,880)
+ key A-S-k = &WindowMoveTo(NW,5,10) &WindowResizeTo(1350,440)
+ key A-S-j = &WindowMoveTo(NW,5,450) &WindowResizeTo(1350,440)
