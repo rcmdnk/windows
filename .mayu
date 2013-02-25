@@ -107,6 +107,7 @@ keymap Global
  key A-_4 = A-F4
  #key C-o = A-Left
  #key C-i = A-Right
+ key A-C-f = WIN
 
  
 
