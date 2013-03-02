@@ -107,7 +107,7 @@ keymap Global
  key A-_4 = A-F4
  #key C-o = A-Left
  #key C-i = A-Right
- key A-C-f = WIN
+ key A-C-f = LWIN
 
  
 
@@ -124,9 +124,6 @@ keymap Global
  key *RD = *RWindows
  key A-Esc = A-GraveAccent
  key A-_1 = A-GraveAccent
-
- # VIMode
- include "vi.mayu"
 
 # for explorer
 window powerpnt /Explorer.EXE*/ : Global
