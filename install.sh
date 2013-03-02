@@ -63,7 +63,7 @@ if [[ "$OSTYPE" =~ "cygwin" ]];then
 fi
 
 if [ $dryrun -ne 1 ];then
-  mkdir -p $instdir
+  :
 else
   echo "*** This is dry run, not install anything ***"
 fi
