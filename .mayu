@@ -3,134 +3,126 @@ include "104.mayu"
 # mouse event activation
 def option mouse-event = true
 
-# for HHK
+# Happy Hacking Keyboard (HHK) key definition {{{
 def key LD = 0x7b
 def key RD = 0x79
+# }}}
 
-# include "default.mayu"
-keymap Global
+keymap Global #{{{
 
- # control, capslock, windows, esc
- #mod shift += !!!Space
- mod control += CapsLock
- key *CapsLock = *LControl 
- mod control += E0CapsLock
- key *E0CapsLock = *LControl 
- #key *LCtrl = $CapsLock
- key *NumLock = $CapsLock
- key *Apps = $CapsLock
- #key LWin =
- #key *LWin = $CapsLock
- key *RWin = $CapsLock
-
- # mouse
- #key A-C-y = Num4
- #key A-C-u = Num2
- #key A-C-i = Num8
- #key A-C-o = Num6
- #key CL-y = Num4
- #key CL-u = Num2
- #key CL-i = Num8
- #key CL-o = Num6
- key A-C-y = &MouseMove(-20, 0)
- key A-C-u = &MouseMove(0, 20)
- key A-C-i = &MouseMove(0, -20)
- key A-C-o = &MouseMove(20, 0)
- key CL-y = &MouseMove(-20, 0)
- key CL-u = &MouseMove(0, 20)
- key CL-i = &MouseMove(0, -20)
- key CL-o = &MouseMove(20, 0)
- key A-S-y = &WindowMove(-20, 0)
- key A-S-u = &WindowMove(0, 20)
- key A-S-i = &WindowMove(0, -20)
- key A-S-o = &WindowMove(20, 0)
- key CL-A-y = &WindowMove(-20, 0)
- key CL-A-u = &WindowMove(0, 20)
- key CL-A-i = &WindowMove(0, -20)
- key CL-A-o = &WindowMove(20, 0)
-
-
- #key A-C-D-n = NumSlash Num0
- #key A-C-U-n = NumPeriod
- #key A-C-D-p = NumMinus Num0
- #key A-C-U-p = NumPeriod
- #key A-S-D-n = NumSlash Num0
- #key A-S-U-n = NumPeriod
- #key A-S-D-p = NumMinus Num0
- #key A-S-U-p = NumPeriod
- #key CL-*A-D-n = NumSlash Num0
- #key CL-*A-U-n = NumPeriod
- #key CL-*A-D-p = NumMinus Num0
- #key CL-*A-U-p = NumPeriod
- #key CL-*A-D-Semicolon = NumMinus Num0
- #key CL-*A-U-Semicolon = NumPeriod
- key A-C-n = LButton
- key A-C-p = RButton
- #key A-S-n = LButton
- #key A-S-p = RButton
- key CL-*A-n = LButton
- key CL-*A-p = RButton
- key CL-*A-Semicolon = RButton
-
- # for putty, pasete by right click
- key A-v = RButton
-
- key A-C-m = &MouseWheel(-520)
- key A-C-comma = &MouseWheel(520)
- key CL-m = &MouseWheel(-520)
- key CL-comma = &MouseWheel(520)
- key A-S-m = &MouseWheel(-120)
- key A-S-comma = &MouseWheel(120)
-
- # arrow
- key A-C-h = Left
- key A-C-j = Down
- key A-C-k = Up
- key A-C-l = Right
- #key CL-*C-*A-h = Left
- #key CL-*C-*A-j = Down
- #key CL-*C-*A-k = Up
- #key CL-*C-*A-l = Right
-
- # for all
- key C-h = BS
- key A-C-a = A-Space n
- key A-C-s = A-Space m
- #key A-*C-e = Esc
- key C-LeftSquareBracket = Esc
- #key Esc = GraveAccent
- #key S-Esc = S-GraveAccent
- #key C-S-e = Esc
- key A-d = Delete
- key A-C-BS = W-l
- key A-_0 = W-l
- key A-_4 = A-F4
- #key C-o = A-Left
- #key C-i = A-Right
- key A-C-f = LWIN
-
+  # control, capslock, windows, esc {{{
+  #mod shift += !!!Space
+  mod control += CapsLock
+  key *CapsLock = *LControl 
+  mod control += E0CapsLock
+  key *E0CapsLock = *LControl 
+  #key *LCtrl = $CapsLock
+  key *NumLock = $CapsLock
+  key *Apps = $CapsLock
+  #key LWin =
+  #key *LWin = $CapsLock
+  key *RWin = $CapsLock
+  # }}}
  
+  # mouse {{{
 
- # volume
- #key C-F3 = VolumeDown VolumeDown VolumeDown VolumeDown VolumeDown VolumeDown VolumeDown VolumeDown VolumeDown VolumeDown VolumeDown VolumeDown VolumeDown VolumeDown VolumeDown VolumeDown VolumeDown VolumeDown VolumeDown VolumeDown
- #key C-F4 = VolumeUp VolumeUp VolumeUp VolumeUp VolumeUp VolumeUp VolumeUp VolumeUp VolumeUp VolumeUp VolumeUp VolumeUp VolumeUp VolumeUp VolumeUp VolumeUp VolumeUp VolumeUp VolumeUp VolumeUp
+  # use yammy's function
+  # vim like moving with keys yuio (keys on the hjkl)
+  key A-C-y = &MouseMove(-20, 0)
+  key A-C-u = &MouseMove(0, 20)
+  key A-C-i = &MouseMove(0, -20)
+  key A-C-o = &MouseMove(20, 0)
+  key CL-y = &MouseMove(-20, 0)
+  key CL-u = &MouseMove(0, 20)
+  key CL-i = &MouseMove(0, -20)
+  key CL-o = &MouseMove(20, 0)
+  key A-S-y = &WindowMove(-20, 0)
+  key A-S-u = &WindowMove(0, 20)
+  key A-S-i = &WindowMove(0, -20)
+  key A-S-o = &WindowMove(20, 0)
+  key CL-A-y = &WindowMove(-20, 0)
+  key CL-A-u = &WindowMove(0, 20)
+  key CL-A-i = &WindowMove(0, -20)
+  key CL-A-o = &WindowMove(20, 0)
 
- # for HHK
- mod alt += LD
- key *LD = *LAlt
- #mod alt += RD
- #key *RD = *LAlt
- mod Windows += RD
- key *RD = *RWindows
- key A-Esc = A-GraveAccent
- key A-_1 = A-GraveAccent
+  # click
+  key A-C-n = LButton
+  key A-C-p = RButton
+  key CL-*A-n = LButton
+  key CL-*A-p = RButton
+  key CL-*A-Semicolon = RButton
 
-# for explorer
+  # For putty, pasete by right click
+  key A-v = RButton
+ 
+  # mouse wheel
+  key A-C-m = &MouseWheel(-520)
+  key A-C-comma = &MouseWheel(520)
+  key CL-m = &MouseWheel(-520)
+  key CL-comma = &MouseWheel(520)
+  key A-S-m = &MouseWheel(-120)
+  key A-S-comma = &MouseWheel(120)
+  # }}}
+ 
+  # vim like arrow {{{
+  key A-C-h = Left
+  key A-C-j = Down
+  key A-C-k = Up
+  key A-C-l = Right
+  key CL-*C-*A-h = Left
+  key CL-*C-*A-j = Down
+  key CL-*C-*A-k = Up
+  key CL-*C-*A-l = Right
+  # }}}
+ 
+  # other basic settings {{{
+  key C-h = BS                  # Always BS with C-h
+  key A-C-a = A-Space n         # Minimize window
+  key A-_4 = A-F4               # Close window
+  #key A-*C-e = Esc              # A-e to ESC
+  #key C-S-e = Esc               # C-S-e to ESC
+  key C-LeftSquareBracket = Esc # Always C-[ to ESC, like vim
+  key A-d = Delete              # Always Delete with A-d
+  #key C-o = A-Left              # Go to previous page
+  #key C-i = A-Right             # Go to nexe page
+  key A-C-f = LWIN              # Push Start button, can start search directly
+  key C-Space = A-GraveAccent   # Unix like IME
+
+  # For HHK
+  # ESC to ` like normal keyboard (ESC is placed on the left of 1 in HHK)
+  #key Esc = GraveAccent
+  #key S-Esc = S-GraveAccent
+  key A-Esc = A-GraveAccent     # IME
+  key A-_1 = A-GraveAccent      # IME
+
+  key A-C-BS = W-l              # Go to login window, for HHK (no Win key)
+  key A-_0 = W-l                # Go to login window, for HHK (no Win key)
+
+  # Left Meta key to Alt (at SW5=Off)
+  mod alt += LD
+  key *LD = *LAlt
+
+  # Right Meta key to Win key
+  mod Windows += RD
+  key *RD = *RWindows
+  # }}}
+
+  # Volume {{{
+  # Volume 0
+  #key C-F3 = VolumeDown VolumeDown VolumeDown VolumeDown VolumeDown VolumeDown VolumeDown VolumeDown VolumeDown VolumeDown VolumeDown VolumeDown VolumeDown VolumeDown VolumeDown VolumeDown VolumeDown VolumeDown VolumeDown VolumeDown
+  # Volume Max
+  #key C-F4 = VolumeUp VolumeUp VolumeUp VolumeUp VolumeUp VolumeUp VolumeUp VolumeUp VolumeUp VolumeUp VolumeUp VolumeUp VolumeUp VolumeUp VolumeUp VolumeUp VolumeUp VolumeUp VolumeUp VolumeUp
+  # }}}
+
+# }}}
+
+# For explorer {{{
 window powerpnt /Explorer.EXE*/ : Global
  key C-o = A-Left
  key C-i = A-Right
+# }}}
 
-# for powerpoint
+# For powerpoint {{{
 window powerpnt /POWERPNT.EXE*/ : Global
  # key C-Space = Right S-Left C-Space
  key C-Space = Right S-Left
@@ -139,48 +131,57 @@ window powerpnt /POWERPNT.EXE*/ : Global
  key C-S-s = C-t f s y m b o l Enter
  key C-S-a = C-t f a r i a l Enter
  key C-S-h = C-t f h e l v e t i c a Enter
+# }}}
 
-# for word
+# For word {{{
 window winword /WINWORD.EXE*/ : Global
  key C-Equal = C-d b Enter
  key C-S-Equal = C-d p Enter
+# }}}
 
-# for edit control
+# For edit control {{{
 window EditControl /:Edit$ : Global
  key C-h = BS
+# }}}
 
-# for magic formation
+# For magic formation {{{
 window magicf /MagicFormation*/ : Global
  key CL-h = Left
  key CL-j = Down
  key CL-k = Up
  key CL-l = Right
+# }}}
 
-# for firefox + thunderbird
+# For firefox + thunderbird {{{
 window ThunderBird /MozillaWindowClass$/ : Global
- #for mozilla with CL
+ #For mozilla with CL
  key *CL-d = d
+# }}}
 
-# for thunderbird
+# For thunderbird {{{
 #window Tunderbird /thunderbird\.exe/ : ViMode
 # key C-h = BS
+# }}}
 
-# for synergy
+# For synergy {{{
 window synergy /Synergy/ : Global
  key A-Esc = A-GraveAccent
  key A-C-h = Left
  key A-C-j = Down
  key A-C-k = Up
  key A-C-l = Right
+# }}}
 
-# for input director
+# For input director {{{
 window inputdirector /InputDirector/ : Global
  key A-Esc = A-GraveAccent
  key A-C-h = Left
  key A-C-j = Down
  key A-C-k = Up
  key A-C-l = Right
+# }}}
 
+# Return to all mode
 keymap Global
 
 # local
