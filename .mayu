@@ -13,9 +13,9 @@ keymap Global #{{{
   # control, capslock, windows, esc {{{
   #mod shift += !!!Space
   mod control += CapsLock
-  key *CapsLock = *LControl 
+  key *CapsLock = *LControl
   mod control += E0CapsLock
-  key *E0CapsLock = *LControl 
+  key *E0CapsLock = *LControl
   #key *LCtrl = $CapsLock
   key *NumLock = $CapsLock
   key *Apps = $CapsLock
@@ -94,6 +94,7 @@ keymap Global #{{{
   #key S-Esc = S-GraveAccent
   key A-Esc = A-GraveAccent     # IME
   key A-_1 = A-GraveAccent      # IME
+  key A-Space = A-GraveAccent   # IME
 
   key A-C-BS = W-l              # Go to login window, for HHK (no Win key)
   key A-_0 = W-l                # Go to login window, for HHK (no Win key)
