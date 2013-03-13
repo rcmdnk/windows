@@ -117,6 +117,85 @@ keymap Global #{{{
 
 # }}}
 
+# Vim mode {{{
+keymap Vim : Global
+
+  # toggles {{{
+
+  # Enter vim normal mode
+  key Esc = &Toggle(Lock0,on)
+  key C-LeftSquareBracket =  &Toggle(Lock0,on)
+
+  # Enter vim insert mode
+  key L0-i = &Toggle(Lock0,off)
+  key L0-S-i = &Toggle(Lock0,off) Home
+  key L0-a = &Toggle(Lock0,off) Right
+  key L0-S-a = &Toggle(Lock0,off) End
+  key L0-o = &Toggle(Lock0,off) Down Home Enter Up
+  key L0-O = &Toggle(Lock0,off) Up End Enter Up
+  key L0-C = &Toggle(Lock0,off) S-End C-x
+  # }}} toggles
+
+  # Move {{{
+  key L0-*C-h = Left
+  key L0-*C-j = Down
+  key L0-*C-k = Up
+  key L0-*C-l = Right
+  key L0-*C-_0 = Home
+  #key L0-*C-$DOLLAR_SIGN = End
+  key L0-*C-_4 = End
+  key L0-*C-a = Home # emacs like
+  key L0-*C-e = End  # emacs like
+  key L0-*C-u = PageUp PageUp PageUp PageUp PageUp PageUp PageUp PageUp PageUp PageUp
+  key L0-*C-d = PageDown PageDown PageDown PageDown PageDown PageDown PageDown PageDown PageDown PageDown
+  key L0-*C-f = PageUp
+  key L0-*C-b = End
+  # }}}
+
+  # Copy/Cut/Paste {{{
+  key L0-p = Right C-v
+  key L0-p = C-v
+  key L0-y = Home S-End C-C End &Toggle(Lock1,on)
+
+  # Line copy/cut mode {{{
+  key L0-y = &Toggle(Lock1,on) # for y*
+  key L1-y = Home S-End C-c &Toggle(Lock1,off) # yy
+  key L1-S-_4 = S-End C-c &Toggle(Lock1,off) # y$
+  key L1-_0 = S-C-Home C-c &Toggle(Lock1,off) # y0
+  key L1-w = S-C-Right C-c &Toggle(Lock1,off) # yw
+  key L0-S-y = &Toggle(Lock1,on) y &Toggle(Lock1,off) # Y
+  key L1-Esc = &Toggle(Lock1,off) # exit
+  key L1-C-LeftSquareBracket =  &Toggle(Lock1,off) # exit
+
+  key L0-d = &Toggle(Lock2,on) # for d*
+  key L2-d = Home S-End C-x &Toggle(Lock2,off) # dd
+  key L2-S-_4 = S-End C-x &Toggle(Lock2,off) # d$
+  key L2-_0 = S-C-Home C-x &Toggle(Lock2,off) # d0
+  key L2-w = S-C-Right C-c &Toggle(Lock2,off) # dw
+  key L0-S-d = &Toggle(Lock2,on) S-End C-x&Toggle(Lock2,off) # D
+  key L2-Esc = &Toggle(Lock2,off) # exit
+  key L2-C-LeftSquareBracket =  &Toggle(Lock2,off) # exit
+
+  key L0-c = &Toggle(Lock3,on) # for c*
+  key L3-c = Home S-End C-x &Toggle(Lock3,off) &Toggle(Lock0,off) # cc
+  key L3-S-_4 = S-End C-x &Toggle(Lock3,off) &Toggle(Lock0,off) # d$
+  key L3-_0 = S-C-Home C-x &Toggle(Lock3,off) &Toggle(Lock0,off) # d0
+  key L3-w = S-C-Right C-x &Toggle(Lock3,off) &Toggle(Lock0,off) # dw
+  key L3-S-d = &Toggle(Lock3,on) S-End C-x&Toggle(Lock3,off) &Toggle(Lock0,off) # D
+  key L3-Esc = &Toggle(Lock3,off) # exit
+  key L3-C-LeftSquareBracket =  &Toggle(Lock3,off) # exit
+  # }}}
+
+  # Undo/Redo {{{
+  key L0-u = C-z
+  key L0-S-r = C-y
+  # }}}
+
+#}}}
+
+
+#}}} Vim mode
+
 # For explorer {{{
 window powerpnt /Explorer.EXE*/ : Global
  key C-o = A-Left
@@ -160,9 +239,17 @@ window ThunderBird /MozillaWindowClass$/ : Global
 # }}}
 
 # For thunderbird {{{
-#window Tunderbird /thunderbird\.exe/ : ViMode
+window Tunderbird /thunderbird\.exe/ : Vim
 # key C-h = BS
+# Vim mode in ThunderBird
+
 # }}}
+
+# For note pad {{{
+# C:\Windows\system32\notepad.exe:Notepad:Edit
+window Notepad /:Notepad:Edit$/ : Vim
+# use Vim mode in Note pad
+#}}}
 
 # For synergy {{{
 window synergy /Synergy/ : Global
@@ -180,6 +267,12 @@ window inputdirector /InputDirector/ : Global
  key A-C-j = Down
  key A-C-k = Up
  key A-C-l = Right
+# }}}
+
+# For Gvim {{{
+#	C:\Program Files\vim\gvim.exe:Vim:VimTextArea
+window Vim /:Vim:VimTextArea$/ : Global
+  key A-v = $QUOTATION_MARK $PLUS_SIGN g S-p
 # }}}
 
 # Return to all mode
