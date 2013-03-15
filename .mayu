@@ -1,4 +1,5 @@
-include "104.mayu"
+# Keyboard settings
+include "dot.mayu"
 
 # mouse event activation
 def option mouse-event = true
@@ -12,9 +13,9 @@ keymap Global #{{{
 
   # control, capslock, windows, esc {{{
   #mod shift += !!!Space
-  mod control += CapsLock
+  mod Control += CapsLock
   key *CapsLock = *LControl
-  mod control += E0CapsLock
+  mod Control += E0CapsLock
   key *E0CapsLock = *LControl
   #key *LCtrl = $CapsLock
   key *NumLock = $CapsLock
@@ -22,8 +23,9 @@ keymap Global #{{{
   #key LWin =
   #key *LWin = $CapsLock
   key *RWin = $CapsLock
+
   # }}}
- 
+
   # mouse {{{
 
   # use yammy's function
@@ -52,9 +54,6 @@ keymap Global #{{{
   key CL-*A-p = RButton
   key CL-*A-Semicolon = RButton
 
-  # For putty, pasete by right click
-  key A-v = RButton
- 
   # mouse wheel
   key A-C-m = &MouseWheel(-520)
   key A-C-comma = &MouseWheel(520)
@@ -110,9 +109,9 @@ keymap Global #{{{
 
   # Volume {{{
   # Volume 0
-  #key C-F3 = VolumeDown VolumeDown VolumeDown VolumeDown VolumeDown VolumeDown VolumeDown VolumeDown VolumeDown VolumeDown VolumeDown VolumeDown VolumeDown VolumeDown VolumeDown VolumeDown VolumeDown VolumeDown VolumeDown VolumeDown
+  #key C-F3 = &Repeat((VolumeDown), 20)
   # Volume Max
-  #key C-F4 = VolumeUp VolumeUp VolumeUp VolumeUp VolumeUp VolumeUp VolumeUp VolumeUp VolumeUp VolumeUp VolumeUp VolumeUp VolumeUp VolumeUp VolumeUp VolumeUp VolumeUp VolumeUp VolumeUp VolumeUp
+  #key C-F4 = &Repeat((VolumeUp), 20)
   # }}}
 
 # }}}
@@ -120,21 +119,32 @@ keymap Global #{{{
 # Vim mode {{{
 keymap Vim : Global
 
-  # toggles {{{
+  # Lock Keys
+  # L0: Normal mode
+  # L1: Character-wise Visual mode
+  # L2: Line-wise Visual mode
+  # L3: Line copy state
+  # L4: Command line mode
+
+  # toggles for insert/normal modes {{{
 
   # Enter vim normal mode
   key Esc = &Toggle(Lock0,on)
   key C-LeftSquareBracket =  &Toggle(Lock0,on)
 
-  # Enter vim insert mode
+  # Enter vim insert mode (Exit vim normal mode)
   key L0-i = &Toggle(Lock0,off)
-  key L0-S-i = &Toggle(Lock0,off) Home
-  key L0-a = &Toggle(Lock0,off) Right
-  key L0-S-a = &Toggle(Lock0,off) End
-  key L0-o = &Toggle(Lock0,off) Down Home Enter Up
-  key L0-O = &Toggle(Lock0,off) Up End Enter Up
-  key L0-C = &Toggle(Lock0,off) S-End C-x
+  key L0-S-i = Home &Toggle(Lock0,off)
+  key L0-a = Right &Toggle(Lock0,off)
+  key L0-S-a = End &Toggle(Lock0,off)
+  key L0-o = End Enter &Toggle(Lock0,off)
+  key L0-O = Up End Enter &Toggle(Lock0,off)
   # }}} toggles
+
+  # Undo/Redo {{{
+  key L0-u = C-z
+  key L0-C-r = C-y
+  # }}}
 
   # Move {{{
   key L0-*C-h = Left
@@ -142,57 +152,134 @@ keymap Vim : Global
   key L0-*C-k = Up
   key L0-*C-l = Right
   key L0-*C-_0 = Home
-  #key L0-*C-$DOLLAR_SIGN = End
   key L0-*C-_4 = End
   key L0-*C-a = Home # emacs like
   key L0-*C-e = End  # emacs like
-  key L0-*C-u = PageUp PageUp PageUp PageUp PageUp PageUp PageUp PageUp PageUp PageUp
-  key L0-*C-d = PageDown PageDown PageDown PageDown PageDown PageDown PageDown PageDown PageDown PageDown
-  key L0-*C-f = PageUp
-  key L0-*C-b = End
+
+  key L0-w = C-Right
+  key L0-b = C-Left
+
+  key L0-C-u = &Repeat((Up), 10)
+  key L0-C-d = &Repeat((Down), 10)
+  key L0-C-b = &Repeat((Up), 20)
+  key L0-C-f = &Repeat((Down), 20)
+
+keymap2 VimUpDown
+  key L0-g = C-Home # gg
+
+keymap Vim : Global
+  key L0-g = &Prefix(VimUpDown)
+  key L0-S-g = C-End # G
   # }}}
 
   # Copy/Cut/Paste {{{
-  key L0-p = Right C-v
-  key L0-p = C-v
-  key L0-y = Home S-End C-C End &Toggle(Lock1,on)
+keymap2 VimCopy
+  key L0-y = Home S-End C-c Esc &Toggle(Lock3,on) # yy
+  key L0-S-_4 = S-End C-c Esc &Toggle(Lock3,off) # y$
+  key L0-_0 = S-Home C-c Esc &Toggle(Lock3,off) # y0
+  key L0-w = S-C-Right C-c Esc &Toggle(Lock3,off) # yw
+  key L0-b = S-C-Left C-c Esc &Toggle(Lock3,off) # yb
+  key L0-S-G = S-C-End C-c Esc &Toggle(Lock3,off) # yG
 
-  # Line copy/cut mode {{{
-  key L0-y = &Toggle(Lock1,on) # for y*
-  key L1-y = Home S-End C-c &Toggle(Lock1,off) # yy
-  key L1-S-_4 = S-End C-c &Toggle(Lock1,off) # y$
-  key L1-_0 = S-C-Home C-c &Toggle(Lock1,off) # y0
-  key L1-w = S-C-Right C-c &Toggle(Lock1,off) # yw
-  key L0-S-y = &Toggle(Lock1,on) y &Toggle(Lock1,off) # Y
-  key L1-Esc = &Toggle(Lock1,off) # exit
-  key L1-C-LeftSquareBracket =  &Toggle(Lock1,off) # exit
+keymap Vim : Global
+  key L0-y = &Prefix(VimCopy)
+  key L0-S-y = Home S-End C-c Esc &Toggle(Lock3,on) # Y
 
-  key L0-d = &Toggle(Lock2,on) # for d*
-  key L2-d = Home S-End C-x &Toggle(Lock2,off) # dd
-  key L2-S-_4 = S-End C-x &Toggle(Lock2,off) # d$
-  key L2-_0 = S-C-Home C-x &Toggle(Lock2,off) # d0
-  key L2-w = S-C-Right C-c &Toggle(Lock2,off) # dw
-  key L0-S-d = &Toggle(Lock2,on) S-End C-x&Toggle(Lock2,off) # D
-  key L2-Esc = &Toggle(Lock2,off) # exit
-  key L2-C-LeftSquareBracket =  &Toggle(Lock2,off) # exit
+keymap2 VimCut
+  key L0-d = Home S-End C-x Delete &Toggle(Lock3,on) # dd
+  key L0-S-_4 = S-End C-x &Toggle(Lock3,off) # d$
+  key L0-_0 = S-Home C-x &Toggle(Lock3,off) # d0
+  key L0-w = S-C-Right C-x &Toggle(Lock3,off) # dw
+  key L0-b = S-C-Left C-x &Toggle(Lock3,off) # db
+  key L0-S-g = S-C-End C-x &Toggle(Lock3,off) # dG
 
-  key L0-c = &Toggle(Lock3,on) # for c*
-  key L3-c = Home S-End C-x &Toggle(Lock3,off) &Toggle(Lock0,off) # cc
-  key L3-S-_4 = S-End C-x &Toggle(Lock3,off) &Toggle(Lock0,off) # d$
-  key L3-_0 = S-C-Home C-x &Toggle(Lock3,off) &Toggle(Lock0,off) # d0
-  key L3-w = S-C-Right C-x &Toggle(Lock3,off) &Toggle(Lock0,off) # dw
-  key L3-S-d = &Toggle(Lock3,on) S-End C-x&Toggle(Lock3,off) &Toggle(Lock0,off) # D
-  key L3-Esc = &Toggle(Lock3,off) # exit
-  key L3-C-LeftSquareBracket =  &Toggle(Lock3,off) # exit
+keymap Vim : Global
+  key L0-d = &Prefix(VimCut)
+  key L0-S-d = S-End C-x &Toggle(Lock3,off) # D
+
+keymap2 VimChange
+  key L0-S-_4 = S-End C-x &Toggle(Lock0,off) # c$
+  key L0-_0 = S-Home C-x &Toggle(Lock0,off) # c0
+  key L0-w = S-C-Right C-x &Toggle(Lock0,off) # cw
+  key L0-b = S-C-Left C-x &Toggle(Lock0,off) # cb
+  key L0-S-g = S-C-End C-x &Toggle(Lock0,off) # cG
+
+keymap Vim : Global
+  key L0-c = &Prefix(VimChange)
+  key L0-S-c = S-End C-x &Toggle(Lock0,off) # C
+
+  #key L0-x = S-Right C-x &Toggle(Lock3,off)
+  key L0-x = Delete
+
+  key L0-p = Right C-v &Toggle(Lock3,off)
+  key L0-S-p = C-v &Toggle(Lock3,off)
+  key L3-L0-p = End Enter C-v Home &Toggle(Lock3,off)
+  key L3-L0-S-p = Up End Enter C-v Home &Toggle(Lock3,off)
   # }}}
 
-  # Undo/Redo {{{
-  key L0-u = C-z
-  key L0-S-r = C-y
+  # Vim visual mode {{{
+  # Characterwise-visual
+  key L0-v = &Toggle(Lock1,on) &Toggle(Lock0,off)
+
+  key L1-h = S-Left
+  key L1-j = S-Down
+  key L1-k = S-Up
+  key L1-l = S-Right
+  key L1-_0 = S-Home
+  key L1-_4 = S-End
+  key L1-w = S-C-Right
+  key L1-b = S-C-Left
+
+  key L1-C-u = &Repeat((S-Up), 10)
+  key L1-C-d = &Repeat((S-Down), 10)
+  key L1-C-b = &Repeat((S-Up), 20)
+  key L1-C-f = &Repeat((S-Down), 20)
+
+  key L1-y = C-c &Toggle(Lock1,off) &Toggle(Lock0,on) &Toggle(Lock3,off)
+  key L1-d = C-x &Toggle(Lock1,off) &Toggle(Lock0,on) &Toggle(Lock3,off)
+  key L1-x = C-x &Toggle(Lock1,off) &Toggle(Lock0,on) &Toggle(Lock3,off)
+  key L1-c = C-x &Toggle(Lock1,off) &Toggle(Lock0,off) &Toggle(Lock3,off)
+
+  key L1-Esc = &Toggle(Lock1,off) &Toggle(Lock0,on)
+  key L1-C-LeftSquareBracket =  &Toggle(Lock1,off) &Toggle(Lock0,on)
+
+  # Linewise-visual
+  key L0-S-v = Home S-End &Toggle(Lock2,on) &Toggle(Lock0,off)
+
+  key L2-j = S-Home S-Down S-End
+  key L2-k = S-Home S-Up S-End
+
+  key L2-y = C-c &Toggle(Lock2,off) &Toggle(Lock0,on) &Toggle(Lock3,on)
+  key L2-d = C-x &Toggle(Lock2,off) &Toggle(Lock0,on) &Toggle(Lock3,on)
+  key L2-x = C-x &Toggle(Lock2,off) &Toggle(Lock0,on) &Toggle(Lock3,on)
+  key L2-c = C-x &Toggle(Lock2,off) &Toggle(Lock0,off) &Toggle(Lock3,on)
+
+  key L2-Esc = &Toggle(Lock2,off) &Toggle(Lock0,on)
+  key L2-C-LeftSquareBracket =  &Toggle(Lock2,off) &Toggle(Lock0,on)
   # }}}
 
-#}}}
+  # Search {{{
+  key L0-Slash = C-f &Toggle(Lock0,off)
+  key L0-n = F3
+  key L0-S-n = S-F3
+window Search ( /検索/ || /検索/) : Vim
+  key L0-n = A-d A-f
+  key L0-S-n = A-u A-f
+  key L0-i = A-n &Toggle(Lock0,off)
+  key Enter = &Toggle(Lock0,on) A-f A-F4
+  key L0-Enter = A-f A-F4
+  key L0-Esc = A-F4 &Toggle(Lock0,on)
+  key L0-C-LeftSquareBracket = A-F4 &Toggle(Lock0,on)
 
+keymap Vim : Global
+  # }}}
+
+  # Command line mode {{{
+  key L0-S-Semicolon = &Toggle(Lock4,on) &Toggle(Lock0,off)
+  key L4-w = A-f A-a # Save as
+  #key L4-w = C-s # Save
+  key L4-q = A-F4
+  # }}}
 
 #}}} Vim mode
 
@@ -225,7 +312,7 @@ window EditControl /:Edit$ : Global
 # }}}
 
 # For magic formation {{{
-window magicf /MagicFormation*/ : Global
+window MagicFormation /MagicFormation*/ : Global
  key CL-h = Left
  key CL-j = Down
  key CL-k = Up
@@ -233,16 +320,18 @@ window magicf /MagicFormation*/ : Global
 # }}}
 
 # For firefox + thunderbird {{{
-window ThunderBird /MozillaWindowClass$/ : Global
+window Mozilla /MozillaWindowClass$/ : Global
  #For mozilla with CL
  key *CL-d = d
 # }}}
 
 # For thunderbird {{{
-window Tunderbird /thunderbird\.exe/ : Vim
-# key C-h = BS
+window Tunderbird ( /thunderbird/ && /作成/ ): Vim
 # Vim mode in ThunderBird
-
+  key L0-n = C-G
+  key L0-S-n = C-S-G
+#window TunderbirdSearch ( /thunderbird/ && /検索/ ) : Vim
+#  key L0-n = A-f
 # }}}
 
 # For note pad {{{
@@ -275,8 +364,21 @@ window Vim /:Vim:VimTextArea$/ : Global
   key A-v = $QUOTATION_MARK $PLUS_SIGN g S-p
 # }}}
 
-# Return to all mode
-keymap Global
+# For Cygwin {{{
+window Cygwin /cygwin/ : Global
+  key A-v = RButton # Paste
+  key IL-Esc = A-GraveAccent Esc # Make IME off, Exit insert mode
+  key IC-Esc = Esc A-GraveAccent Esc # Stop convert, Make IME off, Exit insert mode
+  key IL-C-LeftSquareBracket = A-GraveAccent Esc # Make IME off, Exit insert mode
+  key IC-C-LeftSquareBracket = Esc A-GraveAccent Esc # Stop convert, Make IME off, Exit insert mode
+# }}}
+
+# For PuTTY {{{
+window PuTTY /putty/ : Global
+  key A-v = RButton
+# }}}
+
+ 
 
 # local
 ##window size
