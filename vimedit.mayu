@@ -4,28 +4,7 @@ include "dot.mayu"
 # mouse event activation
 def option mouse-event = true
 
-# Happy Hacking Keyboard (HHK) key definition {{{
-#def key LD = 0x7b
-def key LD = E0-0x7b
-def key RD = 0x79
-# }}}
-
-keymap Global #{{{
-
-  # control, capslock, windows, esc {{{
-  #mod shift += !!!Space
-  mod Control += CapsLock
-  key *CapsLock = *LControl
-  mod Control += E0CapsLock
-  key *E0CapsLock = *LControl
-  #key *LCtrl = $CapsLock
-  key *NumLock = $CapsLock
-  key *Apps = $CapsLock
-  #key LWin =
-  #key *LWin = $CapsLock
-  key *RWin = $CapsLock
-
-  # }}}
+keymap Global #{{{# {{{
 
   # mouse {{{
 
@@ -63,7 +42,7 @@ keymap Global #{{{
   key A-S-m = &MouseWheel(-120)
   key A-S-comma = &MouseWheel(120)
   # }}}
- 
+
   # vim like arrow {{{
   key A-C-h = Left
   key A-C-j = Down
@@ -74,48 +53,8 @@ keymap Global #{{{
   key CL-*C-*A-k = Up
   key CL-*C-*A-l = Right
   # }}}
- 
-  # other basic settings {{{
-  key C-h = BS                  # Always BS with C-h
-  key A-C-a = A-Space n         # Minimize window
-  key A-_4 = A-F4               # Close window
-  #key A-*C-e = Esc              # A-e to ESC
-  #key C-S-e = Esc               # C-S-e to ESC
-  key C-LeftSquareBracket = Esc # Always C-[ to ESC, like vim
-  key A-d = Delete              # Always Delete with A-d
-  #key C-o = A-Left              # Go to previous page
-  #key C-i = A-Right             # Go to nexe page
-  key A-C-f = LWIN              # Push Start button, can start search directly
-  key C-Space = A-GraveAccent   # Unix like IME
 
-  # For HHK
-  # ESC to ` like normal keyboard (ESC is placed on the left of 1 in HHK)
-  #key Esc = GraveAccent
-  #key S-Esc = S-GraveAccent
-  key A-Esc = A-GraveAccent     # IME
-  key A-_1 = A-GraveAccent      # IME
-  key A-Space = A-GraveAccent   # IME
-
-  key A-C-BS = W-l              # Go to login window, for HHK (no Win key)
-  key A-_0 = W-l                # Go to login window, for HHK (no Win key)
-
-  # Left Meta key to Alt (at SW5=Off)
-  mod alt += LD
-  key *LD = *LAlt
-
-  # Right Meta key to Win key
-  mod Windows += RD
-  key *RD = *RWindows
-  # }}}
-
-  # Volume {{{
-  # Volume 0
-  #key C-F3 = &Variable(0,20) &Repeat((VolumeDown)) &Variable(0,0)
-  # Volume Max
-  #key C-F4 = &Variable(0,20) &Repeat((VolumeUp)) &Variable(0,0)
-  # }}}
-
-# }}}
+# }}}# }}}
 
 # Vim mode {{{
 keymap Vim : Global
@@ -551,58 +490,6 @@ keymap Vim : Global
 
 #}}} Vim mode
 
-# For explorer {{{
-window powerpnt /Explorer.EXE*/ : Global
- key C-o = A-Left
- key C-i = A-Right
-# }}}
-
-# For powerpoint {{{
-window powerpnt /POWERPNT.EXE*/ : Global
- # key C-Space = Right S-Left C-Space
- key C-Space = Right S-Left
- if ( USE104 )
-   key C-Equal = C-t b Enter
-   key C-S-Equal = C-t p Enter
- else
-   key C-Hyphen = C-t b Enter
-   key C-S-Hyphen = C-t p Enter
- endif
- key C-S-s = C-t f s y m b o l Enter
- key C-S-a = C-t f a r i a l Enter
- key C-S-h = C-t f h e l v e t i c a Enter
-# }}}
-
-# For word {{{
-window winword /WINWORD.EXE*/ : Global
- if ( USE104 )
-   key C-Equal = C-d b Enter
-   key C-S-Equal = C-d p Enter
- else
-   key C-Hyphen = C-t b Enter
-   key C-S-Hyphen = C-t p Enter
- endif
-# }}}
-
-# For edit control {{{
-window EditControl /:Edit$ : Global
- key C-h = BS
-# }}}
-
-# For magic formation {{{
-window MagicFormation /MagicFormation*/ : Global
- key CL-h = Left
- key CL-j = Down
- key CL-k = Up
- key CL-l = Right
-# }}}
-
-# For firefox + thunderbird {{{
-window Mozilla /MozillaWindowClass$/ : Global
- #For mozilla with CL
- key *CL-d = d
-# }}}
-
 # For thunderbird {{{
 window Tunderbird ( /thunderbird/ && /作成/ ): Vim
 # Vim mode in ThunderBird
@@ -650,52 +537,5 @@ window Search ( /:Notepad:/ && /検索/) : Vim
   key C-e = End
 #}}}
 
-# For synergy {{{
-window synergy /Synergy/ : Global
- key A-Esc = A-GraveAccent
- key A-C-h = Left
- key A-C-j = Down
- key A-C-k = Up
- key A-C-l = Right
-# }}}
-
-# For input director {{{
-window inputdirector /InputDirector/ : Global
- key A-Esc = A-GraveAccent
- key A-C-h = Left
- key A-C-j = Down
- key A-C-k = Up
- key A-C-l = Right
-# }}}
-
-# For Gvim {{{
-#	C:\Program Files\vim\gvim.exe:Vim:VimTextArea
-window Vim /:Vim:VimTextArea$/ : Global
-  key A-v = $QUOTATION_MARK $PLUS_SIGN g S-p
-# }}}
-
-# For Cygwin {{{
-window Cygwin /cygwin/ : Global
-  key A-v = RButton # Paste
-  key IL-Esc = A-GraveAccent Esc # Make IME off, Exit insert mode
-  key IC-Esc = Esc A-GraveAccent Esc # Stop convert, Make IME off, Exit insert mode
-  key IL-C-LeftSquareBracket = A-GraveAccent Esc # Make IME off, Exit insert mode
-  key IC-C-LeftSquareBracket = Esc A-GraveAccent Esc # Stop convert, Make IME off, Exit insert mode
-# }}}
-
-# For PuTTY {{{
-window PuTTY /putty/ : Global
-  key A-v = RButton
-# }}}
-
- 
-
-# local
-##window size
-#key C-A-Enter = &WindowMoveTo(NW,5,10) &WindowResizeTo(1360,880)
-#key C-A-S-Enter = &WindowMoveTo(NW,5,10) &WindowResizeTo(1000,680)
-#key A-S-h = &WindowMoveTo(NW,5,10) &WindowResizeTo(680,880)
-#key A-S-l = &WindowMoveTo(NW,685,10) &WindowResizeTo(680,880)
-#key A-S-k = &WindowMoveTo(NW,5,10) &WindowResizeTo(1350,440)
-#key A-S-j = &WindowMoveTo(NW,5,450) &WindowResizeTo(1350,440)
-include ".local.mayu"
+# Reset to Global
+keymap Global
