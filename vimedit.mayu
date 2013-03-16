@@ -53,6 +53,10 @@ keymap Global
   key A-S-u = &WindowMove(0, 20)
   key A-S-i = &WindowMove(0, -20)
   key A-S-o = &WindowMove(20, 0)
+  key CL-A-y = &WindowMove(-20, 0)
+  key CL-A-u = &WindowMove(0, 20)
+  key CL-A-i = &WindowMove(0, -20)
+  key CL-A-o = &WindowMove(20, 0)
   # }}}
 
 # }}} Cursor, Mouse, Window move
@@ -78,8 +82,10 @@ keymap Vim : Global
 
   # Toggles
   # The key ends with Toggles shows wrong behavior.
-  # "Left Right" is temporary treatment for the problem...
-  keyseq $LR = Left Right
+  # (maybe need to wait a moment?)
+  # "Right Left" is temporary treatment for the problem...
+  #keyseq $RL = Right Left # event blank keaseq work well fine
+  keyseq $RL =
   keyseq $OnN = &Toggle(Lock0,on)
   keyseq $OffN = &Toggle(Lock0,off)
   keyseq $OnV = &Toggle(Lock1,on)
@@ -99,19 +105,19 @@ keymap Vim : Global
   keyseq $OffAll = $OffN $OffV $OffVC $OffVL $OffVB $OffC
 
   # Define each mode In/Out
-  keyseq $InN = $OffAll $OnN $LR # Space O n N Space
-  keyseq $OutN = $OffN $LR # Space O f f N Space
-  keyseq $InVC = $OffAll $OnV $OnVC $LR # Space O n V C Space
-  keyseq $OutVC = $OffVC $OffV $LR # Space O f f V C Space
-  keyseq $InVL = $OffAll $OnV $OnVL $LR # Space O n V L Space
-  keyseq $OutVL = $OffVL $OffV $LR # Space O f f V L Space
-  keyseq $InVB = $OffAll $OnV $OnVB $LR # Space O n V B Space
-  keyseq $OutVB = $OffVB $OffV $LR # Space O f f V B Space
-  keyseq $InC = $OffAll $OnC $LR # Space O n C Space
-  keyseq $OutC = $OffC $LR # Space O f f C Space
+  keyseq $InN = $OffAll $OnN $RL # Space O n N Space
+  keyseq $OutN = $OffN $RL # Space O f f N Space
+  keyseq $InVC = $OffAll $OnV $OnVC $RL # Space O n V C Space
+  keyseq $OutVC = $OffVC $OffV $RL # Space O f f V C Space
+  keyseq $InVL = $OffAll $OnV $OnVL $RL # Space O n V L Space
+  keyseq $OutVL = $OffVL $OffV $RL # Space O f f V L Space
+  keyseq $InVB = $OffAll $OnV $OnVB $RL # Space O n V B Space
+  keyseq $OutVB = $OffVB $OffV $RL # Space O f f V B Space
+  keyseq $InC = $OffAll $OnC $RL # Space O n C Space
+  keyseq $OutC = $OffC $RL # Space O f f C Space
 
-  keyseq $InL = $OnL $LR # Space O n L Space
-  keyseq $OutL = $OffL $LR # Space O f f L Space
+  keyseq $InL = $OnL $RL # Space O n L Space
+  keyseq $OutL = $OffL $RL # Space O f f L Space
 
   # }}} Lock Keys
 
@@ -339,11 +345,6 @@ keymap Vim : Global
   key L0-S-o = Up End Enter $OutN
   # }}} toggles
 
-  # Undo/Redo {{{
-  key L0-u = C-z
-  key L0-C-r = C-y
-  # }}}
-
   # Move {{{
   key L0-*C-h = Left
   key L0-*C-j = Down
@@ -373,9 +374,6 @@ keymap Vim : Global
   key L0-g = &Prefix(VimUpDown)
   key L0-S-g = C-End # G
 
-  # Combine lines
-  key L0-S-j = Down Home BS Space
-
   # }}}
 
   # Copy/Cut/Paste {{{
@@ -388,12 +386,12 @@ keymap Vim : Global
   keyseq $UpAllSelect = S-C-Home
   keyseq $DownAllSelect = S-C-End
 
-  keyseq $Copy = C-c Esc $OutL
-  keyseq $CopyL = C-c Esc $InL
-  keyseq $Cut = C-x $OutL
-  keyseq $CutL = C-x $InL
-  keyseq $Change = C-x $OutN $OutL
-  keyseq $ChangeL = C-x $OutN $InL
+  keyseq $Copy = C-c $OutL Esc
+  keyseq $CopyL = C-c $InL Esc
+  keyseq $Cut = C-x $OutL Esc
+  keyseq $CutL = C-x $InL Esc
+  keyseq $Change = C-x $OutN $OutL Esc
+  keyseq $ChangeL = C-x $OutN $InL Esc
 
   keyseq $Paste = C-v
 
@@ -478,6 +476,47 @@ keymap Vim : Global
   key L9-L0-S-p = Up End Enter $Paste Home
   # }}}
 
+  # Undo/Redo {{{
+  key L0-u = C-z
+  key L0-C-r = C-y
+  # }}}
+
+  # Other normal mode commands {{{
+
+  # Combine lines
+  key L0-S-j = Down Home BS Space
+
+  # Search
+  key L0-Slash = C-f
+  key L0-n = F3
+  key L0-S-n = S-F3
+
+  # Search window's definition
+  # should be decided in each application
+#window Search ( /window name/ || /検索(for example)/) : Vim
+#  key L0-n = A-d A-f
+#  key L0-S-n = A-u A-f
+#  key L0-i = A-n $OutN
+#  key Enter = $InN A-f A-F4
+#  key L0-Enter = A-f A-F4
+#  key L0-Esc = A-F4 $InN
+#  key L0-C-LeftSquareBracket = A-F4 $InN
+keymap Vim : Global
+
+  # Repeat
+  key L0-Period = $WordSelect Delete $Paste Space
+
+  # Make Upcase
+  if ( USE104 )
+    key L0-S-BackQuote = S-Right C-x &Wait(50) &ClipboardUpcaseWord C-v
+    key L0-S-E0BackQuote = S-Right C-x &Wait(50) &ClipboardUpcaseWord C-v
+  else
+    key L0-S-Caret = S-Right C-x &Wait(50) &ClipboardUpcaseWord C-v
+  endif
+
+  #}}}
+
+
   # Vim visual mode {{{
   # Visual Mode Common
 keymap2 VimVisual: Global = &Ignore
@@ -526,9 +565,9 @@ keymap Vim : Global
   key L0-v = $InVC
 
   # Linewise-visual L1+L3
-  key L0-S-v = $InVL Home S-Down S-Home
+  key L0-S-v = $InVL Home S-End
 
-  key L1-~L2-L3-~L4-j = S-Down S-Home
+  key L1-~L2-L3-~L4-j = S-Down S-End
   key L1-~L2-L3-~L4-k = S-Up S-Home
 
   key L1-~L2-L3-~L4-y = C-c $InN $InL
@@ -541,38 +580,20 @@ keymap Vim : Global
 
   # }}}
 
-  # Search {{{
-  key L0-Slash = C-f
-  key L0-n = F3
-  key L0-S-n = S-F3
-
-  # Search window's definition
-  # should be decided in each application
-#window Search ( /window name/ || /検索(for example)/) : Vim
-#  key L0-n = A-d A-f
-#  key L0-S-n = A-u A-f
-#  key L0-i = A-n $OutN
-#  key Enter = $InN A-f A-F4
-#  key L0-Enter = A-f A-F4
-#  key L0-Esc = A-F4 $InN
-#  key L0-C-LeftSquareBracket = A-F4 $InN
-
-keymap Vim : Global
-  # }}}
-
-  # Repeat {{{
-  key L0-Period = $WordSelect Delete $Paste Space
-  #}}}
-
   # Command line mode {{{
-keymap2 VimCommand2: Global = &Ignore
+keymap2 VimCommandW: Global = &Ignore
   key L0-Enter = C-s # Save
   key L0-q = C-s A-F4 # Save & quit
-  key L0-Space = C-s A-a # Save as
+  key L0-Space = A-f a # Save as
+
+keymap2 VimCommandQ: Global = &Ignore
+  key L0-Enter = A-F4 # quit
+  #key L0-S-_1 = A-F4 n # quit!, makes problem when there is no change...
 
 keymap2 VimCommand: Global = &Ignore
-  key L0-w = &Prefix(VimCommand2)
-  key L0-q = A-F4 # quit
+  key L0-w = &Prefix(VimCommandW)
+  key L0-q = &Prefix(VimCommandQ)
+  key L0-h = F1
 
 keymap Vim : Global
   key L0-S-Semicolon = &Prefix(VimCommand)
