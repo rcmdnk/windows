@@ -1,7 +1,7 @@
 # Keyboard settings
 include "dot.mayu"
 
-# mouse event activation
+# Mouse event activation
 def option mouse-event = true
 
 # Happy Hacking Keyboard (HHK) key definition {{{
@@ -10,9 +10,10 @@ def key LD = E0-0x7b
 def key RD = 0x79
 # }}}
 
-keymap Global #{{{
+#{{{ Cursor, Mouse, Window move , and basic settings
+keymap Global
 
-  # control, capslock, windows, esc {{{
+  # Control, capslock, windows, esc {{{
   #mod shift += !!!Space
   mod Control += CapsLock
   key *CapsLock = *LControl
@@ -24,46 +25,8 @@ keymap Global #{{{
   #key LWin =
   #key *LWin = $CapsLock
   key *RWin = $CapsLock
-
   # }}}
 
-  # mouse {{{
-
-  # use yammy's function
-  # vim like moving with keys yuio (keys on the hjkl)
-  key A-C-y = &MouseMove(-20, 0)
-  key A-C-u = &MouseMove(0, 20)
-  key A-C-i = &MouseMove(0, -20)
-  key A-C-o = &MouseMove(20, 0)
-  key CL-y = &MouseMove(-20, 0)
-  key CL-u = &MouseMove(0, 20)
-  key CL-i = &MouseMove(0, -20)
-  key CL-o = &MouseMove(20, 0)
-  key A-S-y = &WindowMove(-20, 0)
-  key A-S-u = &WindowMove(0, 20)
-  key A-S-i = &WindowMove(0, -20)
-  key A-S-o = &WindowMove(20, 0)
-  key CL-A-y = &WindowMove(-20, 0)
-  key CL-A-u = &WindowMove(0, 20)
-  key CL-A-i = &WindowMove(0, -20)
-  key CL-A-o = &WindowMove(20, 0)
-
-  # click
-  key A-C-n = LButton
-  key A-C-p = RButton
-  key CL-*A-n = LButton
-  key CL-*A-p = RButton
-  key CL-*A-Semicolon = RButton
-
-  # mouse wheel
-  key A-C-m = &MouseWheel(-520)
-  key A-C-comma = &MouseWheel(520)
-  key CL-m = &MouseWheel(-520)
-  key CL-comma = &MouseWheel(520)
-  key A-S-m = &MouseWheel(-120)
-  key A-S-comma = &MouseWheel(120)
-  # }}}
- 
   # vim like arrow {{{
   key A-C-h = Left
   key A-C-j = Down
@@ -74,8 +37,48 @@ keymap Global #{{{
   key CL-*C-*A-k = Up
   key CL-*C-*A-l = Right
   # }}}
- 
-  # other basic settings {{{
+
+
+  # Mouse {{{
+  # Use yammy's function
+  # vim like moving with keys yuio (keys on the hjkl)
+  key A-C-y = &MouseMove(-20, 0)
+  key A-C-u = &MouseMove(0, 20)
+  key A-C-i = &MouseMove(0, -20)
+  key A-C-o = &MouseMove(20, 0)
+  key CL-y = &MouseMove(-20, 0)
+  key CL-u = &MouseMove(0, 20)
+  key CL-i = &MouseMove(0, -20)
+  key CL-o = &MouseMove(20, 0)
+
+  # Click
+  key A-C-n = LButton
+  key A-C-p = RButton
+  key CL-*A-n = LButton
+  key CL-*A-p = RButton
+  key CL-*A-Semicolon = RButton
+
+  # Mouse wheel
+  key A-C-m = &MouseWheel(-520)
+  key A-C-comma = &MouseWheel(520)
+  key CL-m = &MouseWheel(-520)
+  key CL-comma = &MouseWheel(520)
+  key A-S-m = &MouseWheel(-120)
+  key A-S-comma = &MouseWheel(120)
+  # }}}
+
+  # Window move {{{
+  key A-S-y = &WindowMove(-20, 0)
+  key A-S-u = &WindowMove(0, 20)
+  key A-S-i = &WindowMove(0, -20)
+  key A-S-o = &WindowMove(20, 0)
+  key CL-A-y = &WindowMove(-20, 0)
+  key CL-A-u = &WindowMove(0, 20)
+  key CL-A-i = &WindowMove(0, -20)
+  key CL-A-o = &WindowMove(20, 0)
+  # }}}
+
+  # Other basic settings {{{
   key C-h = BS                  # Always BS with C-h
   key A-C-a = A-Space n         # Minimize window
   key A-_4 = A-F4               # Close window
