@@ -81,6 +81,14 @@ You can add any other applications in the setting file if you want.
 
 ##### Mode
 Following modes are available
+
+| Name | Function |
+|:-----|:---------|
+| `IGNORE_FAIL` | This will let slate move to the next operation if the current operation fails to resize/move on the current window |
+| `REPEAT` | This will repeat the list of operations if the number of windows is larger than the number of operations |
+| `REPEAT_LAST` | This will repeat the last operation in the list if the number of windows is larger than the number of operations |
+
+
 |Mode|Description|
 |:---|:----------|
 |Insert Mode|Normal Windows state|
