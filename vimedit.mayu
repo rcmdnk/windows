@@ -18,7 +18,6 @@ keymap Global
   key CL-*C-*A-l = Right
   # }}}
 
-
   # Mouse {{{
   # Use yammy's function
   # vim like moving with keys yuio (keys on the hjkl)
@@ -45,6 +44,8 @@ keymap Global
   key CL-comma = &MouseWheel(520)
   key A-S-m = &MouseWheel(-120)
   key A-S-comma = &MouseWheel(120)
+  key CL-S-m = &MouseWheel(-120)
+  key CL-S-comma = &MouseWheel(120)
   # }}}
 
   # Window move {{{
@@ -52,10 +53,6 @@ keymap Global
   key A-S-u = &WindowMove(0, 20)
   key A-S-i = &WindowMove(0, -20)
   key A-S-o = &WindowMove(20, 0)
-  key CL-A-y = &WindowMove(-20, 0)
-  key CL-A-u = &WindowMove(0, 20)
-  key CL-A-i = &WindowMove(0, -20)
-  key CL-A-o = &WindowMove(20, 0)
   # }}}
 
 # }}} Cursor, Mouse, Window move
@@ -687,7 +684,6 @@ window Search ( /TeraPad/ && /検索/) : Vim
   #key C-a = Home # rather useful to select all in original
   key C-e = End
 #}}}
-
 # Reset to Global
 keymap Global
 
