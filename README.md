@@ -14,27 +14,28 @@ also could help you!
 
 This repository has some files for yamy.
 
-### .mayu
+### [.mayu](./.mayu)
 My main setting file.
 
-### .local.mayu
+### [.local.mayu](./.local.mayu)
 Settings for each PC.
 It has settings of window alignment (depends on a display dimension).
 
-### vimedit.mayu
+### [vimedit.mayu](./vimedit.mayu)
 In this file, the settings for vim-like move/edit are extracted from .mayu file.
 It can work standalone.
+[This page](http://rcmdnk.github.com/blog/2013/03/16/yamy4/) also explains this setting.
 
 Following features are available.
 
 #### Vim-like cursor move with Alt+Control (or CapsLock)
-You can move a cursor with `A-C-[hjkl]` to left, down, up, and right
+You can move a cursor with `Alt-Ctrl-`+`h`,`j`,`k`,`l` to left, down, up, and right
 like vim in anytime. (It just sends eacy cursor key command.)
 
-In addition, if CapslLock is set, `hjkl` can be used standalone to move around.
+In addition, if `CapslLock` is set, `h`,`j`,`k`,`l` can be used standalone to move around.
 
 
-    * Cursor Move (A-C- can be removed when CapsLock is set)
+    * Cursor Move (`A-C-` can be removed when `CapsLock` is set)
       * A-C-h: Cursor Left
       * A-C-j: Cursor Down
       * A-C-k: Cursor Up
@@ -52,15 +53,15 @@ Such `y` moves a mouse cursor to the left when Capslock is set.
 
 In addition, click/mouse wheel also can be used from the keyboard as followings.
 
-    * Mouse Move (When CapsLock is set, A-C- must not used)
+    * Mouse Move (When `CapsLock` is set, `A-C-` must not be used)
       * A-C-y: Mouse Left
       * A-C-u: Mouse Down
       * A-C-i: Mouse Up
       * A-C-o: Mouse Right
-    * Mouse Click (A-C- can be removed when CapsLock is set)
+    * Mouse Click (`A-C-` can be removed when `CapsLock` is set)
       * A-C-n: Mouse Left Click
       * A-C-p: Mouse Right Click
-    * Mouse Wheel (A-C- can be removed when CapsLock is set)
+    * Mouse Wheel (`A-C-` can be removed when `CapsLock` is set)
       * A-C-m: Mouse Wheel Down
       * A-C-, Mouse Wheel Up
       * A-S-C-m (or CapsLock-S-m): Mouse Wheel More Down
@@ -76,8 +77,8 @@ You can also move windows w/o mosue!
       * A-S-o: Window Move Right
 
 #### Vim emulation
-With `vimedit.mayu`, vim mode is available on Thunderbird, Notepad, and TeraPad.
-You can add any other applications in the setting file if you want.
+With [vimedit.mayu](./vimedit.mayu), vim mode is available on Thunderbird, Notepad, and TeraPad.
+You can add any other applications in the setting file if you want ([Ref](http://rcmdnk.github.com/blog/2013/03/16/yamy4/)).
 
 ##### Mode
 Following modes are available
@@ -189,3 +190,4 @@ Commands in the nomal mode
 
 #### Demonstration of Vim emulation with yamy, on TeraPad
 <p><img src="https://dl.dropbox.com/u/630732/Blog/WinApp/YamyVimEmulation.gif" ></p>
+
