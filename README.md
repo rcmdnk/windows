@@ -82,18 +82,12 @@ You can add any other applications in the setting file if you want.
 ##### Mode
 Following modes are available
 
-| Name | Function |
-|:-----|:---------|
-| `IGNORE_FAIL` | This will let slate move to the next operation if the current operation fails to resize/move on the current window |
-| `REPEAT` | This will repeat the list of operations if the number of windows is larger than the number of operations |
-| `REPEAT_LAST` | This will repeat the last operation in the list if the number of windows is larger than the number of operations |
-
-
 |Mode|Description|
 |:---|:----------|
 |Insert Mode|Normal Windows state|
 |Normal Mode|As in vim, cursor is moved by hjkl, w, etc... and some vim like commands are available.|
 |Visual Mode|There are three visual mode: Character-wise, Line-wise, and Block-wise. Block-wise visual mode is available only the applications which support it (In the default applications, only TeraPad support Block-sise mode.)|
+|Command Line Mode|Can be used for saving file/exiting.|
 
 Initial state is `Insert Mode`, then `Esc` or `C-[` bring you to the normal mode.
 
@@ -102,6 +96,43 @@ In the normal mode, `i` is the key to be back to the insert mode.
 `v`, `S-v` and `C-v` are the key to the Character-wise, Line-wise, and Block-wise
 visual mode, respectively.
 
+After push `:`, a few commands to save/quit are available.
+
+#### Available commands at Normal mode
+
+|Key/Commands|Function|
+|:----------:|:-------|
+|h,j,k,l|Left, Down, Up, Right
+|0/$| To the first/end character of the line|
+|C-a/C-e| To the first/end character of the line (emacs like)|
+|w/W/e/E| Move a word forard. All work same. (like `w` in vim)|
+|b/B| Move a word backword. All work same. (like `ge` in vim)|
+|C-u/C-d| Move Up/Down 10 line|
+|C-b/C-f| Move Up/Down 20 line|
+|gg/G| Go to the top/end of the file|
+|J| Combine two lines|
+
+|yy, Y| Copy line|
+|y0, y$| Copy from here to the first/end of the line|
+|yw, yW, ye, yE| Copy following one word|
+|yb, yB| Copy previous one word|
+|yG, ygg| Copy from here to the top/end of the file|
+|yj, yk| Copy blow/above line|
+
+|dd| Cut line|
+|d0, d$, D| Cut from here to the first/end of the line (d$=D)|
+|dw, dW, de, dE| Cut following one word|
+|db, dB| Cut previous one word|
+|dG, dgg| Cut from here to the top/end of the file|
+|dj, dk| Cut blow/above line|
+
+|c0, c$, C| Cut from here to the first/end of the line (c$=C) and enter in the insert mode|
+|cw, cW, ce, cE| Cut following one word and enter in the insert mode|
+|cb, cB| Cut previous one word and enter in the insert mode|
+|cG, cgg| Cut from here to the top/end of the file and enter in the insert mode|
+|cj, ck| Cut blow/above line and enter in the insert mode|
+
+||
 
 
 
