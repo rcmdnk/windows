@@ -38,7 +38,6 @@ keymap Global
   key CL-*C-*A-l = Right
   # }}}
 
-
   # Mouse {{{
   # Use yammy's function
   # vim like moving with keys yuio (keys on the hjkl)
@@ -65,6 +64,8 @@ keymap Global
   key CL-comma = &MouseWheel(520)
   key A-S-m = &MouseWheel(-120)
   key A-S-comma = &MouseWheel(120)
+  key CL-S-m = &MouseWheel(-120)
+  key CL-S-comma = &MouseWheel(120)
   # }}}
 
   # Window move {{{
@@ -141,8 +142,10 @@ keymap Vim : Global
 
   # Toggles
   # The key ends with Toggles shows wrong behavior.
-  # "Left Right" is temporary treatment for the problem...
-  keyseq $LR = Left Right
+  # (maybe need to wait a moment?)
+  # "Right Left" is temporary treatment for the problem...
+  #keyseq $RL = Right Left # event blank keaseq work well fine
+  keyseq $RL =
   keyseq $OnN = &Toggle(Lock0,on)
   keyseq $OffN = &Toggle(Lock0,off)
   keyseq $OnV = &Toggle(Lock1,on)
@@ -162,19 +165,19 @@ keymap Vim : Global
   keyseq $OffAll = $OffN $OffV $OffVC $OffVL $OffVB $OffC
 
   # Define each mode In/Out
-  keyseq $InN = $OffAll $OnN $LR # Space O n N Space
-  keyseq $OutN = $OffN $LR # Space O f f N Space
-  keyseq $InVC = $OffAll $OnV $OnVC $LR # Space O n V C Space
-  keyseq $OutVC = $OffVC $OffV $LR # Space O f f V C Space
-  keyseq $InVL = $OffAll $OnV $OnVL $LR # Space O n V L Space
-  keyseq $OutVL = $OffVL $OffV $LR # Space O f f V L Space
-  keyseq $InVB = $OffAll $OnV $OnVB $LR # Space O n V B Space
-  keyseq $OutVB = $OffVB $OffV $LR # Space O f f V B Space
-  keyseq $InC = $OffAll $OnC $LR # Space O n C Space
-  keyseq $OutC = $OffC $LR # Space O f f C Space
+  keyseq $InN = $OffAll $OnN $RL # Space O n N Space
+  keyseq $OutN = $OffN $RL # Space O f f N Space
+  keyseq $InVC = $OffAll $OnV $OnVC $RL # Space O n V C Space
+  keyseq $OutVC = $OffVC $OffV $RL # Space O f f V C Space
+  keyseq $InVL = $OffAll $OnV $OnVL $RL # Space O n V L Space
+  keyseq $OutVL = $OffVL $OffV $RL # Space O f f V L Space
+  keyseq $InVB = $OffAll $OnV $OnVB $RL # Space O n V B Space
+  keyseq $OutVB = $OffVB $OffV $RL # Space O f f V B Space
+  keyseq $InC = $OffAll $OnC $RL # Space O n C Space
+  keyseq $OutC = $OffC $RL # Space O f f C Space
 
-  keyseq $InL = $OnL $LR # Space O n L Space
-  keyseq $OutL = $OffL $LR # Space O f f L Space
+  keyseq $InL = $OnL $RL # Space O n L Space
+  keyseq $OutL = $OffL $RL # Space O f f L Space
 
   # }}} Lock Keys
 
@@ -443,12 +446,12 @@ keymap Vim : Global
   keyseq $UpAllSelect = S-C-Home
   keyseq $DownAllSelect = S-C-End
 
-  keyseq $Copy = C-c Esc $OutL
-  keyseq $CopyL = C-c Esc $InL
-  keyseq $Cut = C-x $OutL
-  keyseq $CutL = C-x $InL
-  keyseq $Change = C-x $OutN $OutL
-  keyseq $ChangeL = C-x $OutN $InL
+  keyseq $Copy = C-c $OutL Esc
+  keyseq $CopyL = C-c $InL Esc
+  keyseq $Cut = C-x $OutL Esc
+  keyseq $CutL = C-x $InL Esc
+  keyseq $Change = C-x $OutN $OutL Esc
+  keyseq $ChangeL = C-x $OutN $InL Esc
 
   keyseq $Paste = C-v
 
@@ -622,9 +625,9 @@ keymap Vim : Global
   key L0-v = $InVC
 
   # Linewise-visual L1+L3
-  key L0-S-v = $InVL Home S-Down S-Home
+  key L0-S-v = $InVL Home S-End
 
-  key L1-~L2-L3-~L4-j = S-Down S-Home
+  key L1-~L2-L3-~L4-j = S-Down S-End
   key L1-~L2-L3-~L4-k = S-Up S-Home
 
   key L1-~L2-L3-~L4-y = C-c $InN $InL
@@ -638,16 +641,19 @@ keymap Vim : Global
   # }}}
 
   # Command line mode {{{
-keymap2 VimCommand2: Global = &Ignore
+keymap2 VimCommandW: Global = &Ignore
   key L0-Enter = C-s # Save
   key L0-q = C-s A-F4 # Save & quit
-  key L0-Space = C-s A-a # Save as
+  key L0-Space = A-f a # Save as
+
+keymap2 VimCommandQ: Global = &Ignore
+  key L0-Enter = A-F4 # quit
+  #key L0-S-_1 = A-F4 n # quit!, makes problem when there is no change...
 
 keymap2 VimCommand: Global = &Ignore
-  key L0-w = &Prefix(VimCommand2)
-  key L0-q = A-F4 # quit
+  key L0-w = &Prefix(VimCommandW)
+  key L0-q = &Prefix(VimCommandQ)
   key L0-h = F1
-
 
 keymap Vim : Global
   key L0-S-Semicolon = &Prefix(VimCommand)
@@ -810,6 +816,7 @@ window Search ( /TeraPad/ && /検索/) : Vim
   key C-b = Right
   #key C-a = Home # rather useful to select all in original
   key C-e = End
+
 #}}}
 
 # For synergy {{{

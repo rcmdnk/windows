@@ -186,3 +186,6 @@ Commands in the nomal mode
 |i| Start to change the search word |
 |Enter| Enter normal mode, close the window and back to the main window (the searched word is highlighted, and you can continue to search with `n`/`N`)|
 
+
+#### Demonstration of Vim emulation with yamy, on TeraPad
+<p><img src="https://dl.dropbox.com/u/630732/Blog/WinApp/YamyVimEmulation.gif" ></p>
