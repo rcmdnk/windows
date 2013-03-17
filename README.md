@@ -34,7 +34,6 @@ like vim in anytime. (It just sends eacy cursor key command.)
 
 In addition, if `CapslLock` is set, `h`,`j`,`k`,`l` can be used standalone to move around.
 
-
     * Cursor Move (`A-C-` can be removed when `CapsLock` is set)
       * A-C-h: Cursor Left
       * A-C-j: Cursor Down
@@ -105,6 +104,9 @@ After push `:`, a few commands to save/quit are available.
 
 |Key/Commands|Function|
 |:----------:|:-------|
+|i/I/a/A/o/O| Enter the insert mode at under the cursor/start of the line/next to the cursor/end of the line/next line/previous line|
+|v/S-v/C-v|Enter the visual mode of Character-wise/Line-wise/Block-wise. In the application which doesn't support Block-wise select, it just does Character-wise select.|
+|:|Enter the command line mode|
 |h/j/k/l|Left/Down/Up/Right|
 |0/$| To the first/end character of the line|
 |C-a/C-e| To the first/end character of the line (emacs like)|
