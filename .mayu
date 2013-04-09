@@ -89,7 +89,7 @@ keymap Global
   key A-d = Delete              # Always Delete with A-d
   #key C-o = A-Left              # Go to previous page
   #key C-i = A-Right             # Go to nexe page
-  key A-C-f = LWIN              # Push Start button, can start search directly
+  #key A-C-f = LWIN              # Push Start button, can start search directly
   key C-Space = A-GraveAccent   # Unix like IME
 
   # For HHK
