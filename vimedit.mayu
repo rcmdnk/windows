@@ -596,7 +596,11 @@ keymap2 VimCommand: Global = &Ignore
   key L0-h = F1
 
 keymap Vim : Global
-  key L0-S-Semicolon = &Prefix(VimCommand)
+  if ( USE104 )
+    key L0-S-Semicolon = &Prefix(VimCommand)
+  else
+    key L0-Scolon = &Prefix(VimCommand)
+  endif
 
   #key L0-S-Semicolon = $InC $OutN
   #key L7-w = A-f A-a # Save as
