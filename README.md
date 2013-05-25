@@ -133,7 +133,7 @@ After push `:`, a few commands to save/quit are available.
 |cG, cgg| Cut from here to the top/end of the file and enter in the insert mode|
 |cj, ck| Cut blow/above line and enter in the insert mode|
 |x/X|Delete a character under/before the cursor (not registered in the clipboard)|
-|p/P| Paste to the next/current place. If copy/cut was done with line-wise, it pastes to the next/previous line. Some commands (such yy/dd) also force to paste as line-wise even if it was copied/cut in Character-wise mode.|
+|p/P| Paste to the next/current place. If copy/cut was done with line-wise, it pastes to the next/current line. Some commands (such yy/dd) also force to paste as line-wise even if it was copied/cut in Character-wise mode.|
 |u/C-r| Undo/Redo. Note, some applications support only one time undo and second undo works as redo (`C-r` can't work in that case).|
 |J| Combine two lines|
 |/| Start search (search box will be opened)|
