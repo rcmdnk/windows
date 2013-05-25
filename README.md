@@ -9,7 +9,7 @@ for  windows.
 For basic settings, you can refer
 [the manual of Mado Tukai no Yuutsu](http://mayu.sourceforge.net/mayu/doc/README-ja.html), which is a base of yamy
 
-My blog about [yamy](http://rcmdnk.github.com/blog/categories/yamy/)
+My blog about [yamy](http://rcmdnk.github.com/blog/categories/yamy/) (Japanese only)
 also could help you!
 
 This repository has some files for yamy.
