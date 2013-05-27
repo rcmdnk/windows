@@ -130,15 +130,17 @@ keymap Vim : Global
   # L2: Character-wise Visual mode
   # L3: Line-wise Visual mode
   # L4: Block-wise Visual mode
+  # L5: Overwite Once
+  # L6: Overwite Continuously
   # L7: Command line mode # currently not used
   # L9: Line copy state
   #
-  # L0, L2-L3 and L7 are exclusive
+  # L0, L2-L7 are exclusive
   # L1 is used with L2-L4
 
   # Change Default Modifier (could be affect on other applications)
   # Original in yamy is *LX- for all Lock keys
-  #key ~L0-~L1-~L2-~L3-~L4-~L7-*L9- =
+  #key ~L0-~L1-~L2-~L3-~L4-~L5-~L6-~L7-*L9- =
 
   # Toggles
   # The key ends with Toggles shows wrong behavior.
@@ -156,13 +158,17 @@ keymap Vim : Global
   keyseq $OffVL = &Toggle(Lock3,off)
   keyseq $OnVB = &Toggle(Lock4,on)
   keyseq $OffVB = &Toggle(Lock4,off)
+  keyseq $OnOO = &Toggle(Lock5,on)
+  keyseq $OffOO = &Toggle(Lock5,off)
+  keyseq $OnOC = &Toggle(Lock6,on)
+  keyseq $OffOC = &Toggle(Lock6,off)
   keyseq $OnC = &Toggle(Lock7,on)
   keyseq $OffC = &Toggle(Lock7,off)
   keyseq $OnL = &Toggle(Lock9,on)
   keyseq $OffL = &Toggle(Lock9,off)
 
   # Define keyseq to lock off all exclusive locks
-  keyseq $OffAll = $OffN $OffV $OffVC $OffVL $OffVB $OffC
+  keyseq $OffAll = $OffN $OffV $OffVC $OffVL $OffVB $OffOO $OffOC $OffC
 
   # Define each mode In/Out
   keyseq $InN = $OffAll $OnN $RL # Space O n N Space
@@ -173,6 +179,10 @@ keymap Vim : Global
   keyseq $OutVL = $OffVL $OffV $RL # Space O f f V L Space
   keyseq $InVB = $OffAll $OnV $OnVB $RL # Space O n V B Space
   keyseq $OutVB = $OffVB $OffV $RL # Space O f f V B Space
+  keyseq $InOO = $OffAll $OnOO $RL # Space O n O O Space
+  keyseq $OutOO = $OffOO $RL # Space O f f O O Space
+  keyseq $InOC = $OffAll $OnOC $RL # Space O n O C Space
+  keyseq $OutOC = $OffOC $RL # Space O f f O C Space
   keyseq $InC = $OffAll $OnC $RL # Space O n C Space
   keyseq $OutC = $OffC $RL # Space O f f C Space
 
@@ -186,9 +196,11 @@ keymap Vim : Global
   key L0-*S-b = &Ignore
   key L0-*S-c = &Ignore
   key L0-*S-d = &Ignore
+  key L0-*S-e = &Ignore
   key L0-*S-f = &Ignore
   key L0-*S-g = &Ignore
   key L0-*S-h = &Ignore
+  key L0-*S-i = &Ignore
   key L0-*S-j = &Ignore
   key L0-*S-k = &Ignore
   key L0-*S-l = &Ignore
@@ -216,14 +228,33 @@ keymap Vim : Global
   key L0-*S-_7 = &Ignore
   key L0-*S-_8 = &Ignore
   key L0-*S-_9 = &Ignore
+  key L0-*S-Comma = &Ignore
+  key L0-*S-Period = &Ignore
+  key L0-*S-HyphenMinus = &Ignore
+  key L0-*S-LeftSquareBracket = &Ignore
+  key L0-*S-RightSquareBracket = &Ignore
+  key L0-*S-Semicolon = &Ignore
+  key L0-*S-BackSlash = &Ignore
+  key L0-*S-Slash = &Ignore
+  key L0-*S-Space = &Ignore
+  if ( USE104 )
+    key L0-*S-EqualsSign = &Ignore
+    key L0-*S-GraveAccent = &Ignore
+  else
+    key L0-*S-Caret = &Ignore
+    key L0-*S-Atmark = &Ignore
+    key L0-*S-Colon = &Ignore
+  endif
 
   key L1-*S-a = &Ignore
   key L1-*S-b = &Ignore
   key L1-*S-c = &Ignore
   key L1-*S-d = &Ignore
+  key L1-*S-e = &Ignore
   key L1-*S-f = &Ignore
   key L1-*S-g = &Ignore
   key L1-*S-h = &Ignore
+  key L1-*S-i = &Ignore
   key L1-*S-j = &Ignore
   key L1-*S-k = &Ignore
   key L1-*S-l = &Ignore
@@ -251,14 +282,33 @@ keymap Vim : Global
   key L1-*S-_7 = &Ignore
   key L1-*S-_8 = &Ignore
   key L1-*S-_9 = &Ignore
+  key L1-*S-Comma = &Ignore
+  key L1-*S-Period = &Ignore
+  key L1-*S-HyphenMinus = &Ignore
+  key L1-*S-LeftSquareBracket = &Ignore
+  key L1-*S-RightSquareBracket = &Ignore
+  key L1-*S-Semicolon = &Ignore
+  key L1-*S-BackSlash = &Ignore
+  key L1-*S-Slash = &Ignore
+  key L1-*S-Space = &Ignore
+  if ( USE104 )
+    key L1-*S-EqualsSign = &Ignore
+    key L1-*S-GraveAccent = &Ignore
+  else
+    key L1-*S-Caret = &Ignore
+    key L1-*S-Atmark = &Ignore
+    key L1-*S-Colon = &Ignore
+  endif
 
   key L2-*S-a = &Ignore
   key L2-*S-b = &Ignore
   key L2-*S-c = &Ignore
   key L2-*S-d = &Ignore
+  key L2-*S-e = &Ignore
   key L2-*S-f = &Ignore
   key L2-*S-g = &Ignore
   key L2-*S-h = &Ignore
+  key L2-*S-i = &Ignore
   key L2-*S-j = &Ignore
   key L2-*S-k = &Ignore
   key L2-*S-l = &Ignore
@@ -286,14 +336,33 @@ keymap Vim : Global
   key L2-*S-_7 = &Ignore
   key L2-*S-_8 = &Ignore
   key L2-*S-_9 = &Ignore
+  key L2-*S-Comma = &Ignore
+  key L2-*S-Period = &Ignore
+  key L2-*S-HyphenMinus = &Ignore
+  key L2-*S-LeftSquareBracket = &Ignore
+  key L2-*S-RightSquareBracket = &Ignore
+  key L2-*S-Semicolon = &Ignore
+  key L2-*S-BackSlash = &Ignore
+  key L2-*S-Slash = &Ignore
+  key L2-*S-Space = &Ignore
+  if ( USE104 )
+    key L2-*S-EqualsSign = &Ignore
+    key L2-*S-GraveAccent = &Ignore
+  else
+    key L2-*S-Caret = &Ignore
+    key L2-*S-Atmark = &Ignore
+    key L2-*S-Colon = &Ignore
+  endif
 
   key L3-*S-a = &Ignore
   key L3-*S-b = &Ignore
   key L3-*S-c = &Ignore
   key L3-*S-d = &Ignore
+  key L3-*S-e = &Ignore
   key L3-*S-f = &Ignore
   key L3-*S-g = &Ignore
   key L3-*S-h = &Ignore
+  key L3-*S-i = &Ignore
   key L3-*S-j = &Ignore
   key L3-*S-k = &Ignore
   key L3-*S-l = &Ignore
@@ -321,14 +390,33 @@ keymap Vim : Global
   key L3-*S-_7 = &Ignore
   key L3-*S-_8 = &Ignore
   key L3-*S-_9 = &Ignore
+  key L3-*S-Comma = &Ignore
+  key L3-*S-Period = &Ignore
+  key L3-*S-HyphenMinus = &Ignore
+  key L3-*S-LeftSquareBracket = &Ignore
+  key L3-*S-RightSquareBracket = &Ignore
+  key L3-*S-Semicolon = &Ignore
+  key L3-*S-BackSlash = &Ignore
+  key L3-*S-Slash = &Ignore
+  key L3-*S-Space = &Ignore
+  if ( USE104 )
+    key L3-*S-EqualsSign = &Ignore
+    key L3-*S-GraveAccent = &Ignore
+  else
+    key L3-*S-Caret = &Ignore
+    key L3-*S-Atmark = &Ignore
+    key L3-*S-Colon = &Ignore
+  endif
 
   key L4-*S-a = &Ignore
   key L4-*S-b = &Ignore
   key L4-*S-c = &Ignore
   key L4-*S-d = &Ignore
+  key L4-*S-e = &Ignore
   key L4-*S-f = &Ignore
   key L4-*S-g = &Ignore
   key L4-*S-h = &Ignore
+  key L4-*S-i = &Ignore
   key L4-*S-j = &Ignore
   key L4-*S-k = &Ignore
   key L4-*S-l = &Ignore
@@ -356,45 +444,71 @@ keymap Vim : Global
   key L4-*S-_7 = &Ignore
   key L4-*S-_8 = &Ignore
   key L4-*S-_9 = &Ignore
+  key L4-*S-Comma = &Ignore
+  key L4-*S-Period = &Ignore
+  key L4-*S-HyphenMinus = &Ignore
+  key L4-*S-LeftSquareBracket = &Ignore
+  key L4-*S-RightSquareBracket = &Ignore
+  key L4-*S-Semicolon = &Ignore
+  key L4-*S-BackSlash = &Ignore
+  key L4-*S-Slash = &Ignore
+  key L4-*S-Space = &Ignore
+  if ( USE104 )
+    key L4-*S-EqualsSign = &Ignore
+    key L4-*S-GraveAccent = &Ignore
+  else
+    key L4-*S-Caret = &Ignore
+    key L4-*S-Atmark = &Ignore
+    key L4-*S-Colon = &Ignore
+  endif
+
   #}}} disable
 
   # Debug keys {{{
-  key *L0-*L1-*L2-*L3-*L4-*L7-*L9-C-A-_0 = \
+  key *L0-*L1-*L2-*L3-*L4-*L5-*L6-*L7-*L9-C-A-_0 = \
     &Toggle(Lock0,toggle) Space S-L o c k S-T o g g l e _0 Space
-  key *L0-*L1-*L2-*L3-*L4-*L7-*L9-C-A-_1 = \
+  key *L0-*L1-*L2-*L3-*L4-*L5-*L6-*L7-*L9-C-A-_1 = \
     &Toggle(Lock1,toggle) Space S-L o c k S-T o g g l e _1 Space
-  key *L0-*L1-*L2-*L3-*L4-*L7-*L9-C-A-_2 = \
+  key *L0-*L1-*L2-*L3-*L4-*L5-*L6-*L7-*L9-C-A-_2 = \
     &Toggle(Lock2,toggle) Space S-L o c k S-T o g g l e _2 Space
-  key *L0-*L1-*L2-*L3-*L4-*L7-*L9-C-A-_3 = \
+  key *L0-*L1-*L2-*L3-*L4-*L5-*L6-*L7-*L9-C-A-_3 = \
     &Toggle(Lock3,toggle) Space S-L o c k S-T o g g l e _3 Space
-  key *L0-*L1-*L2-*L3-*L4-*L7-*L9-C-A-_4 = \
+  key *L0-*L1-*L2-*L3-*L4-*L5-*L6-*L7-*L9-C-A-_4 = \
     &Toggle(Lock4,toggle) Space S-L o c k S-T o g g l e _4 Space
-  key *L0-*L1-*L2-*L3-*L4-*L7-*L9-C-A-_7 = \
+  key *L0-*L1-*L2-*L3-*L4-*L5-*L6-*L7-*L9-C-A-_5 = \
+    &Toggle(Lock7,toggle) Space S-L o c k S-T o g g l e _5 Space
+  key *L0-*L1-*L2-*L3-*L4-*L5-*L6-*L7-*L9-C-A-_6 = \
+    &Toggle(Lock7,toggle) Space S-L o c k S-T o g g l e _6 Space
+  key *L0-*L1-*L2-*L3-*L4-*L5-*L6-*L7-*L9-C-A-_7 = \
     &Toggle(Lock7,toggle) Space S-L o c k S-T o g g l e _7 Space
-  key *L0-*L1-*L2-*L3-*L4-*L7-*L9-C-A-_9 = \
+  key *L0-*L1-*L2-*L3-*L4-*L5-*L6-*L7-*L9-C-A-_9 = \
     &Toggle(Lock9,toggle) Space S-L o c k S-T o g g l e _9 Space
 
-  key ~L0-*L1-*L2-*L3-*L4-*L7-*L9-C-S-_0 = Space S-L o c k S-O f f _0 Space
-  key *L0-~L1-*L2-*L3-*L4-*L7-*L9-C-_1 = Space S-L o c k S-O f f _1 Space
-  key *L0-*L1-~L2-*L3-*L4-*L7-*L9-C-_2 = Space S-L o c k S-O f f _2 Space
-  key *L0-*L1-*L2-~L3-*L4-*L7-*L9-C-_3 = Space S-L o c k S-O f f _3 Space
-  key *L0-*L1-*L2-*L3-~L4-*L7-*L9-C-_4 = Space S-L o c k S-O f f _4 Space
-  key *L0-*L1-*L2-*L3-*L4-~L7-*L9-C-_7 = Space S-L o c k S-O f f _7 Space
-  key *L0-*L1-*L2-*L3-*L4-*L7-~L9-C-_9 = Space S-L o c k S-O f f _9 Space
-  key L0-*L1-*L2-*L3-*L4-*L7-*L9-C-S-_0 = Space S-L o c k S-O n _0 Space
-  key *L0-L1-*L2-*L3-*L4-*L7-*L9-C-_1 = Space S-L o c k S-O n _1 Space
-  key *L0-*L1-L2-*L3-*L4-*L7-*L9-C-_2 = Space S-L o c k S-O n _2 Space
-  key *L0-*L1-*L2-L3-*L4-*L7-*L9-C-_3 = Space S-L o c k S-O n _3 Space
-  key *L0-*L1-*L2-*L3-L4-*L7-*L9-C-_4 = Space S-L o c k S-O n _4 Space
-  key *L0-*L1-*L2-*L3-*L4-L7-*L9-C-_7 = Space S-L o c k S-O n _7 Space
-  key *L0-*L1-*L2-*L3-*L4-*L7-L9-C-_9 = Space S-L o c k S-O n _9 Space
+  key ~L0-*L1-*L2-*L3-*L4-*L5-*L6-*L7-*L9-C-S-_0 = Space S-L o c k S-O f f _0 Space
+  key *L0-~L1-*L2-*L3-*L4-*L5-*L6-*L7-*L9-C-_1 = Space S-L o c k S-O f f _1 Space
+  key *L0-*L1-~L2-*L3-*L4-*L5-*L6-*L7-*L9-C-_2 = Space S-L o c k S-O f f _2 Space
+  key *L0-*L1-*L2-~L3-*L4-*L5-*L6-*L7-*L9-C-_3 = Space S-L o c k S-O f f _3 Space
+  key *L0-*L1-*L2-*L3-~L4-*L5-*L6-*L7-*L9-C-_4 = Space S-L o c k S-O f f _4 Space
+  key *L0-*L1-*L2-*L3-*L4-~L5-*L6-*L7-*L9-C-_5 = Space S-L o c k S-O f f _5 Space
+  key *L0-*L1-*L2-*L3-*L4-*L5-~L6-*L7-*L9-C-_6 = Space S-L o c k S-O f f _6 Space
+  key *L0-*L1-*L2-*L3-*L4-*L5-*L6-~L7-*L9-C-_7 = Space S-L o c k S-O f f _7 Space
+  key *L0-*L1-*L2-*L3-*L4-*L5-*L6-*L7-~L9-C-_9 = Space S-L o c k S-O f f _9 Space
+  key L0-*L1-*L2-*L3-*L4-*L5-*L6-*L7-*L9-C-S-_0 = Space S-L o c k S-O n _0 Space
+  key *L0-L1-*L2-*L3-*L4-*L5-*L6-*L7-*L9-C-_1 = Space S-L o c k S-O n _1 Space
+  key *L0-*L1-L2-*L3-*L4-*L5-*L6-*L7-*L9-C-_2 = Space S-L o c k S-O n _2 Space
+  key *L0-*L1-*L2-L3-*L4-*L5-*L6-*L7-*L9-C-_3 = Space S-L o c k S-O n _3 Space
+  key *L0-*L1-*L2-*L3-L4-*L5-*L6-*L7-*L9-C-_4 = Space S-L o c k S-O n _4 Space
+  key *L0-*L1-*L2-*L3-*L4-L5-*L6-*L7-*L9-C-_5 = Space S-L o c k S-O n _6 Space
+  key *L0-*L1-*L2-*L3-*L4-*L5-L6-*L7-*L9-C-_6 = Space S-L o c k S-O n _6 Space
+  key *L0-*L1-*L2-*L3-*L4-*L5-*L6-L7-*L9-C-_7 = Space S-L o c k S-O n _7 Space
+  key *L0-*L1-*L2-*L3-*L4-*L5-*L6-*L7-L9-C-_9 = Space S-L o c k S-O n _9 Space
   # }}}
 
   # toggles for insert/normal modes {{{
 
   # Enter vim normal mode
-  key *L0-*L1-*L2-*L3-*L4-*L7-Esc = $InN
-  key *L0-*L1-*L2-*L3-*L4-*L7-C-LeftSquareBracket = $InN
+  key *L0-*L1-*L2-*L3-*L4-*L5-*L6-*L7-Esc = $InN
+  key *L0-*L1-*L2-*L3-*L4-*L5-*L6-*L7-C-LeftSquareBracket = $InN
 
   # Enter vim insert mode (Exit vim normal mode)
   key L0-i = $OutN
@@ -505,6 +619,7 @@ keymap2 VimChange2: Global = &Ignore
   key L0-g = $UpAllSelect $ChangeL # cgg
 
 keymap2 VimChange: Global = &Ignore
+  key L0-c = $LineSelect $CutL $Change # cc
   key L0-S-_4 = $EndSelect $Change # c$
   key L0-_0 = $HomeSelect $Change # c0
   key L0-w = $WordSelect $Change # cw
@@ -573,9 +688,121 @@ keymap Vim : Global
   else
     key L0-S-Caret = S-Right C-x &Wait(50) &ClipboardUpcaseWord C-v
   endif
+  key L0-S-n = S-F3
+
+  # Overwrite
+  key L0-r = $InOO
+  key L0-S-r = $InOC
+
+  key L5-*S-a = Delete *S-a $InN
+  key L5-*S-b = Delete *S-b $InN
+  key L5-*S-c = Delete *S-c $InN
+  key L5-*S-d = Delete *S-d $InN
+  key L5-*S-e = Delete *S-e $InN
+  key L5-*S-f = Delete *S-f $InN
+  key L5-*S-g = Delete *S-g $InN
+  key L5-*S-h = Delete *S-h $InN
+  key L5-*S-i = Delete *S-i $InN
+  key L5-*S-j = Delete *S-j $InN
+  key L5-*S-k = Delete *S-k $InN
+  key L5-*S-l = Delete *S-l $InN
+  key L5-*S-m = Delete *S-m $InN
+  key L5-*S-n = Delete *S-n $InN
+  key L5-*S-o = Delete *S-o $InN
+  key L5-*S-p = Delete *S-p $InN
+  key L5-*S-q = Delete *S-q $InN
+  key L5-*S-r = Delete *S-r $InN
+  key L5-*S-s = Delete *S-s $InN
+  key L5-*S-t = Delete *S-t $InN
+  key L5-*S-u = Delete *S-u $InN
+  key L5-*S-v = Delete *S-v $InN
+  key L5-*S-w = Delete *S-w $InN
+  key L5-*S-x = Delete *S-x $InN
+  key L5-*S-y = Delete *S-y $InN
+  key L5-*S-z = Delete *S-z $InN
+  key L5-*S-_0 = Delete *S-_0 $InN
+  key L5-*S-_1 = Delete *S-_1 $InN
+  key L5-*S-_2 = Delete *S-_2 $InN
+  key L5-*S-_3 = Delete *S-_3 $InN
+  key L5-*S-_4 = Delete *S-_4 $InN
+  key L5-*S-_5 = Delete *S-_5 $InN
+  key L5-*S-_6 = Delete *S-_6 $InN
+  key L5-*S-_7 = Delete *S-_7 $InN
+  key L5-*S-_8 = Delete *S-_8 $InN
+  key L5-*S-_9 = Delete *S-_9 $InN
+  key L5-*S-Comma = Delete *S-Comma $InN
+  key L5-*S-Period = Delete *S-Period $InN
+  key L5-*S-HyphenMinus = Delete *S-HyphenMinus $InN
+  key L5-*S-LeftSquareBracket = Delete *S-LeftSquareBracket $InN
+  key L5-*S-RightSquareBracket = Delete *S-RightSquareBracket $InN
+  key L5-*S-Semicolon = Delete *S-Semicolon $InN
+  key L5-*S-BackSlash = Delete *S-BackSlash $InN
+  key L5-*S-Slash = Delete *S-Slash $InN
+  key L5-*S-Space = Delete *S-Space $InN
+  if ( USE104 )
+    key L5-*S-EqualsSign = Delete *S-EqualsSign $InN
+    key L5-*S-GraveAccent = Delete *S-GraveAccent $InN
+  else
+    key L5-*S-Caret = Delete *S-Caret $InN
+    key L5-*S-Atmark = Delete *S-Atmark $InN
+    key L5-*S-Colon = Delete *S-Colon $InN
+  endif
+
+  key L6-*S-a = Delete *S-a
+  key L6-*S-b = Delete *S-b
+  key L6-*S-c = Delete *S-c
+  key L6-*S-e = Delete *S-e
+  key L6-*S-d = Delete *S-d
+  key L6-*S-f = Delete *S-f
+  key L6-*S-g = Delete *S-g
+  key L6-*S-h = Delete *S-h
+  key L6-*S-i = Delete *S-i
+  key L6-*S-j = Delete *S-j
+  key L6-*S-k = Delete *S-k
+  key L6-*S-l = Delete *S-l
+  key L6-*S-m = Delete *S-m
+  key L6-*S-n = Delete *S-n
+  key L6-*S-o = Delete *S-o
+  key L6-*S-p = Delete *S-p
+  key L6-*S-q = Delete *S-q
+  key L6-*S-r = Delete *S-r
+  key L6-*S-s = Delete *S-s
+  key L6-*S-t = Delete *S-t
+  key L6-*S-u = Delete *S-u
+  key L6-*S-v = Delete *S-v
+  key L6-*S-w = Delete *S-w
+  key L6-*S-x = Delete *S-x
+  key L6-*S-y = Delete *S-y
+  key L6-*S-z = Delete *S-z
+  key L6-*S-_0 = Delete *S-_0
+  key L6-*S-_1 = Delete *S-_1
+  key L6-*S-_2 = Delete *S-_2
+  key L6-*S-_3 = Delete *S-_3
+  key L6-*S-_4 = Delete *S-_4
+  key L6-*S-_5 = Delete *S-_5
+  key L6-*S-_6 = Delete *S-_6
+  key L6-*S-_7 = Delete *S-_7
+  key L6-*S-_8 = Delete *S-_8
+  key L6-*S-_9 = Delete *S-_9
+  key L6-*S-Comma = Delete *S-Comma
+  key L6-*S-Period = Delete *S-Period
+  key L6-*S-HyphenMinus = Delete *S-HyphenMinus
+  key L6-*S-LeftSquareBracket = Delete *S-LeftSquareBracket
+  key L6-*S-RightSquareBracket = Delete *S-RightSquareBracket
+  key L6-*S-Semicolon = Delete *S-Semicolon
+  key L6-*S-BackSlash = Delete *S-BackSlash
+  key L6-*S-Slash = Delete *S-Slash
+  key L6-*S-Space = Delete *S-Space
+  if ( USE104 )
+    key L6-*S-EqualsSign = Delete *S-EqualsSign
+    key L6-*S-GraveAccent = Delete *S-GraveAccent
+  else
+    key L6-*S-Caret = Delete *S-Caret
+    key L6-*S-Atmark = Delete *S-Atmark
+    key L6-*S-Colon = Delete *S-Colon
+  endif
 
   #}}}
-
 
   # Vim visual mode {{{
   # Visual Mode Common
@@ -600,8 +827,8 @@ keymap Vim : Global
 
   key L1-*L2-*L3-*L4-C-u = &Variable(0,10) &Repeat((S-Up),10) &Variable(0,0)
   key L1-*L2-*L3-*L4-C-d = &Variable(0,10) &Repeat((S-Down),10) &Variable(0,0)
-  key L1-*L2-*L3-*L4-C-b = &Variable(0,20) &Repeat((S-Up),20) &Variable(0,0)
-  key L1-*L2-*L3-*L4-C-f = &Variable(0,20) &Repeat((S-Down),20) &Variable(0,0)
+  key L1-*L2-*L3-*L4-C-b = PageUp
+  key L1-*L2-*L3-*L4-C-f = PageDown
 
   key L1-*L2-*L3-*L4-y = C-c $InN $OutL
   key L1-*L2-*L3-*L4-d = C-x $InN $OutL
@@ -620,6 +847,10 @@ keymap Vim : Global
   key L1-*L2-*L3-*L4-Esc = $InN
   key L1-*L2-*L3-*L4-C-LeftSquareBracket = $InN
 
+  key L1-*L2-*L3-L4-~L9-p = Delete $Paste C-Left $InN
+  key L1-*L2-*L3-L4-~L9-S-p = Delete $Paste C-Left $InN
+  key L1-*L2-*L3-L4-L9-p = Delete $Paste Home $InN
+  key L1-*L2-*L3-L4-L9-S-p = Delete $Paste Home $InN
 
   # Characterwise-visual L1+L2
   key L0-v = $InVC
