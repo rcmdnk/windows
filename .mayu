@@ -690,6 +690,14 @@ keymap Vim : Global
   endif
   key L0-S-n = S-F3
 
+  # Save/Quit
+keymap2 VimZ: Global = &Ignore
+  key L0-S-z = C-s A-F4
+  key L0-S-q = A-F4
+
+keymap Vim : Global
+  key L0-S-z = &Prefix(VimZ)
+
   # Overwrite
   key L0-r = $InOO
   key L0-S-r = $InOC
