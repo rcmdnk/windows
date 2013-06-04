@@ -14,17 +14,39 @@ def key RD = 0x79
 keymap Global
 
   # Control, capslock, windows, esc {{{
-  #mod shift += !!!Space
-  mod Control += CapsLock
-  key *CapsLock = *LControl
-  mod Control += E0CapsLock
-  key *E0CapsLock = *LControl
-  #key *LCtrl = $CapsLock
+  #--------
+  #mod Control += CapsLock
+  #key *CapsLock = *LControl
+  #mod Control += E0CapsLock
+  #key *E0CapsLock = *LControl
+  #key *NumLock = $CapsLock
+  #key *Apps = $CapsLock
+  #key *RWin = $CapsLock
+  #--------
+  mod alt += CapsLock
+  mod alt += E0CapsLock
+  key *CapsLock = *LAlt
+  key *E0CapsLock = *LAlt
+  mod alt -= LeftAlt
+  mod alt -= RightAlt
+  mod control += LAlt
+  mod control += RAlt
+  #key *LAlt = *LControl # not necessary? rather works badly...?
+  #key *RAlt = *LControl
+
+  mod control -= LControl
+  mod control -= RControl
+  mod alt += LControl
+  mod alt += RControl
+
   key *NumLock = $CapsLock
   key *Apps = $CapsLock
-  #key LWin =
-  #key *LWin = $CapsLock
   key *RWin = $CapsLock
+  key A-Tab = C-Tab
+  key C-Tab = A-Tab
+  key A-m = C-m
+  key C-m = A-m
+  #--------
   # }}}
 
   # vim like arrow {{{
