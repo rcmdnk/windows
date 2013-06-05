@@ -55,6 +55,8 @@ keymap Global
   #key A-*C-e = Esc              # A-e to ESC
   #key C-S-e = Esc               # C-S-e to ESC
   #key C-LeftSquareBracket = Esc # Always C-[ to ESC, like vim # bad conflict with swapped Alt...?
+                                 # If set: key *LAlt = *LControl, Alt-[ works as A-Esc
+                                 # If not set: key *LAlt = *LControl, Alt-[ works as C-[, ok
   key A-d = Delete              # Always Delete with A-d
   key C-o = A-Left              # Go to previous page
   key C-i = A-Right             # Go to nexe page
@@ -65,7 +67,7 @@ keymap Global
   # ESC to ` like normal keyboard (ESC is placed on the left of 1 in HHK)
   #key Esc = GraveAccent
   #key S-Esc = S-GraveAccent
-  key A-Esc = A-GraveAccent     # IME
+  #key A-Esc = A-GraveAccent     # IME
   key A-_1 = A-GraveAccent      # IME
   key A-Space = A-GraveAccent   # IME
 
@@ -1084,7 +1086,7 @@ window MagicFormation /MagicFormation*/ : Global
 
 # For synergy {{{
 window synergy /Synergy/ : Global
- key A-Esc = A-GraveAccent
+ #key A-Esc = A-GraveAccent
  key A-C-h = Left
  key A-C-j = Down
  key A-C-k = Up
@@ -1093,7 +1095,7 @@ window synergy /Synergy/ : Global
 
 # For input director {{{
 window inputdirector /InputDirector/ : Global
- key A-Esc = A-GraveAccent
+ #key A-Esc = A-GraveAccent
  key A-C-h = Left
  key A-C-j = Down
  key A-C-k = Up
