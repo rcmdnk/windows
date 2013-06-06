@@ -52,6 +52,7 @@ keymap Global
   key C-h = BS                  # Always BS with C-h
   key A-C-a = A-Space n         # Minimize window
   key A-_4 = A-F4               # Close window
+  key C-_4 = A-F4               # Close window
   #key A-*C-e = Esc              # A-e to ESC
   #key C-S-e = Esc               # C-S-e to ESC
   #key C-LeftSquareBracket = Esc # Always C-[ to ESC, like vim # bad conflict with swapped Alt...?
