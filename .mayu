@@ -689,7 +689,7 @@ keymap Vim : Global
   # Other normal mode commands {{{
 
   # Combine lines
-  key L0-S-j = Down Home BS Space
+  key L0-S-j = Down Home BS Space Left
 
   # Search
   key L0-Slash = C-f
