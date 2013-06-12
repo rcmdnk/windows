@@ -14,24 +14,24 @@ keymap Global
 
 # Basic Settings {{{
   # Control, capslock, windows, esc {{{
-  #--------
-  mod Control += CapsLock
-  key *CapsLock = *LControl
-  mod Control += E0CapsLock
-  key *E0CapsLock = *LControl
-  key *NumLock = $CapsLock
-  key *Apps = $CapsLock
-  key *RWin = $CapsLock
-  #--------
-  #mod alt += CapsLock
-  #mod alt += E0CapsLock
-  #key *CapsLock = *LAlt
-  #key *E0CapsLock = *LAlt
-  #mod alt -= LeftAlt
-  #mod alt -= RightAlt
-  #mod control += LAlt
+  #-------- Normal (CapsLock to Control)
+  #mod Control += CapsLock
+  #key *CapsLock = *LControl
+  #mod Control += E0CapsLock
+  #key *E0CapsLock = *LControl
+  #key *NumLock = $CapsLock
+  #key *Apps = $CapsLock
+  #key *RWin = $CapsLock
+  #-------- Normal (CapsLock to Alt, Alt to Control)
+  mod alt += CapsLock
+  mod alt += E0CapsLock
+  key *CapsLock = *LAlt
+  key *E0CapsLock = *LAlt
+  mod alt -= LAlt
+  #mod alt -= Rlt
+  mod control += LAlt
   #mod control += RAlt
-  #key *LAlt = *LControl # not necessary? rather works badly...?
+  key *LAlt = *LControl # not necessary? rather works badly...?
   #key *RAlt = *LControl
 
   #mod control -= LControl
@@ -39,11 +39,11 @@ keymap Global
   #mod alt += LControl
   #mod alt += RControl
 
-  #key *NumLock = $CapsLock
-  #key *Apps = $CapsLock
-  #key *RWin = $CapsLock
-  #key A-Tab = C-Tab
-  #key C-Tab = A-Tab
+  key *NumLock = $CapsLock
+  key *Apps = $CapsLock
+  key *RWin = $CapsLock
+  key A-Tab = C-Tab
+  key C-Tab = A-Tab
   #key A-m = C-m
   #key C-m = A-m
   #  }}} Control, capslock, windows, esc
@@ -55,7 +55,7 @@ keymap Global
   key C-_4 = A-F4               # Close window
   #key A-*C-e = Esc              # A-e to ESC
   #key C-S-e = Esc               # C-S-e to ESC
-  key C-LeftSquareBracket = Esc # Always C-[ to ESC, like vim # bad conflict with swapped Alt...?
+  #key C-LeftSquareBracket = Esc # Always C-[ to ESC, like vim # bad conflict with swapped Alt...?
                                  # If set: key *LAlt = *LControl, Alt-[ works as A-Esc
                                  # If not set: key *LAlt = *LControl, Alt-[ works as C-[, ok
   key A-d = Delete              # Always Delete with A-d
@@ -1073,8 +1073,8 @@ window winword /WINWORD.EXE*/ : Global
 # }}}
 
 # For edit control {{{
-window EditControl /:Edit$ : Global
- key C-h = BS
+#window EditControl /:Edit$ : Global
+# key C-h = BS
 # }}}
 
 # For magic formation {{{
