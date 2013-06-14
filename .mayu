@@ -10,7 +10,7 @@ def key LD = E0-0x7b
 def key RD = 0x79
 # }}}
 
-keymap Global
+#keymap Global
 
 # Basic Settings {{{
   # Control, capslock, windows, esc {{{
@@ -28,11 +28,11 @@ keymap Global
   key *CapsLock = *LAlt
   key *E0CapsLock = *LAlt
   mod alt -= LAlt
-  #mod alt -= Rlt
+  mod alt -= RAlt
   mod control += LAlt
-  #mod control += RAlt
+  mod control += RAlt
   key *LAlt = *LControl # not necessary? rather works badly...?
-  #key *RAlt = *LControl
+  key *RAlt = *LControl
 
   #mod control -= LControl
   #mod control -= RControl
@@ -44,8 +44,8 @@ keymap Global
   key *RWin = $CapsLock
   key A-Tab = C-Tab
   key C-Tab = A-Tab
-  #key A-m = C-m
-  #key C-m = A-m
+  key A-m = C-m
+  key C-m = A-m
   #  }}} Control, capslock, windows, esc
 
   # Other basic settings {{{
@@ -137,10 +137,18 @@ keymap Global
   # }}}
 
   # Window move {{{
-  key A-S-y = &WindowMove(-20, 0)
-  key A-S-u = &WindowMove(0, 20)
-  key A-S-i = &WindowMove(0, -20)
-  key A-S-o = &WindowMove(20, 0)
+  #key A-S-y = &WindowMove(-20, 0)
+  #key A-S-u = &WindowMove(0, 20)
+  #key A-S-i = &WindowMove(0, -20)
+  #key A-S-o = &WindowMove(20, 0)
+  key A-S-y = C-S-y
+  key A-S-u = C-S-u
+  key A-S-i = C-S-i
+  key A-S-o = C-S-o
+  key C-S-y = &WindowMove(-20, 0)
+  key C-S-u = &WindowMove(0, 20)
+  key C-S-i = &WindowMove(0, -20)
+  key C-S-o = &WindowMove(20, 0)
   key CL-A-y = &WindowMove(-20, 0)
   key CL-A-u = &WindowMove(0, 20)
   key CL-A-i = &WindowMove(0, -20)
@@ -996,27 +1004,48 @@ window TunderbirdSearch ( /thunderbird/ && /検索/ ) : Vim
   key C-e = End
 # }}}
 
-# For note pad {{{
-# C:\Windows\system32\notepad.exe:Notepad:Edit
-window Notepad /:Notepad:Edit$/ : Vim
-window Search ( /:Notepad:/ && /検索/) : Vim
-  # Search with Searching window
-  key L0-n = A-d A-f
-  key L0-S-n = A-u A-f
-  key L0-i = A-n $OutN
-
-  # Exit Searching window and search on main window
-  key Enter = $InN A-f Esc
-  key L0-Enter = A-f Esc
-  key L0-Esc = Esc
-  key L0-C-LeftSquareBracket = Esc
-
-  # Emacs-like move
-  key C-f = Right
-  key C-b = Right
-  #key C-a = Home # rather useful to select all in original
-  key C-e = End
-#}}}
+## For word pad {{{
+#window WordPad /:Wordpad/ : Vim
+#window Search ( /:Wordpad:/ && /検索/) : Vim
+#  # Search with Searching window
+#  key L0-n = A-d A-f
+#  key L0-S-n = A-u A-f
+#  key L0-i = A-n $OutN
+#
+#  # Exit Searching window and search on main window
+#  key Enter = $InN A-f Esc
+#  key L0-Enter = A-f Esc
+#  key L0-Esc = Esc
+#  key L0-C-LeftSquareBracket = Esc
+#
+#  # Emacs-like move
+#  key C-f = Right
+#  key C-b = Right
+#  #key C-a = Home # rather useful to select all in original
+#  key C-e = End
+##}}}
+#
+## For note pad {{{
+## C:\Windows\system32\notepad.exe:Notepad:Edit
+#window Notepad /:Notepad:Edit$/ : Vim
+#window Search ( /:Notepad:/ && /検索/) : Vim
+#  # Search with Searching window
+#  key L0-n = A-d A-f
+#  key L0-S-n = A-u A-f
+#  key L0-i = A-n $OutN
+#
+#  # Exit Searching window and search on main window
+#  key Enter = $InN A-f Esc
+#  key L0-Enter = A-f Esc
+#  key L0-Esc = Esc
+#  key L0-C-LeftSquareBracket = Esc
+#
+#  # Emacs-like move
+#  key C-f = Right
+#  key C-b = Right
+#  #key C-a = Home # rather useful to select all in original
+#  key C-e = End
+##}}}
 
 # For TeraPad {{{
 window TeraPad /TTeraPadMainForm:TEditor/ : Vim
@@ -1037,6 +1066,10 @@ window Search ( /TeraPad/ && /検索/) : Vim
   key C-b = Right
   #key C-a = Home # rather useful to select all in original
   key C-e = End
+#}}}
+
+# For Evernote {{{
+window Evernote /Evernote/ : Vim
 #}}}
 
 # For explorer {{{
@@ -1121,6 +1154,7 @@ window Cygwin /cygwin/ : Global
 # For PuTTY {{{
 window PuTTY /putty/ : Global
   key A-v = RButton
+  key C-h = C-h # need for Alt-Ctrl swap
 # }}}
 
  
