@@ -35,13 +35,13 @@ def key RD = 0x79
   key *RAlt = *LControl
 
   #mod control -= LControl
-  #mod control -= RControl
+  mod control -= RControl
   #mod alt += LControl
-  #mod alt += RControl
+  mod alt += RControl
 
-  key *NumLock = $CapsLock
-  key *Apps = $CapsLock
-  key *RWin = $CapsLock
+  #key *NumLock = $CapsLock
+  #key *Apps = $CapsLock
+  #key *RWin = $CapsLock
   key A-Tab = C-Tab
   key C-Tab = A-Tab
   key A-m = C-m
@@ -598,12 +598,12 @@ keymap Vim : Global
   keyseq $UpAllSelect = S-C-Home
   keyseq $DownAllSelect = S-C-End
 
-  keyseq $Copy = C-c $OutL Esc
-  keyseq $CopyL = C-c $InL Esc
-  keyseq $Cut = C-x $OutL Esc
-  keyseq $CutL = C-x $InL Esc
-  keyseq $Change = C-x $OutN $OutL Esc
-  keyseq $ChangeL = C-x $OutN $InL Esc
+  keyseq $Copy = C-c $OutL
+  keyseq $CopyL = C-c $InL
+  keyseq $Cut = C-x $OutL
+  keyseq $CutL = C-x $InL
+  keyseq $Change = C-x $OutN $OutL
+  keyseq $ChangeL = C-x $OutN $InL
 
   keyseq $Paste = C-v
 
@@ -881,11 +881,11 @@ keymap Vim : Global
   key L1-*L2-*L3-*L4-x = C-x $InN $OutL
   key L1-*L2-*L3-*L4-c = C-x $OutVC $OutL
 
-  #key L1-*L2-*L3-*L4-S-y = Home S-End C-c Esc $InL
+  #key L1-*L2-*L3-*L4-S-y = Home S-End C-c $InL
   #key L1-*L2-*L3-*L4-S-d = Home S-End C-x $InL
   #key L1-*L2-*L3-*L4-S-x = Home S-End C-x $InL
   #key L1-*L2-*L3-*L4-S-c = Home S-End C-x $OutVC $InL
-  key L1-*L2-*L3-*L4-S-y = S-End C-c Esc $InL
+  key L1-*L2-*L3-*L4-S-y = S-End C-c $InL
   key L1-*L2-*L3-*L4-S-d = S-End C-x $InL
   key L1-*L2-*L3-*L4-S-x = S-End C-x $InL
   key L1-*L2-*L3-*L4-S-c = S-End C-x $OutVC $InL
@@ -1025,27 +1025,27 @@ window TunderbirdSearch ( /thunderbird/ && /検索/ ) : Vim
 #  key C-e = End
 ##}}}
 #
-## For note pad {{{
-## C:\Windows\system32\notepad.exe:Notepad:Edit
-#window Notepad /:Notepad:Edit$/ : Vim
-#window Search ( /:Notepad:/ && /検索/) : Vim
-#  # Search with Searching window
-#  key L0-n = A-d A-f
-#  key L0-S-n = A-u A-f
-#  key L0-i = A-n $OutN
-#
-#  # Exit Searching window and search on main window
-#  key Enter = $InN A-f Esc
-#  key L0-Enter = A-f Esc
-#  key L0-Esc = Esc
-#  key L0-C-LeftSquareBracket = Esc
-#
-#  # Emacs-like move
-#  key C-f = Right
-#  key C-b = Right
-#  #key C-a = Home # rather useful to select all in original
-#  key C-e = End
-##}}}
+# For note pad {{{
+# C:\Windows\system32\notepad.exe:Notepad:Edit
+window Notepad /:Notepad:Edit$/ : Vim
+window Search ( /:Notepad:/ && /検索/) : Vim
+  # Search with Searching window
+  key L0-n = A-d A-f
+  key L0-S-n = A-u A-f
+  key L0-i = A-n $OutN
+
+  # Exit Searching window and search on main window
+  key Enter = $InN A-f Esc
+  key L0-Enter = A-f Esc
+  key L0-Esc = Esc
+  key L0-C-LeftSquareBracket = Esc
+
+  # Emacs-like move
+  key C-f = Right
+  key C-b = Right
+  #key C-a = Home # rather useful to select all in original
+  key C-e = End
+#}}}
 
 # For TeraPad {{{
 window TeraPad /TTeraPadMainForm:TEditor/ : Vim
