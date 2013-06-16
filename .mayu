@@ -27,6 +27,7 @@ def key RD = 0x79
   mod alt += E0CapsLock
   key *CapsLock = *LAlt
   key *E0CapsLock = *LAlt
+
   mod alt -= LAlt
   mod alt -= RAlt
   mod control += LAlt
@@ -38,6 +39,8 @@ def key RD = 0x79
   mod control -= RControl
   #mod alt += LControl
   mod alt += RControl
+  #key *LControl = *LAlt
+  key *RControl = *RAlt
 
   #key *NumLock = $CapsLock
   #key *Apps = $CapsLock
@@ -46,6 +49,9 @@ def key RD = 0x79
   key C-Tab = A-Tab
   key A-m = C-m
   key C-m = A-m
+
+  key C-Left = A-Left
+  key C-Right = A-Right
   #  }}} Control, capslock, windows, esc
 
   # Other basic settings {{{
