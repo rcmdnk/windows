@@ -1155,9 +1155,10 @@ window Cygwin /cygwin/ : Global
   # IC: IME inserting
 
   key IL-~IC-Esc = $ToggleIME Esc # Make IME off, Exit insert mode
-  key IC-Esc = Esc # Stop inserting, Make IME off, Exit insert mode
+  key IC-Esc = $ToggleIME Esc # Stop inserting, Make IME off, Exit insert mode
 
-  key IL-*IC-C-LeftSquareBracket = Esc $ToggleIME Esc # Stop inserting, Make IME off, Exit insert mode
+  key IL-~IC-C-LeftSquareBracket = $ToggleIME Esc # Make IME off, Exit insert mode
+  key IC-C-LeftSquareBracket = $ToggleIME Esc # Stop inserting, Make IME off, Exit insert mode
 # }}}
 
 # For PuTTY {{{
