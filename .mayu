@@ -983,6 +983,7 @@ keymap Vim : Global
 
   # }}}
 
+keymap Global
 #}}} Vim mode
 
 # For thunderbird {{{
@@ -1142,31 +1143,31 @@ window inputdirector /InputDirector/ : Global
  key A-C-l = Right
 # }}}
 
-# For Gvim {{{
-#	C:\Program Files\vim\gvim.exe:Vim:VimTextArea
-window Vim /:Vim:VimTextArea$/ : Global
-  key A-v = $QUOTATION_MARK $PLUS_SIGN g S-p
-# }}}
-
-# For Cygwin {{{
-window Cygwin /cygwin/ : Global
+# Terminal/Vim {{{
+keymap Terminal : Global
   key A-v = RButton # Paste
   # IL: IME on
   # IC: IME inserting
 
   key IL-~IC-Esc = $ToggleIME Esc # Make IME off, Exit insert mode
-  key IC-Esc = $ToggleIME Esc # Stop inserting, Make IME off, Exit insert mode
+  key IC-Esc = Esc # Stop inserting
 
-  key IL-~IC-C-LeftSquareBracket = $ToggleIME Esc # Make IME off, Exit insert mode
-  key IC-C-LeftSquareBracket = $ToggleIME Esc # Stop inserting, Make IME off, Exit insert mode
+  key IL-*IC-C-LeftSquareBracket = $ToggleIME Esc # Stop inserting, Make IME off, Exit insert mode
+keymap Global
+#}}}
+
+# For Cygwin {{{
+window Cygwin /cygwin/ : Terminal
+# }}}
+
+# For Gvim {{{
+window GVim /Vim/ : Terminal
+#window CVim /ConsoleWindowClass/ : Terminal
 # }}}
 
 # For PuTTY {{{
-window PuTTY /putty/ : Global
-  key A-v = RButton
-  key C-h = C-h # need for Alt-Ctrl swap
+window PuTTY /putty/ : Terminal
 # }}}
-
  
 keymap Global
 
