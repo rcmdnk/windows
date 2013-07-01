@@ -1076,7 +1076,7 @@ window Search ( /TeraPad/ && /検索/) : Vim
 #}}}
 
 # For Evernote {{{
-window Evernote /Evernote/ : Vim
+#window Evernote /Evernote/ : Vim
 #}}}
 
 # For explorer {{{
