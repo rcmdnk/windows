@@ -1161,7 +1161,8 @@ keymap Global
 
 # For Cygwin {{{
 window Cygwin /cygwin/ : Terminal
-  key IL-~IC-Enter = $ToggleIME Enter
+#  Below key is useful for command line, but not for CUI vim...
+#  key IL-~IC-Enter = $ToggleIME Enter
 # }}}
 
 # For Gvim {{{
