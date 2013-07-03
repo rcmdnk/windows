@@ -62,6 +62,7 @@ def key RD = 0x79
   #key A-*C-e = Esc              # A-e to ESC
   #key C-S-e = Esc               # C-S-e to ESC
   #key C-LeftSquareBracket = Esc # Always C-[ to ESC, like vim # bad conflict with swapped Alt...?
+  key A-LeftSquareBracket = Esc # Always C-[ to ESC, like vim # bad conflict with swapped Alt...?
                                  # If set: key *LAlt = *LControl, Alt-[ works as A-Esc
                                  # If not set: key *LAlt = *LControl, Alt-[ works as C-[, ok
   key A-d = Delete              # Always Delete with A-d
@@ -1145,6 +1146,8 @@ window inputdirector /InputDirector/ : Global
 
 # Terminal/Vim {{{
 keymap Terminal : Global
+  key C-o = C-o # as is
+  key C-i = C-i # as is
   key A-v = RButton # Paste
   # IL: IME on
   # IC: IME inserting
@@ -1158,6 +1161,7 @@ keymap Global
 
 # For Cygwin {{{
 window Cygwin /cygwin/ : Terminal
+  key IL-~IC-Enter = $ToggleIME Enter
 # }}}
 
 # For Gvim {{{
