@@ -1148,6 +1148,8 @@ window inputdirector /InputDirector/ : Global
 keymap Terminal : Global
   key C-o = C-o # as is
   key C-i = C-i # as is
+  key C-h = C-h # as is, necessary for Alt-Ctrl swap
+                # (otherwise works like \e\C-h on Putty, but it is fine on Cygwin...)
   key A-v = RButton # Paste
   # IL: IME on
   # IC: IME inserting
