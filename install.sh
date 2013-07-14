@@ -1,7 +1,6 @@
 #!/bin/bash
-files=()
-instdirs=()
-exclude=('.' '..' 'README.md' 'install.sh')
+files=("AutoHotkey.ahk")
+instdirs=("/cygdrive/c/Users/$USER/Documents/")
 
 backup="bak"
 overwrite=1
@@ -62,26 +61,17 @@ if [[ "$OSTYPE" =~ "cygwin" ]];then
 # }}}
 fi
 
-if [ $dryrun -ne 1 ];then
-  :
-else
+if [ $dryrun -eq 1 ];then
+  echo "*********************************************"
   echo "*** This is dry run, not install anything ***"
+  echo "*********************************************"
+  echo
 fi
 i=0
 while [ $i -lt ${#files[@]} ];do
   f=${files[$i]}
   d=${instdirs[$i]}
-  i=$(($i+1))
-  for e in ${exclude[@]};do
-    flag=0
-    if [ "$f" = "$e" ];then
-      flag=1
-      break
-    fi
-  done
-  if [ $flag = 1 ];then
-    continue
-  fi
+  i=$((i+1))
   echo install $f to \"$d\"
   install=1
   if [ $dryrun -eq 1 ];then
@@ -105,31 +95,6 @@ while [ $i -lt ${#files[@]} ];do
     ln -s "$curdir/$f" "$d/$f"
   fi
 done
-f=$(basename "`pwd`")                 
-d="/cygdrive/c/Program Files/yamy"
-echo install current directly $f to "$d"
-install=1
-if [ $dryrun -eq 1 ];then
-  install=0
-fi
-if [ "`ls "$d/$f" 2>/dev/null`" != "" ];then
-  exist=(${exist[@]} "$f")
-  if [ $dryrun -eq 1 ];then
-    echo -n ""
-  elif [ $overwrite -eq 0 ];then
-    install=0
-  elif [ "$backup" != "" ];then
-    mv "$d/$f" "$d/${f}.$backup"
-  else
-    rm "$d/$f"
-  fi
-else
-  newlink=(${newlink[@]} "$f")
-fi
-if [ $install -eq 1 ];then
-  ln -s "`pwd`" "$d/$f"
-fi
-echo ""
 if [ $dryrun -eq 1 ];then
   echo "Following files don't exist:"
 else
@@ -149,3 +114,9 @@ else
 fi
 echo "  ${exist[@]}"
 echo
+if [ $dryrun -eq 1 ];then
+  echo "*********************************************"
+  echo "*** This is dry run, nothing was installed***"
+  echo "*********************************************"
+  echo
+fi
