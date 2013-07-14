@@ -48,7 +48,7 @@ def key RD = 0x79
   key A-Tab = C-Tab
   key C-Tab = A-Tab
   key A-m = C-m
-  key C-m = A-m
+  #key C-m = A-m
 
   key C-Left = A-Left
   key C-Right = A-Right
@@ -581,10 +581,10 @@ keymap Vim : Global
 
   key L0-C-u = &Variable(0,10) &Repeat((Up),10) &Variable(0,0)
   key L0-C-d = &Variable(0,10) &Repeat((Down),10) &Variable(0,0)
-  key L0-C-b = &Variable(0,20) &Repeat((Up),20) &Variable(0,0)
-  key L0-C-f = &Variable(0,20) &Repeat((Down),20) &Variable(0,0)
+  key L0-C-b = PageUp
+  key L0-C-f = PageDown
 
-  key L0-Enter = Down Home C-Right C-Left
+  #key L0-Enter = Down Home C-Right C-Left
 
 keymap2 VimUpDown: Global = &Ignore
   key L0-g = C-Home # gg
