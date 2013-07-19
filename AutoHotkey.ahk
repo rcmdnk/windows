@@ -45,6 +45,8 @@ Return
 #InstallKeybdHook ; For checking key history
                   ; Use ~500kB memory?
 
+#HotkeyInterval 2000 ; Hotkey inteval (default 2000 milliseconds).
+#MaxHotkeysPerInterval 70 ; Max hotkeys perinterval (default 50).
 
 
 ; For HHK
@@ -140,17 +142,17 @@ VimSetMode(Mode="", g=0, n=0, LineCopy=-1) {
   if (LineCopy!=-1) {
     VimLineCopy=%LineCopy%
   }
-  VimCheckMode()
+  VimCheckMode(0)
   Return
 }
-VimCheckMode(verbose=1) {
+VimCheckMode(verbose=0) {
   global
   if(verbose=1){
     TrayTip,VimMode,%VimMode%,10,, ; 10 sec is minimum for TrayTip
   }else if(verbose=2){
-    TrayTip,VimMode,%VimMode%`r`ng=%g%`r`nn=%n%,10,,
+    TrayTip,VimMode,%VimMode%`r`ng=%Vim_g%`r`nn=%Vim_n%,10,,
   }
-  if(verbose=1){
+  if(verbose=3){
     Msgbox,
     (
     VimMode: %VimMode%
@@ -162,7 +164,7 @@ VimCheckMode(verbose=1) {
   Return
 }
 ^!+c::
-  VimCheckMode(1)
+  VimCheckMode(3)
   Return
 ; }}}
 
@@ -174,10 +176,10 @@ Esc:: ; Just send Esc at converting.
       Send,{Esc}
     } else {
       IME_SET()
-      VimSetMode(1)
+      VimSetMode("Normal")
     }
   } else {
-    VimSetMode(1)
+    VimSetMode("Normal")
   }
   Return
 
@@ -187,162 +189,162 @@ Esc:: ; Just send Esc at converting.
     Sleep 1
     IME_SET()
   }
-  VimSetMode(1)
+  VimSetMode("Normal")
   Return
 ; }}}
 
 ; Enter vim insert mode (Exit vim normal mode) {{{
 #If WInActive("ahk_group VimGroup") && (VimMode == "Normal")
-i::VimSetMode(0)
+i::VimSetMode("Insert")
 +i::
   Send,{Home}
-  VimSetMode(0)
+  VimSetMode("Insert")
   Return
 a::
   Send,{Right}
-  VimSetMode(0)
+  VimSetMode("Insert")
   Return
 +a::
   Send,{End}
-  VimSetMode(0)
+  VimSetMode("Insert")
   Return
 o::
   Send,{End}{Enter}
-  VimSetMode(0)
+  VimSetMode("Insert")
   Return
 +o::
   Send,{Up}{End}{Enter}
-  VimSetMode(0)
+  VimSetMode("Insert")
   Return
 ; }}}
 
 ; Repeat {{{
 #If WInActive("ahk_group VimGroup") and (VimMode != "Insert") and (Vim_n=0)
-;0::Vim_n=0
-1::Vim_n=1
-2::Vim_n=2
-3::Vim_n=3
-4::Vim_n=4
-5::Vim_n=5
-6::Vim_n=6
-7::Vim_n=7
-8::Vim_n=8
-9::Vim_n=9
+;0::VimSetMode("",0,0)
+1::VimSetMode("",0,1)
+2::VimSetMode("",0,2)
+3::VimSetMode("",0,3)
+4::VimSetMode("",0,4)
+5::VimSetMode("",0,5)
+6::VimSetMode("",0,6)
+7::VimSetMode("",0,7)
+8::VimSetMode("",0,8)
+9::VimSetMode("",0,9)
 #If WInActive("ahk_group VimGroup") and (VimMode != "Insert") and (Vim_n=1)
-0::Vim_n=10
-1::Vim_n=11
-2::Vim_n=12
-3::Vim_n=13
-4::Vim_n=14
-5::Vim_n=15
-6::Vim_n=16
-7::Vim_n=17
-8::Vim_n=18
-9::Vim_n=19
+0::VimSetMode("",0,10)
+1::VimSetMode("",0,11)
+2::VimSetMode("",0,12)
+3::VimSetMode("",0,13)
+4::VimSetMode("",0,14)
+5::VimSetMode("",0,15)
+6::VimSetMode("",0,16)
+7::VimSetMode("",0,17)
+8::VimSetMode("",0,18)
+9::VimSetMode("",0,19)
 #If WInActive("ahk_group VimGroup") and (VimMode != "Insert") and (Vim_n=2)
-0::Vim_n=20
-1::Vim_n=21
-2::Vim_n=22
-3::Vim_n=23
-4::Vim_n=24
-5::Vim_n=25
-6::Vim_n=26
-7::Vim_n=27
-8::Vim_n=28
-9::Vim_n=29
+0::VimSetMode("",0,20)
+1::VimSetMode("",0,21)
+2::VimSetMode("",0,22)
+3::VimSetMode("",0,23)
+4::VimSetMode("",0,24)
+5::VimSetMode("",0,25)
+6::VimSetMode("",0,26)
+7::VimSetMode("",0,27)
+8::VimSetMode("",0,28)
+9::VimSetMode("",0,29)
 #If WInActive("ahk_group VimGroup") and (VimMode != "Insert") and (Vim_n=3)
-0::Vim_n=30
-1::Vim_n=31
-2::Vim_n=32
-3::Vim_n=33
-4::Vim_n=34
-5::Vim_n=35
-6::Vim_n=36
-7::Vim_n=37
-8::Vim_n=38
-9::Vim_n=39
+0::VimSetMode("",0,30)
+1::VimSetMode("",0,31)
+2::VimSetMode("",0,32)
+3::VimSetMode("",0,33)
+4::VimSetMode("",0,34)
+5::VimSetMode("",0,35)
+6::VimSetMode("",0,36)
+7::VimSetMode("",0,37)
+8::VimSetMode("",0,38)
+9::VimSetMode("",0,39)
 #If WInActive("ahk_group VimGroup") and (VimMode != "Insert") and (Vim_n=4)
-0::Vim_n=40
-1::Vim_n=41
-2::Vim_n=42
-3::Vim_n=43
-4::Vim_n=44
-5::Vim_n=45
-6::Vim_n=46
-7::Vim_n=47
-8::Vim_n=48
-9::Vim_n=49
+0::VimSetMode("",0,40)
+1::VimSetMode("",0,41)
+2::VimSetMode("",0,42)
+3::VimSetMode("",0,43)
+4::VimSetMode("",0,44)
+5::VimSetMode("",0,45)
+6::VimSetMode("",0,46)
+7::VimSetMode("",0,47)
+8::VimSetMode("",0,48)
+9::VimSetMode("",0,49)
 #If WInActive("ahk_group VimGroup") and (VimMode != "Insert") and (Vim_n=5)
-0::Vim_n=50
-1::Vim_n=51
-2::Vim_n=52
-3::Vim_n=53
-4::Vim_n=54
-5::Vim_n=55
-6::Vim_n=56
-7::Vim_n=57
-8::Vim_n=58
-9::Vim_n=59
+0::VimSetMode("",0,50)
+1::VimSetMode("",0,51)
+2::VimSetMode("",0,52)
+3::VimSetMode("",0,53)
+4::VimSetMode("",0,54)
+5::VimSetMode("",0,55)
+6::VimSetMode("",0,56)
+7::VimSetMode("",0,57)
+8::VimSetMode("",0,58)
+9::VimSetMode("",0,59)
 #If WInActive("ahk_group VimGroup") and (VimMode != "Insert") and (Vim_n=6)
-0::Vim_n=60
-1::Vim_n=61
-2::Vim_n=62
-3::Vim_n=63
-4::Vim_n=64
-5::Vim_n=65
-6::Vim_n=66
-7::Vim_n=67
-8::Vim_n=68
-9::Vim_n=69
+0::VimSetMode("",0,60)
+1::VimSetMode("",0,61)
+2::VimSetMode("",0,62)
+3::VimSetMode("",0,63)
+4::VimSetMode("",0,64)
+5::VimSetMode("",0,65)
+6::VimSetMode("",0,66)
+7::VimSetMode("",0,67)
+8::VimSetMode("",0,68)
+9::VimSetMode("",0,69)
 #If WInActive("ahk_group VimGroup") and (VimMode != "Insert") and (Vim_n=7)
-0::Vim_n=70
-1::Vim_n=71
-2::Vim_n=72
-3::Vim_n=73
-4::Vim_n=74
-5::Vim_n=75
-6::Vim_n=76
-7::Vim_n=77
-8::Vim_n=78
-9::Vim_n=79
+0::VimSetMode("",0,70)
+1::VimSetMode("",0,71)
+2::VimSetMode("",0,72)
+3::VimSetMode("",0,73)
+4::VimSetMode("",0,74)
+5::VimSetMode("",0,75)
+6::VimSetMode("",0,76)
+7::VimSetMode("",0,77)
+8::VimSetMode("",0,78)
+9::VimSetMode("",0,79)
 #If WInActive("ahk_group VimGroup") and (VimMode != "Insert") and (Vim_n=8)
-0::Vim_n=80
-1::Vim_n=81
-2::Vim_n=82
-3::Vim_n=83
-4::Vim_n=84
-5::Vim_n=85
-6::Vim_n=86
-7::Vim_n=87
-8::Vim_n=88
-9::Vim_n=89
+0::VimSetMode("",0,80)
+1::VimSetMode("",0,81)
+2::VimSetMode("",0,82)
+3::VimSetMode("",0,83)
+4::VimSetMode("",0,84)
+5::VimSetMode("",0,85)
+6::VimSetMode("",0,86)
+7::VimSetMode("",0,87)
+8::VimSetMode("",0,88)
+9::VimSetMode("",0,89)
 #If WInActive("ahk_group VimGroup") and (VimMode != "Insert") and (Vim_n=9)
-0::Vim_n=90
-1::Vim_n=91
-2::Vim_n=92
-3::Vim_n=93
-4::Vim_n=94
-5::Vim_n=95
-6::Vim_n=96
-7::Vim_n=97
-8::Vim_n=98
-9::Vim_n=99
+0::VimSetMode("",0,90)
+1::VimSetMode("",0,91)
+2::VimSetMode("",0,92)
+3::VimSetMode("",0,93)
+4::VimSetMode("",0,94)
+5::VimSetMode("",0,95)
+6::VimSetMode("",0,96)
+7::VimSetMode("",0,97)
+8::VimSetMode("",0,98)
+9::VimSetMode("",0,99)
 #If WInActive("ahk_group VimGroup") and (VimMode != "Insert") and (Vim_n>=10)
-0::Vim_n=0
-1::Vim_n=0
-2::Vim_n=0
-3::Vim_n=0
-4::Vim_n=0
-5::Vim_n=0
-6::Vim_n=0
-7::Vim_n=0
-8::Vim_n=0
-9::Vim_n=0
+0::VimSetMode("",0,0)
+1::VimSetMode("",0,0)
+2::VimSetMode("",0,0)
+3::VimSetMode("",0,0)
+4::VimSetMode("",0,0)
+5::VimSetMode("",0,0)
+6::VimSetMode("",0,0)
+7::VimSetMode("",0,0)
+8::VimSetMode("",0,0)
+9::VimSetMode("",0,0)
 ; }}}
 
 ; g {{{
 #If WInActive("ahk_group VimGroup") and (VimMode != "Insert") and (not Vim_g)
-g::VimSetMode(Mode="",1)
+g::VimSetMode("",1)
 ; }}}
 
 ; Normal Mode Basic {{{
@@ -357,6 +359,7 @@ u::Send,^z
 
 ; Move {{{
 VimMove(key="", shift=0){
+  global
   ; 1 character
   if (key="h" and shift=0){
     Send,{Left}
@@ -424,17 +427,16 @@ VimMove(key="", shift=0){
     ;Send,+^{End}+{Home}
     Send,+^{End}
   }
-  global Vim_g=0
+  VimSetMode("",0,0)
 }
 VimMoveLoop(key="", shift=0){
   global
   if (Vim_n = 0) {
-    Vim_n = 1
+    Vim_n=1
   }
   Loop, %Vim_n% {
     VimMove(key,shift)
   }
-  Vim_n=0
 }
 
 #If WInActive("ahk_group VimGroup") and (VimMode == "Normal")
@@ -494,13 +496,13 @@ VimYDC(key="line"){
   }
   if (VimMode="y"){
     Send,^c
-    VimSetMode(1)
+    VimSetMode("Normal")
   }else if (VimMode="d"){
     Send,^x
-    VimSetMode(1)
+    VimSetMode("Normal")
   }else if (VimMode="c"){
     Send,^x
-    VimSetMode(0)
+    VimSetMode("Insert")
   }
   Return
 }
@@ -508,20 +510,20 @@ VimYDC(key="line"){
 ; YDC
 #If WInActive("ahk_group VimGroup") and (VimMode="Normal")
 +y::
-  VimSetMode(y)
+  VimSetMode("y")
   VimYDC("line")
   Return
-y::VimSetMode(y)
+y::VimSetMode("y")
 +d::
-  VimSetMode(y)
+  VimSetMode("d")
   VimYDC("+4")
   Return
-d::VimSetMode(y)
+d::VimSetMode("d")
 +c::
-  VimSetMode(y)
+  VimSetMode("c")
   VimYDC("+4")
   Return
-c::VimSetMode(y)
+c::VimSetMode("c")
 #If WInActive("ahk_group VimGroup") and (VimMode="y")
 y::VimYDC("line")
 #If WInActive("ahk_group VimGroup") and (VimMode="d")
@@ -549,11 +551,33 @@ x::Send, {Delete}
 ; Paste
 #If WInActive("ahk_group VimGroup") and (VimMode="Normal")
 p::
-  if VimLineCopy {
-    Send,{End}{Enter}^v{BS}{Home}
-  } else {
-    Send,{Right}^v^{Left}
+  i:=0
+  ;Send, {p Up}
+  Loop {
+    if !GetKeyState("p", "P"){
+      break
+    }
+    if VimLineCopy {
+      Send,{End}{Enter}^v{BS}{Home}
+    } else {
+      Send,{Right}
+      Send,^v
+      ;Sleep,1000
+      Send,^{Left}
+    }
+    ;TrayTip,i,%i%,
+    if(i=0){
+      Sleep, 500
+    }else if(i>100){
+      Msgbox Stop at 100!!!
+      break
+    }else{
+      Sleep, 0
+    }
+    i+=1
+    break
   }
+  KeyWait, p ; To avoid repeat, somehow it calls <C-p>, print...
   Return
 +p::
   if VimLineCopy {
@@ -561,6 +585,7 @@ p::
   } else {
     Send,^v^{Left}
   }
+  KeyWait, p
   Return
 ; }}} Copy/Cut/Paste (ydcxp)
 
@@ -568,7 +593,7 @@ p::
 
 ; Visual Char
 #If WInActive("ahk_group VimGroup") and (VimMode="Normal")
-v::VimSetMode(VisualChar)
+v::VimSetMode("VisualChar")
 #If WInActive("ahk_group VimGroup") and (VimMode="VisualChar")
 ; 1 character
 h::VimMoveLoop("h",1)
@@ -607,25 +632,25 @@ g::VimMoveLoop("g",1)
 #If WInActive("ahk_group VimGroup") and (VimMode="VisualChar")
 y::
   Send,^c
-  VimSetMode(1,0)
+  VimSetMode("Normal",0,0,0)
   Return
 d::
   Send,^x
-  VimSetMode(1,0)
+  VimSetMode("Normal",0,0,0)
   Return
 x::
   Send,^x
-  VimSetMode(1,0)
+  VimSetMode("Normal",0,0,0)
   Return
 c::
   Send,^x
-  VimSetMode(0,0)
+  VimSetMode("Insert",0,0,0)
   Return
 
 ; Visual Line
 #If WInActive("ahk_group VimGroup") and (VimMode="Normal")
 +v::
-  VimSetMode(VisualLineFirst)
+  VimSetMode("VisualLineFirst")
   Send,{Home}+{Down}
   Return
 #If WInActive("ahk_group VimGroup") and (InStr(VimMode,"VisualLine"))
@@ -635,7 +660,7 @@ VimMoveVisualLine(key="",up=0){
     Send,{End}{Home}+{Up}
   }
   VimMoveLoop(key,1)
-  VimSetMode(VisualLine)
+  VimSetMode("VisualLine")
 }
 ; 1 character
 j::VimMoveVisualLine("j",0)
@@ -657,42 +682,37 @@ g::VimMoveVisualLine("g",1)
 #If WInActive("ahk_group VimGroup") and (InStr(VimMode,"VisualLine"))
 y::
   Send,^c
-  VimSetMode(1,1)
+  VimSetMode("Normal",0,0,1)
   Return
 d::
   Send,^x
-  VimSetMode(1,1)
+  VimSetMode("Normal",0,0,1)
   Return
 x::
   Send,^x
-  VimSetMode(1,1)
+  VimSetMode("Normal",0,0,1)
   Return
 c::
   Send,^x
-  VimSetMode(0,1)
+  VimSetMode("Insert",0,0,1)
   Return
 
+; }}} Vim visual mode
 
-;;;  # Search
-;;;  key L0-Slash = C-f
-;;;  key L0-n = F3
-;;;  key L0-S-n = S-F3
-;;;
-;;;  # Search window's definition
-;;;  # should be decided in each application
-;;;#window Search ( /window name/ || /検索(for example)/) : Vim
-;;;#  key L0-n = A-d A-f
-;;;#  key L0-S-n = A-u A-f
-;;;#  key L0-i = A-n $OutN
-;;;#  key Enter = $InN A-f A-F4
-;;;#  key L0-Enter = A-f A-F4
-;;;#  key L0-Esc = A-F4 $InN
-;;;#  key L0-C-LeftSquareBracket = A-F4 $InN
-;;;keymap Vim : Global
-;;;
-;;;  # Repeat
-;;;  key L0-Period = $WordSelect Delete $Paste Space
-;;;
+; Search {{{
+#If WInActive("ahk_group VimGroup") and (VimMode="Normal")
+/::Send,^f
+n::Send,{F3}
++n::Send,+{F3}
+; }}} Search
+
+; Vim comamnd mode {{{
+#If WInActive("ahk_group VimGroup") and (VimMode="Normal")
++`;::VimSetMode("Comments") ;(:)
+;vkBAsc028::VimSetMode("Comments") ; colon(:) for JIS
+
+; }}} Vim command mode
+
 ;;;  # Make Upcase
 ;;;  if ( USE104 )
 ;;;    key L0-S-BackQuote = S-Right C-x &Wait(50) &ClipboardUpcaseWord C-v
@@ -951,9 +971,9 @@ Esc:: ; Just send Esc at converting.
 ; Basic Settings {{{
 
 ; Suspend
-Esc & Tab::
-  Suspend, Toggle
-  Return
+;Esc & Tab::
+;  Suspend, Toggle
+;  Return
 ; For Alt-Ctrl Swap (swapped by KeySwap)
 LCtrl & Tab::AltTab
 Alt & Tab::
@@ -1067,6 +1087,4 @@ Ctrl & Right::Send,!{Right}
 ^o::Send,!{Left}
 ^i::Send,!{Right}
 #IfWInActive
-; }}}
-
 ; }}}
