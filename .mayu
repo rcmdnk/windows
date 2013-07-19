@@ -48,7 +48,7 @@ def key RD = 0x79
   key A-Tab = C-Tab
   key C-Tab = A-Tab
   key A-m = C-m
-  #key C-m = A-m
+  key C-m = A-m
 
   key C-Left = A-Left
   key C-Right = A-Right
@@ -89,6 +89,9 @@ def key RD = 0x79
   # Right Meta key to Win key
   mod Windows += RD
   key *RD = *RWindows
+
+  # For magic formation
+  key C-m = A-m
   # }}}
 
   # Volume {{{
