@@ -29,6 +29,7 @@ GroupAdd Terminal, ahk_class Vim
 GroupAdd VimGroup, ahk_class Notepad
 GroupAdd VimGroup, ahk_class WordPadClass
 GroupAdd VimGroup, 作成
+GroupAdd VimGroup, Write:
 VimMode=Insert
 Vim_g=0
 Vim_n=0
@@ -708,12 +709,66 @@ n::Send,{F3}
 
 ; Vim comamnd mode {{{
 #If WInActive("ahk_group VimGroup") and (VimMode="Normal")
-+`;::VimSetMode("Comments") ;(:)
-;vkBAsc028::VimSetMode("Comments") ; colon(:) for JIS
-
++`;::VimSetMode("Command") ;(:)
+;vkBAsc028::VimSetMode("Command") ; colon(:) for JIS
+#If WInActive("ahk_group VimGroup") and (VimMode="Command")
+w::VimSetMode("Command_w")
+q::VimSetMode("Command_q")
+h::
+  Send,{F1}
+  VimSetMode("Normal")
+  Return
+#If WInActive("ahk_group VimGroup") and (VimMode="Command_w")
+Return::
+  Send,^s
+  VimSetMode("Normal")
+  Return
+q::
+  Send,^s
+  Send,!{F4}
+  VimSetMode("Normal")
+  Return
+Space::
+  Send,!fa
+  VimSetMode("Normal")
+  Return
+#If WInActive("ahk_group VimGroup") and (VimMode="Command_q")
+Return::
+  Send,!{F4}
+  VimSetMode("Normal")
+  Return
 ; }}} Vim command mode
 
-;;;  # Make Upcase
+
+; Others {{{
+; Make case
+;#If WInActive("ahk_group VimGroup") and (VimMode="Normal")
+;~::
+;  bak=%clipboard%
+;  Send,+{Right}^x
+;  if clipboard is lower {
+;    msgbox %clipboard% is lower
+;    StringUpper, clipboard, clipboard
+;  }else{
+;    msgbox %clipboard% is upper
+;    Stringlower, clipboard, clipboard
+;  }
+;  ;clip = %Clipboard%
+;  ;msgbox %clip%
+;  ;if (clip is not upper){
+;  ;  MsgBox, lower
+;  ;  StringUpper, out, clip
+;  ;}else{
+;  ;  MsgBox, upper
+;  ;  StringLower, out, clip
+;  ;}
+;  ;Clipboard = %out%
+;  Send,^v
+;  clipboard=%bak%
+;  return
+
+;}}}
+
 ;;;  if ( USE104 )
 ;;;    key L0-S-BackQuote = S-Right C-x &Wait(50) &ClipboardUpcaseWord C-v
 ;;;    key L0-S-E0BackQuote = S-Right C-x &Wait(50) &ClipboardUpcaseWord C-v
@@ -842,7 +897,6 @@ n::Send,{F3}
 ;;;    key L6-*S-Colon = Delete *S-Colon
 ;;;  endif
 ;;;
-;;;  #}}}
 ;;;
 ;;;  # Command line mode {{{
 ;;;keymap2 VimCommandW: Global = &Ignore
@@ -873,36 +927,6 @@ n::Send,{F3}
 ;;;  #key L7-Enter = $OutC $InN
 ;;;  # }}}
 ;;;
-;;;  # N * command {{{
-;;;keymap2 VimRepeat: Vim = &Repeat((&KeymapWindow),100) &Variable(0,0)
-;;;  key L0-y = &Prefix(VimCopy)
-;;;  key L0-d = &Prefix(VimCut)
-;;;  key L0-c = &Prefix(VimChange)
-;;;
-;;;keymap VimN0_9 : VimRepeat
-;;;  key L0-_0 = &Variable(10,0) &Prefix(VimRepeat)
-;;;  key L0-_1 = &Variable(10,1) &Prefix(VimRepeat)
-;;;  key L0-_2 = &Variable(10,2) &Prefix(VimRepeat)
-;;;  key L0-_3 = &Variable(10,3) &Prefix(VimRepeat)
-;;;  key L0-_4 = &Variable(10,4) &Prefix(VimRepeat)
-;;;  key L0-_5 = &Variable(10,5) &Prefix(VimRepeat)
-;;;  key L0-_6 = &Variable(10,6) &Prefix(VimRepeat)
-;;;  key L0-_7 = &Variable(10,7) &Prefix(VimRepeat)
-;;;  key L0-_8 = &Variable(10,8) &Prefix(VimRepeat)
-;;;  key L0-_9 = &Variable(10,9) &Prefix(VimRepeat)
-;;;
-;;;keymap Vim : Global
-;;;  key L0-_1 = &Variable(0,1) &Prefix(VimN0_9)
-;;;  key L0-_2 = &Variable(0,2) &Prefix(VimN0_9)
-;;;  key L0-_3 = &Variable(0,3) &Prefix(VimN0_9)
-;;;  key L0-_4 = &Variable(0,4) &Prefix(VimN0_9)
-;;;  key L0-_5 = &Variable(0,5) &Prefix(VimN0_9)
-;;;  key L0-_6 = &Variable(0,6) &Prefix(VimN0_9)
-;;;  key L0-_7 = &Variable(0,7) &Prefix(VimN0_9)
-;;;  key L0-_8 = &Variable(0,8) &Prefix(VimN0_9)
-;;;  key L0-_9 = &Variable(0,9) &Prefix(VimN0_9)
-;;;
-;;;  # }}}
 ;;;
 ;#IfWInActive
 ;; }}} Vim mode
