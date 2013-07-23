@@ -155,15 +155,20 @@ Esc:: ; Just send Esc at converting.
 
 ; Power Point {{{
 #IfWInActive, ahk_class PP12FrameClass
+; Select one character
 ^Space::Send,{Right}+{Left}
+
+; Subscript/Superscript
 ^=::Send,^tb{Enter}
 ^+=::Send,^tp{Enter}
-; for JP keyboards
+; For JP keyboards
 ;^-::Send,^tb{Enter}
 ;^+-::Send,^tp{Enter}
+
+; Fonts
 ^+s::Send,^tfsymbol{Enter}
-^+a::Send,^tfarialEnter
-^+h::Send,^tfhelveticaEnter
+^+a::Send,^tfarial{Enter}
+^+h::Send,^tfhelvetica{Enter}
 #IfWInActive
 ; }}} Power Point
 
@@ -180,8 +185,20 @@ Esc:: ; Just send Esc at converting.
 
 ; Explorer {{{
 #IfWInActive, ahk_class CabinetWClas
-^o::Send,!{Left}
+; Next/Previous page
 ^i::Send,!{Right}
+^o::Send,!{Left}
+#IfWInActive
+; }}} Explorer
+
+; CLCL {{{
+;#IfWInActive, ahk_class CLCLMain
+#IfWInActive, CLCL
+j::
+  Msgbox, clcl_down
+  Send,{Down}
+  Return
+k::Send,{Up}
 #IfWInActive
 ; }}} Explorer
 
@@ -197,8 +214,7 @@ Esc:: ; Just send Esc at converting.
 LCtrl & Tab::AltTab
 Alt & Tab::
   if GetKeyState("Shift","P") {
-    msgbox, "A-S-Tab"
-    ;Send,^+{Tab} ; dosen't work ()
+    Send,^+{Tab} ; dosen't work ()
   }else{
     Send,^{Tab}
   }
@@ -249,7 +265,7 @@ Ctrl & Right::Send,!{Right}
 !^p::MouseClick, Right
 ; Right click on current window
 !v::
-  ;MouseMove, 50, 50, 0
+  MouseMove, 50, 50, 0
   MouseClick, Right
   Return
 
