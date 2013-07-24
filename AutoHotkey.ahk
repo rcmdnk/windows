@@ -193,12 +193,12 @@ Esc:: ; Just send Esc at converting.
 
 ; CLCL {{{
 ;#IfWInActive, ahk_class CLCLMain
-#IfWInActive, CLCL
+#IfWInActive, CLCL ; both window/title do not working...
 j::
   Msgbox, clcl_down
   Send,{Down}
   Return
-k::Send,{Up}
+K::Send,{Up}
 #IfWInActive
 ; }}} Explorer
 
