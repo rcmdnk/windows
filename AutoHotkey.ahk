@@ -1,4 +1,4 @@
-﻿; Tips {{{
+; Tips {{{
 ; #: win
 ; !: alt
 ; ^: ctrl
@@ -201,6 +201,23 @@ j::
 K::Send,{Up}
 #IfWInActive
 ; }}} Explorer
+
+; Everthing {{{
+#IfWInActive, ahk_class EVERYTHING
+Enter::
+  Send,{Enter}
+  sleep,200
+  IfWinActive, ahk_class EVERYTHING
+  {
+    Send,{Enter}
+    sleep,200
+  }
+  WinActivate, ahk_class EVERYTHING
+  sleep,100
+  Send,{Esc}
+  Return
+#IfWInActive
+; }}} Everything
 
 ; Global Settings {{{
 #if
