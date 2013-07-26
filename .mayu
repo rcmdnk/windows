@@ -693,8 +693,10 @@ keymap Vim : Global
   #key L0-S-p = C-v $OutL
   #key L9-L0-p = End Enter C-v Home $OutL
   #key L9-L0-S-p = Up End Enter C-v Home $OutL
-  key ~L9-L0-p = Right $Paste C-Left
-  key ~L9-L0-S-p = $Paste C-Left
+  #key ~L9-L0-p = Right $Paste C-Left
+  #key ~L9-L0-S-p = $Paste C-Left
+  key ~L9-L0-p = Right $Paste
+  key ~L9-L0-S-p = $Paste
   key L9-L0-p = End Enter $Paste Home
   key L9-L0-S-p = Up End Enter $Paste Home
   # }}}
