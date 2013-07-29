@@ -22,7 +22,8 @@ MinSize=0.7
 ; For Terminal/Vim
 GroupAdd Terminal, ahk_class PuTTY
 GroupAdd Terminal, ahk_class mintty ; cygwin
-GroupAdd Terminal, ahk_class Vim
+GroupAdd TerminalVim, ahk_group Terminal
+GroupAdd TerminalVim, ahk_class Vim
 
 #Include  %A_ScriptDir%\vim.ahk
 
@@ -122,8 +123,8 @@ vkFFsc07b::LCtrl
 ; }}}
 
 ; Terminal/Vim {{{
-; On Terminal/Vim
-#IfWInActive, ahk_group Terminal
+; ESC + IME
+#IfWInActive, ahk_group TerminalVim
 Esc:: ; Just send Esc at converting.
   if (IME_GET(A)) {
     if (IME_GetConverting(A)) {
@@ -147,8 +148,26 @@ Esc:: ; Just send Esc at converting.
   Return
 #IfWInActive
 
+; Paste
+#IfWInActive, ahk_group Terminal
+!v::
+  StringSplit, strout, clipboard, `n
+  If(strout0>1 or InStr(clipboard, "sudo")>0) {
+    MsgBox, 308, Clipboard, %clipboard%`n`n Do you want to paste?
+    IfMsgBox, No
+    {
+      Return
+    }
+  }
+  MouseClick, Right, 50, 50, 1
+  Return
+#IfWInActive
+#IfWInActive, ahk_class Vim
+!v::Send,{Alt}ep
+#IfWInActive
+
 ; Other than Terminal/Vim
-#IfWInNotActive, ahk_group Terminal
+#IfWInNotActive, ahk_group TerminalVim
 ^[::Send,{Esc}             ; Always C-[ to ESC, like vim
 #IfWInNotActive
 ; }}} Terminal/Vim
@@ -231,12 +250,11 @@ Enter::
 LCtrl & Tab::AltTab
 Alt & Tab::
   if GetKeyState("Shift","P") {
-    Send,^+{Tab} ; dosen't work ()
+    Send,^+{taB} ; dosen't work ()
   }else{
     Send,^{Tab}
   }
   Return
-
 ;!m::Send,^m
 ;^m::Send,!m
 ^m::Send,!m
@@ -281,10 +299,6 @@ Ctrl & Right::Send,!{Right}
 !^n::MouseClick, Left
 !^p::MouseClick, Right
 ; Right click on current window
-!v::
-  MouseMove, 50, 50, 0
-  MouseClick, Right
-  Return
 
 ; Mouse wheel
 !^m::MouseClick, WheelDown,,,  2
@@ -328,8 +342,8 @@ Ctrl & Right::Send,!{Right}
   SysGet, MWA, MonitorWorkArea ; w/o Taskbar
   ;Msgbox, %MWALeft% %MWATop% %MWARight% %MWABottom%
   WinMove, A, ,MWALeft+LMargin, MWATop+TMargin
-    , (MWARight-MWALeft-LMargin-RMargin)*MinSize
-    , (MWABottom-MWATop-TMargin-BMargin)*MinSize
+    , (MWARight-MWALeft-LMargin-RMargin)*minsize
+    , (MWABottom-MWATop-TMargin-BMargin)*minsize
   Return
 ; }}} Window size
 ; }}} Cursor, Mouse, Window move
