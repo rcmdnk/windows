@@ -203,7 +203,7 @@ Esc:: ; Just send Esc at converting.
 ; }}} Word
 
 ; Explorer {{{
-#IfWInActive, ahk_class CabinetWClas
+#IfWInActive, ahk_class CabinetWClass
 ; Next/Previous page
 ^i::Send,!{Right}
 ^o::Send,!{Left}
@@ -225,18 +225,26 @@ K::Send,{Up}
 #IfWInActive, ahk_class EVERYTHING
 Enter::
   Send,{Enter}
-  sleep,200
+  Sleep,200
   IfWinActive, ahk_class EVERYTHING
   {
     Send,{Enter}
-    sleep,200
+    Sleep,200
   }
   WinActivate, ahk_class EVERYTHING
-  sleep,100
+  Sleep,100
   Send,{Esc}
   Return
 #IfWInActive
 ; }}} Everything
+
+; Command Prompt {{{
+#IfWinActive ahk_class ConsoleWindowClass
+^v::
+  SendInput %clipboard%
+  Return
+#IfWInActive
+; }}} Command Prompt
 
 ; Global Settings {{{
 #if
