@@ -126,8 +126,8 @@ vkFFsc07b::LCtrl
 ; ESC + IME
 #IfWInActive, ahk_group TerminalVim
 Esc:: ; Just send Esc at converting.
-  if (IME_GET(A)) {
-    if (IME_GetConverting(A)) {
+  if (VIM_IME_GET(A)) {
+    if (VIM_IME_GetConverting(A)) {
       Send,{Esc}
     } else {
       IME_SET()
@@ -137,7 +137,7 @@ Esc:: ; Just send Esc at converting.
   }
   Return
 ^[:: ; Go to Normal mode (for vim) with IME off even at converting.
-  if (IME_GET(A)) {
+  if (VIM_IME_GET(A)) {
     Send,{Esc}
     Sleep 1 ; wait 1 ms (Need to stop converting)
     IME_SET()
