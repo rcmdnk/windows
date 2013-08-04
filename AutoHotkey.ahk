@@ -130,7 +130,7 @@ Esc:: ; Just send Esc at converting.
     if (VIM_IME_GetConverting(A)) {
       Send,{Esc}
     } else {
-      IME_SET()
+      VIM_IME_SET()
     }
   } else {
     Send,{Esc}
@@ -140,7 +140,7 @@ Esc:: ; Just send Esc at converting.
   if (VIM_IME_GET(A)) {
     Send,{Esc}
     Sleep 1 ; wait 1 ms (Need to stop converting)
-    IME_SET()
+    VIM_IME_SET()
     Send,{Esc}
   } else {
     Send,{Esc}
