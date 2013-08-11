@@ -159,6 +159,7 @@ Esc:: ; Just send Esc at converting.
       Return
     }
   }
+  Sleep,200
   MouseClick, Right, 50, 50, 1
   Return
 #IfWInActive
