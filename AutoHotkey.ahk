@@ -170,6 +170,7 @@ Esc:: ; Just send Esc at converting.
 ; Other than Terminal/Vim
 #IfWInNotActive, ahk_group TerminalVim
 ^[::Send,{Esc}             ; Always C-[ to ESC, like vim
+^d::Send,{Del}             ; Always Delete with C-d
 #IfWInNotActive
 ; }}} Terminal/Vim
 
