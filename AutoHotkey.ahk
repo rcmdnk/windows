@@ -225,16 +225,16 @@ K::Send,{Up}
 
 ; Everthing {{{
 #IfWInActive, ahk_class EVERYTHING
-Enter::
+Return::
   Send,{Enter}
   Sleep,200
   IfWinActive, ahk_class EVERYTHING
   {
     Send,{Enter}
-    Sleep,200
+    Sleep,500
   }
   WinActivate, ahk_class EVERYTHING
-  Sleep,100
+  Sleep,200
   Send,{Esc}
   Return
 #IfWInActive
