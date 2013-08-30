@@ -276,7 +276,6 @@ Ctrl & Right::Send,!{Right}
 ^Space::Send,{vkF3sc029}   ; IME by C-Space
 ; {vkF3sc029}              ; 変換
 ; {vk1Dsc07B}              ; 無変換
-^h::Send,{BS}              ; Always BS with C-h
 !a::Send,^{Space}n        ; Minimize window
 !4::Send,!{F4}             ; Close window
 ^4::Send,!{F4}             ; Close window
@@ -284,6 +283,18 @@ Ctrl & Right::Send,!{Right}
 ;^o::Send,!{Left}           ; Go to previous page
 ;^i::Send,!{Right}          ; Go to nexe page
 ^Space::!`                 ; IME
+
+;^h::Send,{BS}              ; Always BS with C-h
+^h::
+  n=0
+  TrayTip,Start:,%n%,10,,
+  While GetKeyState("h","p"){
+    Send {BS}
+    n:= n+1
+    TrayTip,Start:,%n%,10,,
+    Sleep 100
+  }
+  return
 
 ; For HHK
 ; ESC to ` like normal keyboard (ESC is placed on the left of 1 in HHK)
