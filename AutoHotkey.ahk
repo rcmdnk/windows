@@ -38,8 +38,8 @@ Return
 #InstallKeybdHook ; For checking key history
                   ; Use ~500kB memory?
 
-#HotkeyInterval 2000 ; Hotkey inteval (default 2000 milliseconds).
-#MaxHotkeysPerInterval 70 ; Max hotkeys perinterval (default 50).
+#HotkeyInterval 1000 ; Hotkey inteval (default 2000 milliseconds).
+#MaxHotkeysPerInterval 100 ; Max hotkeys perinterval (default 50).
 
 
 ; For HHK
@@ -286,13 +286,10 @@ Ctrl & Right::Send,!{Right}
 
 ;^h::Send,{BS}              ; Always BS with C-h
 ^h::
-  n=0
-  TrayTip,Start:,%n%,10,,
   While GetKeyState("h","p"){
     Send {BS}
-    n:= n+1
     TrayTip,Start:,%n%,10,,
-    Sleep 100
+    Sleep 2
   }
   return
 
