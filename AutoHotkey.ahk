@@ -284,14 +284,14 @@ Ctrl & Right::Send,!{Right}
 ;^i::Send,!{Right}          ; Go to nexe page
 ^Space::!`                 ; IME
 
-;^h::Send,{BS}              ; Always BS with C-h
-^h::
-  While GetKeyState("h","p"){
-    Send {BS}
-    TrayTip,Start:,%n%,10,,
-    Sleep 2
-  }
-  return
+^h::Send,{BS}              ; Always BS with C-h
+;^h::
+;  While GetKeyState("h","p"){
+;    Send {BS}
+;    TrayTip,Start:,%n%,10,,
+;    Sleep 50
+;  }
+;  return
 
 ; For HHK
 ; ESC to ` like normal keyboard (ESC is placed on the left of 1 in HHK)
