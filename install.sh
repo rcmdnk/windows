@@ -1,6 +1,6 @@
 #!/bin/bash
-files=("AutoHotkey.ahk")
-instdirs=("/cygdrive/c/Users/$USER/Documents/")
+files=("AutoHotkey.ahk" "submodules/vim_ahk/vim.ahk")
+instdirs=("/cygdrive/c/Users/$USER/Documents/" "/cygdrive/c/Users/$USER/Documents/")
 
 backup="bak"
 overwrite=1
@@ -60,6 +60,18 @@ if [[ "$OSTYPE" =~ "cygwin" ]];then
   }
 # }}}
 fi
+
+echo "**********************************************"
+echo "Update submodules"
+echo "**********************************************"
+echo
+if which git >&/dev/null;then
+  git submodule update --init
+else
+  echo "git is not installed, please install git or get following submodules directly:"
+  grep url .gitmodules
+fi
+echo
 
 if [ $dryrun -eq 1 ];then
   echo "*********************************************"
