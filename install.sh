@@ -82,6 +82,7 @@ fi
 i=0
 while [ $i -lt ${#files[@]} ];do
   f=${files[$i]}
+  f_name=$(basename ${files[$i]})
   d=${instdirs[$i]}
   i=$((i+1))
   echo install $f to \"$d\"
@@ -89,22 +90,23 @@ while [ $i -lt ${#files[@]} ];do
   if [ $dryrun -eq 1 ];then
     install=0
   fi
-  if [ "`ls "$d/$f" 2>/dev/null`" != "" ];then
-    exist=(${exist[@]} "$f")
+  if [ "`ls "$d/$f_name" 2>/dev/null`" != "" ];then
+    exist=(${exist[@]} "$f_name")
     if [ $dryrun -eq 1 ];then
       echo -n ""
     elif [ $overwrite -eq 0 ];then
       install=0
     elif [ "$backup" != "" ];then
-      mv "$d/$f" "$d/${f}.$backup"
+      mv "$d/$f_name" "$d/${f_name}.$backup"
     else
-      rm "$d/$f"
+      rm "$d/$f_name"
     fi
   else
-    newlink=(${newlink[@]} "$f")
+    newlink=(${newlink[@]} "$f_name")
   fi
   if [ $install -eq 1 ];then
-    ln -s "$curdir/$f" "$d/$f"
+    echo ln -s "$curdir/$f" "$d/$f_name"
+    ln -s "$curdir/$f" "$d/$f_name"
   fi
 done
 if [ $dryrun -eq 1 ];then
