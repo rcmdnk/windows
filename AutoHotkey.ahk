@@ -16,7 +16,7 @@
 TMargin=5
 BMargin=5
 LMargin=5
-RMargin=155 ; sidebar = 150px
+RMargin=5 ; sidebar = 150px
 MinSize=0.7
 
 ; For Terminal/Vim
