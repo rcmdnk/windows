@@ -352,18 +352,41 @@ Ctrl & Right::Send,!{Right}
   ;Msgbox, Pos At %X% %Y% %W% %H%
   SysGet, MWA, MonitorWorkArea ; w/o Taskbar
   ;Msgbox, %MWALeft% %MWATop% %MWARight% %MWABottom%
-  WinMove, A, ,MWALeft+LMargin, MWATop+TMargin
+  WinMove, A, , MWALeft+LMargin, MWATop+TMargin
     , MWARight-MWALeft-LMargin-RMargin
     , MWABottom-MWATop-TMargin-BMargin
   Return
 ^!+Enter::
-  ;WinGetPos, X, Y, W, H, Program Manager ; Full Desktop
-  ;Msgbox, Pos At %X% %Y% %W% %H%
   SysGet, MWA, MonitorWorkArea ; w/o Taskbar
-  ;Msgbox, %MWALeft% %MWATop% %MWARight% %MWABottom%
-  WinMove, A, ,MWALeft+LMargin, MWATop+TMargin
-    , (MWARight-MWALeft-LMargin-RMargin)*minsize
-    , (MWABottom-MWATop-TMargin-BMargin)*minsize
+  WinMove, A, , MWALeft+LMargin, MWATop+TMargin
+    , (MWARight-MWALeft-LMargin-RMargin)*Minsize
+    , (MWABottom-MWATop-TMargin-BMargin)*Minsize
+  Return
+!+h::
+  SysGet, MWA, MonitorWorkArea ; w/o Taskbar
+  WinMove, A, , MWALeft+LMargin, MWATop+TMargin
+    , (MWARight-MWALeft-LMargin-RMargin)*0.5
+    , MWABottom-MWATop-TMargin-BMargin
+  Return
+!+j::
+  SysGet, MWA, MonitorWorkArea ; w/o Taskbar
+  WinMove, A, , MWALeft+LMargin
+    , MWATop+(MWABottom-MWATop)*0.5
+    , MWARight-MWALeft-LMargin-RMargin
+    , (MWABottom-MWATop-TMargin-BMargin)*0.5
+  Return
+!+k::
+  SysGet, MWA, MonitorWorkArea ; w/o Taskbar
+  WinMove, A, , MWALeft+LMargin, MWATop+TMargin
+    , MWARight-MWALeft-LMargin-RMargin
+    , (MWABottom-MWATop-TMargin-BMargin)*0.5
+  Return
+!+l::
+  SysGet, MWA, MonitorWorkArea ; w/o Taskbar
+  WinMove, A, , MWALeft+(MWARight-MWALeft)*0.5
+    , MWATop+TMargin
+    , (MWARight-MWALeft-LMargin-RMargin)*0.5
+    , MWABottom-MWATop-TMargin-BMargin
   Return
 ; }}} Window size
 ; }}} Cursor, Mouse, Window move
