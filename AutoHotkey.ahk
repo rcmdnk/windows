@@ -148,6 +148,7 @@ Esc:: ; Just send Esc at converting.
     Send,{Esc}
   }
   Return
+^m::Send,^m ; Use Ctrl-m as is
 #IfWInActive
 
 ; Paste
