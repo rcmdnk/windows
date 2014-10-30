@@ -270,7 +270,7 @@ Alt & Tab::
   Return
 ;!m::Send,^m
 ;^m::Send,!m
-^m::Send,!m
+>^m::Send,!m
 Ctrl & Left::Send,!{Left}
 Ctrl & Right::Send,!{Right}
 
