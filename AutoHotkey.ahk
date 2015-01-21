@@ -22,6 +22,8 @@ MinSize=0.7
 ; For Terminal/Vim
 GroupAdd Terminal, ahk_class PuTTY
 GroupAdd Terminal, ahk_class mintty ; cygwin
+GroupAdd Terminal, ahk_class TMobaXtermForm
+GroupAdd Terminal, ahk_class TFormDetachedTab
 GroupAdd TerminalVim, ahk_group Terminal
 GroupAdd TerminalVim, ahk_class Vim
 
