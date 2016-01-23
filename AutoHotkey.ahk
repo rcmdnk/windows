@@ -272,9 +272,16 @@ Alt & Tab::
   Return
 ;!m::Send,^m
 ;^m::Send,!m
->^m::Send,!m
-Ctrl & Left::Send,!{Left}
-Ctrl & Right::Send,!{Right}
+;>^m::Send,!m
+;Ctrl & Left::Send,!{Left}
+;Ctrl & Right::Send,!{Right}
+
+; Virtual desktop
+^+h::Send,#^{Left}
+^+l::Send,#^{Right}
+
+; Cortana
+!^f::Send,#s
 
 ; Other basic settings
 !Space::Send,{vkF3sc029}   ; IME by A-Space
