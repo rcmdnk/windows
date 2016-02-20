@@ -1,6 +1,6 @@
 #!/bin/bash
 files=("AutoHotkey.ahk" "submodules/vim_ahk/vim.ahk")
-instdirs=("/cygdrive/c/Users/$USER/Documents/" "/cygdrive/c/Users/$USER/Documents/")
+instdirs=("/cygdrive/c/Users/$USER/Documents" "/cygdrive/c/Users/$USER/Documents")
 
 backup="bak"
 overwrite=1
