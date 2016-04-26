@@ -1,6 +1,7 @@
 #!/bin/bash
-files=("AutoHotkey.ahk" "submodules/vim_ahk/vim.ahk")
-instdirs=("/cygdrive/c/Users/$USER/Documents" "/cygdrive/c/Users/$USER/Documents")
+files=("AutoHotkey.ahk" "submodules/vim_ahk/vim.ahk" "Microsoft.PowerShell_profile.ps1")
+documents="/cygdrive/c/Users/$USER/Documents"
+instdirs=("$documents" "$documents" "$documents/WindowsPowerShell/")
 
 backup="bak"
 overwrite=1
@@ -105,6 +106,7 @@ while [ $i -lt ${#files[@]} ];do
   fi
   if [ $install -eq 1 ];then
     echo ln -s "$curdir/$f" "$d/$f_name"
+    mkdir -p "$d"
     ln -s "$curdir/$f" "$d/$f_name"
   fi
 done
