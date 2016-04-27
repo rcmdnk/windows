@@ -4,7 +4,7 @@ include "dot.mayu"
 # Mouse event activation
 def option mouse-event = true
 
-# Happy Hacking Keyboard (HHK) key definition {{{
+# Happy Hacking Keyboard (HHKB) key definition {{{
 #def key LD = 0x7b
 def key LD = E0-0x7b
 def key RD = 0x79
@@ -71,16 +71,16 @@ def key RD = 0x79
   #key A-C-f = LWIN              # Push Start button, can start search directly
   key C-Space = A-GraveAccent   # Unix like IME
 
-  # For HHK
-  # ESC to ` like normal keyboard (ESC is placed on the left of 1 in HHK)
+  # For HHKB
+  # ESC to ` like normal keyboard (ESC is placed on the left of 1 in HHKB)
   #key Esc = GraveAccent
   #key S-Esc = S-GraveAccent
   #key A-Esc = A-GraveAccent     # IME
   key A-_1 = A-GraveAccent      # IME
   key A-Space = A-GraveAccent   # IME
 
-  key A-C-BS = W-l              # Go to login window, for HHK (no Win key)
-  key A-_0 = W-l                # Go to login window, for HHK (no Win key)
+  key A-C-BS = W-l              # Go to login window, for HHKB (no Win key)
+  key A-_0 = W-l                # Go to login window, for HHKB (no Win key)
 
   # Left Meta key to Alt (at SW5=Off)
   mod alt += LD

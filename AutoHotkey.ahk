@@ -44,7 +44,7 @@ Return
 #MaxHotkeysPerInterval 100 ; Max hotkeys perinterval (default 50).
 
 
-; For HHK
+; For HHKB
 ;vkFFsc079::RAlt
 ;vkFFsc07b::LAlt
 vkFFsc079::RCtrl
@@ -305,8 +305,8 @@ Alt & Tab::
 ;  }
 ;  return
 
-; For HHK
-; ESC to ` like normal keyboard (ESC is placed on the left of 1 in HHK)
+; For HHKB
+; ESC to ` like normal keyboard (ESC is placed on the left of 1 in HHKB)
 !1::!`                ; IME
 ; }}} Basic Settings
 
