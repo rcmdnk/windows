@@ -2,7 +2,7 @@
 
 if [[ ! "$OSTYPE" =~ cygwin ]];then
   echo Can be used only in cygwin.
-  exit 1
+  exit
 fi
 
 files=("AutoHotkey.ahk" "submodules/vim_ahk/vim.ahk" "Microsoft.PowerShell_profile.ps1")
