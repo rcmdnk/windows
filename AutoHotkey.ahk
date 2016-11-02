@@ -305,6 +305,8 @@ Alt & Tab::
 ;  }
 ;  return
 
+^j::Send,{Enter}      ; C-j to Enter
+
 ; For HHKB
 ; ESC to ` like normal keyboard (ESC is placed on the left of 1 in HHKB)
 !1::!`                ; IME
