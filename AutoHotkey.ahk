@@ -253,6 +253,12 @@ Return::
 #IfWInActive
 ; }}} Command Prompt
 
+; Fiefox {{{
+#IfWinActive ahk_exe firefox.exe
+^j::Send ^j
+#IfWInActive
+; }}} Firefox
+
 ; Global Settings {{{
 #if
 ; Basic Settings {{{
