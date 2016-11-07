@@ -254,9 +254,9 @@ Return::
 ; }}} Command Prompt
 
 ; Fiefox {{{
-#IfWinActive ahk_exe firefox.exe
-^j::Send ^j
-#IfWInActive
+;#IfWinActive ahk_exe firefox.exe
+;^j::Send ^j
+;#IfWInActive
 ; }}} Firefox
 
 ; Global Settings {{{
@@ -311,7 +311,7 @@ Alt & Tab::
 ;  }
 ;  return
 
-^j::Send,{Enter}      ; C-j to Enter
+;^j::Send,{Enter}      ; C-j to Enter
 
 ; For HHKB
 ; ESC to ` like normal keyboard (ESC is placed on the left of 1 in HHKB)
