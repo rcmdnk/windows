@@ -776,6 +776,8 @@ v::VimSetMode("Vim_VisualChar")
 y::
   Clipboard=
   Send,^c
+  Send,{Right}
+  Send,{Left}
   ClipWait,1
   if (InStr(VimMode,"Line")){
     VimSetMode("Vim_Normal",0,0,1)
@@ -828,7 +830,10 @@ c::
 
 ; Search {{{
 #If WInActive("ahk_group VimGroup") and (VimMode="Vim_Normal")
-/::Send,^f
+/::
+  Send,^f
+  VimSetMode("Inseret")
+  Return
 *::
   bak:=ClipboardAll
   Clipboard=
@@ -837,6 +842,7 @@ c::
   Send,^f
   Send,^v!f
   clipboard:=bak
+  VimSetMode("Inseret")
   Return
 n::Send,{F3}
 +n::Send,+{F3}
