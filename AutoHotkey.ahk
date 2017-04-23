@@ -296,6 +296,9 @@ Alt & Tab::
 ; Cortana
 !^f::Send,#s
 
+; CLCL
+#c::Send,!c
+
 ; Other basic settings
 !Space::Send,{vkF3sc029}   ; IME by A-Space
 ^Space::Send,{vkF3sc029}   ; IME by C-Space
