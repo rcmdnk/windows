@@ -158,20 +158,19 @@ Esc:: ; Just send Esc at converting.
 
 ; Paste
 #IfWInActive, ahk_group Terminal
-;!v::
-;  ;StringSplit, strout, clipboard, `n
-;  ;If(strout0>1 or InStr(clipboard, "sudo")>0) {
-;  ;  MsgBox, 308, Clipboard, %clipboard%`n`n Do you want to paste?
-;  ;  IfMsgBox, No
-;  ;  {
-;  ;    Return
-;  ;  }
-;  ;}
-;  Sleep,200
-;  MouseClick, Right, 50, 50, 1
-;  Return
 !v::
-  SendInput %clipboard%
+  ;StringSplit, strout, clipboard, `n
+  ;If(strout0>1 or InStr(clipboard, "sudo")>0) {
+  ;  MsgBox, 308, Clipboard, %clipboard%`n`n Do you want to paste?
+  ;  IfMsgBox, No
+  ;  {
+  ;    Return
+  ;  }
+  ;}
+  ;SendInput %clipboard%
+  ;Return
+  Sleep,200
+  MouseClick, Right, 50, 50, 1
   Return
 #IfWInActive
 #IfWInActive, ahk_class Vim
