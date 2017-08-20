@@ -1,3 +1,0 @@
-[submodule "submodules/vim_ahk"]
-	path = submodules/vim_ahk
-	url = git@github.com:rcmdnk/vim_ahk.git

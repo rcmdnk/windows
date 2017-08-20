@@ -30,6 +30,7 @@ GroupAdd Terminal, ahk_exe vim.exe
 GroupAdd TerminalVim, ahk_group Terminal
 GroupAdd TerminalVim, ahk_class Vim
 
+VimIcon=1
 #Include  %A_ScriptDir%\vim.ahk
 
 Return
