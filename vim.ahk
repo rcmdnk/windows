@@ -21,9 +21,8 @@ GroupAdd LBSelect, ahk_exe POWERPNT.exe ; PowerPoint
 GroupAdd LBSelect, ahk_exe WINWORD.exe ; Word
 GroupAdd LBSelect, ahk_exe wordpad.exe ; WordPad
 
-; Seems Windows 10's OneNote has normal behavior as others.
+; OneNote before Windows 10
 GroupAdd OneNoteGroup, ahk_exe onenote.exe ; OneNote Desktop
-;GroupAdd OneNoteGroup, , OneNote ; OneNote in Windows 10
 
 ; Need Home twice
 GroupAdd DoubleHome, ahk_exe Code.exe ; Visual Studio Code
@@ -31,7 +30,10 @@ GroupAdd DoubleHome, ahk_exe Code.exe ; Visual Studio Code
 ; Global settings
 VimVerbose=0 ; Verbose level (0: no pop up, 1: minimum tool tips of status, 2: more info in tool tips, 3: Debug mode with a message box, which doesn't disappear automatically)
 VimRestoreIME=1 ; If IME status is restored or not at entering insert mode. 1 for restoring, 0 for not to restore (always IME off at enterng insert mode).
-VimIcon=1 ; 1 to enable Tray Icon for Vim Modes (0 to disable)
+if VimIcon is not integer
+{
+  VimIcon=1 ; 1 to enable Tray Icon for Vim Modes (0 to disable)
+}
 
 VimMode=Insert
 Vim_g=0
@@ -39,6 +41,7 @@ Vim_n=0
 VimLineCopy=0
 VimLastIME=0
 
+;SetIcon("Disabled")
 Return
 ; }}}
 
@@ -86,7 +89,7 @@ VIM_IME_GetConverting(WinTitle="A",ConvCls="",CandCls="") {
     .  "|mscandui\d+\.candidate"                  ; MS Office IME-2007
     .  "|WXGIMECand"                              ; WXG
     .  "|SKKIME\d+\.*\d+UCand"                    ; SKKIME Unicode
- CandGCls := "GoogleJapaneseInputCandidateWindow" ; Google IME
+  CandGCls := "GoogleJapaneseInputCandidateWindow" ; Google IME
 
   ControlGet,hwnd,HWND,,,%WinTitle%
   if (WinActive(WinTitle)) {
@@ -107,6 +110,7 @@ VIM_IME_GetConverting(WinTitle="A",ConvCls="",CandCls="") {
   SetTitleMatchMode, %tmm%
   Return ret
 }
+
 ; Set IME, SetSts=0: Off, 1: On, return 0 for success, others for non-success
 VIM_IME_SET(SetSts=0, WinTitle="A")    {
   ControlGet,hwnd,HWND,,,%WinTitle%
@@ -125,20 +129,43 @@ VIM_IME_SET(SetSts=0, WinTitle="A")    {
     ,  Int, SetSts) ;lParam  : 0 or 1
 }
 
+SetIcon(Mode=""){
+  global VimIcon
+  if(VimIcon!=1){
+    Return
+  }
+  icon =
+  if InStr(Mode, "Normal"){
+    icon = icons/normal.ico
+  }else if InStr(Mode, "Insert"){
+    icon = icons/insert.ico
+  }else if InStr(Mode, "Visual"){
+    icon = icons/visual.ico
+  }else if InStr(Mode, "Disabled"){
+    icon = icons/disabled.ico
+  }
+  if(icon != ""){
+    icon = % A_ScriptDir . "\" . icon
+    if FileExist(icon){
+      Menu, Tray, Icon, %icon%
+    }
+  }
+}
+
 ; }}}
 
 ; Vim mode {{{
 #IfWInActive, ahk_group VimGroup
 
 Status(Title){
-    WinGetPos,,,W,H,A
-    Tooltip,%Title%,W*3/4,H*3/4
-    SetTimer, RemoveStatus, 1000
+  WinGetPos,,,W,H,A
+  Tooltip,%Title%,W*3/4,H*3/4
+  SetTimer, RemoveStatus, 1000
 }
 
 RemoveStatus:
-    SetTimer, RemoveStatus, off
-    Tooltip
+  SetTimer, RemoveStatus, off
+  Tooltip
 return
 
 ; Set Modes {{{
@@ -147,8 +174,9 @@ VimSetMode(Mode="", g=0, n=0, LineCopy=-1) {
   if(Mode!=""){
     VimMode=%Mode%
     If(Mode=="Insert") and (VimRestoreIME==1){
-        VIM_IME_SET(LastIME)
+      VIM_IME_SET(LastIME)
     }
+    SetIcon(VimMode)
   }
   if (g != -1){
     Vim_g=%g%
@@ -162,6 +190,7 @@ VimSetMode(Mode="", g=0, n=0, LineCopy=-1) {
   VimCheckMode(VimVerbose,Mode,g,n,LineCopy)
   Return
 }
+
 VimCheckMode(verbose=0,Mode="", g=0, n=0, LineCopy=-1) {
   global
   if(verbose<1) or ((Mode=="" ) and (g==0) and (n==0) and (LineCopy==-1)) {
@@ -182,6 +211,7 @@ VimCheckMode(verbose=0,Mode="", g=0, n=0, LineCopy=-1) {
   }
   Return
 }
+
 ^!+c::
   VimCheckMode(3,VimMode)
   Return
@@ -206,7 +236,7 @@ Esc:: ; Just send Esc at converting, long press for normal Esc.
   } else {
     VimSetMode("Vim_Normal")
   }
-  Return
+Return
 
 ^[:: ; Go to Normal mode (for vim) with IME off even at converting.
   KeyWait, [, T0.5
@@ -225,7 +255,7 @@ Esc:: ; Just send Esc at converting, long press for normal Esc.
   } else {
     VimSetMode("Vim_Normal")
   }
-  Return
+Return
 ; }}}
 
 ; Enter vim insert mode (Exit vim normal mode) {{{
@@ -235,25 +265,28 @@ i::VimSetMode("Insert")
   Send,{Home}
   Sleep 200
   VimSetMode("Insert")
-  Return
+Return
+
 a::
   Send,{Right}
   VimSetMode("Insert")
-  Return
+Return
 +a::
   Send,{End}
   Sleep 200
   VimSetMode("Insert")
-  Return
+Return
+
 o::
   Send,{End}{Enter}
   VimSetMode("Insert")
-  Return
+Return
+
 +o::
   Send,{Up}{End}{Enter}
   Sleep 200
   VimSetMode("Insert")
-  Return
+Return
 ; }}}
 
 ; Repeat {{{
@@ -269,12 +302,13 @@ o::
 9::
   n_repeat:= Vim_n*10 + A_ThisHotkey
   VimSetMode("",0,n_repeat)
-  Return
+Return
+
 #If WInActive("ahk_group VimGroup") and (InStr(VimMode,"Vim_")) and (Vim__n>0)
 0:: ; 0 is used as {Home} for Vim_n=0
   n_repeat:= Vim_n*10 + A_ThisHotkey
   VimSetMode("",0,n_repeat)
-  Return
+Return
 ; }}}
 
 ; Normal Mode Basic {{{
@@ -309,7 +343,7 @@ u::Send,^z
   }
   Send,^v
   clipboard:=bak
-  return
+return
 
 +z::VimSetMode("Z")
 #If WInActive("ahk_group VimGroup") and (VimMode="Z")
@@ -317,11 +351,12 @@ u::Send,^z
   Send,^s
   Send,!{F4}
   VimSetMode("Vim_Normal")
-  Return
+Return
+
 +q::
   Send,!{F4}
   VimSetMode("Vim_Normal")
-  Return
+Return
 
 #If WInActive("ahk_group VimGroup") and (VimMode="Vim_Normal")
 Space::Send,{Right}
@@ -336,6 +371,7 @@ Space::Send,{Right}
 #If WInActive("ahk_group VimGroup") and (VimMode="Vim_Normal")
 r::VimSetMode("r_once")
 +r::VimSetMode("r_repeat")
+
 #If WInActive("ahk_group VimGroup") and (VimMode="r_once")
 ~a::
 ~b::
@@ -405,11 +441,13 @@ r::VimSetMode("r_once")
 ~Space::
   Send, {Del}
   VimSetMode("Vim_Normal")
-  Return
+Return
+
 ::: ; ":" can't be used with "~"?
   Send,{:}{Del}
   VimSetMode("Vim_Normal")
-  Return
+Return
+
 #If WInActive("ahk_group VimGroup") and (VimMode="r_repeat")
 ~a::
 ~b::
@@ -478,10 +516,11 @@ r::VimSetMode("r_once")
 ~>::
 ~Space::
   Send,{Del}
-  Return
+Return
+
 :::
   Send,{:}{Del}
-  Return
+Return
 ; }}}
 
 ; Move {{{
@@ -643,7 +682,8 @@ c::VimSetMode("Vim_ydc_c",0,-1,0)
     VimMove("")
   }
   Send, {Left}{Home}
-  Return
+Return
+
 +d::
   VimSetMode("Vim_ydc_d",0,0,0)
   if not WinActive("ahk_group LBSelect"){
@@ -652,7 +692,8 @@ c::VimSetMode("Vim_ydc_c",0,-1,0)
     Send,{Shift Down}{End}{Left}
     VimMove("")
   }
-  Return
+Return
+
 +c::
   VimSetMode("Vim_ydc_c",0,0,0)
   if not WinActive("ahk_group LBSelect"){
@@ -661,7 +702,8 @@ c::VimSetMode("Vim_ydc_c",0,-1,0)
     Send,{Shift Down}{End}{Left}
     VimMove("")
   }
-  Return
+Return
+
 #If WInActive("ahk_group VimGroup") and (VimMode="Vim_ydc_y")
 y::
   VimLineCopy=1
@@ -675,7 +717,8 @@ y::
     VimMove("")
   }
   Send, {Left}{Home}
-  Return
+Return
+
 #If WInActive("ahk_group VimGroup") and (VimMode="Vim_ydc_d")
 d::
   VimLineCopy=1
@@ -688,7 +731,8 @@ d::
   }else{
     VimMove("")
   }
-  Return
+Return
+
 #If WInActive("ahk_group VimGroup") and (VimMode="Vim_ydc_c")
 c::
   VimLineCopy=1
@@ -701,7 +745,7 @@ c::
   }else{
     VimMove("")
   }
-  Return
+Return
 
 #If WInActive("ahk_group VimGroup") and (VimMode="Vim_Normal")
 ; X
@@ -747,7 +791,8 @@ p::
     ;;Send,^{Left}
   }
   KeyWait, p ; To avoid repeat, somehow it calls <C-p>, print...
-  Return
+Return
+
 +p::
   if VimLineCopy {
     Send,{Up}{End}{Enter}^v{BS}{Home}
@@ -756,7 +801,7 @@ p::
     ;Send,^{Left}
   }
   KeyWait, p
-  Return
+Return
 ; }}} Copy/Cut/Paste (ydcxp)
 
 ; Vim visual mode {{{
@@ -767,11 +812,13 @@ v::VimSetMode("Vim_VisualChar")
 ^v::
   Send,^b
   VimSetMode("Vim_VisualChar")
-  Return
+Return
+
 +v::
   VimSetMode("Vim_VisualLineFirst")
   Send,{Home}+{Down}
-  Return
+Return
+
 ; ydc
 #If WInActive("ahk_group VimGroup") and (InStr(VimMode,"Visual"))
 y::
@@ -785,7 +832,8 @@ y::
   }else{
     VimSetMode("Vim_Normal",0,0,0)
   }
-  Return
+Return
+
 d::
   Clipboard=
   Send,^x
@@ -795,7 +843,8 @@ d::
   }else{
     VimSetMode("Vim_Normal",0,0,0)
   }
-  Return
+Return
+
 x::
   Clipboard=
   Send,^x
@@ -805,7 +854,8 @@ x::
   }else{
     VimSetMode("Vim_Normal",0,0,0)
   }
-  Return
+Return
+
 c::
   Clipboard=
   Send,^x
@@ -815,7 +865,7 @@ c::
   }else{
     VimSetMode("Insert",0,0,0)
   }
-  Return
+Return
 
 *::
   bak:=ClipboardAll
@@ -826,7 +876,7 @@ c::
   Send,^v!f
   clipboard:=bak
   VimSetMode("Vim_Normal")
-  Return
+Return
 ; }}} Vim visual mode
 
 ; Search {{{
@@ -834,7 +884,8 @@ c::
 /::
   Send,^f
   VimSetMode("Inseret")
-  Return
+Return
+
 *::
   bak:=ClipboardAll
   Clipboard=
@@ -844,7 +895,8 @@ c::
   Send,^v!f
   clipboard:=bak
   VimSetMode("Inseret")
-  Return
+Return
+
 n::Send,{F3}
 +n::Send,+{F3}
 ; }}} Search
@@ -858,26 +910,32 @@ q::VimSetMode("Command_q")
 h::
   Send,{F1}
   VimSetMode("Normal")
-  Return
+Return
+
 #If WInActive("ahk_group VimGroup") and (VimMode="Command_w")
 Return::
   Send,^s
   VimSetMode("Normal")
-  Return
+Return
+
 q::
   Send,^s
   Send,!{F4}
   VimSetMode("Normal")
-  Return
+Return
+
 Space::
   Send,!fa
   VimSetMode("Normal")
-  Return
+Return
+
 #If WInActive("ahk_group VimGroup") and (VimMode="Command_q")
 Return::
   Send,!{F4}
   VimSetMode("Normal")
-  Return
+Return
 ; }}} Vim command mode
-#If
 ; }}} Vim Mode
+
+; vim: foldmethod=marker
+; vim: foldmarker={{{,}}}

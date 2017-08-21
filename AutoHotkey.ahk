@@ -124,7 +124,7 @@ vkFFsc07b::LCtrl
 ;    , UInt, 0x0283  ;Message : WM_IME_CONTROL
 ;    ,  Int, 0x006   ;wParam  : IMC_SETOPENSTATUS
 ;    ,  Int, SetSts) ;lParam  : 0 or 1
-;}  
+;}
 
 ; }}}
 
@@ -141,7 +141,8 @@ Esc:: ; Just send Esc at converting.
   } else {
     Send,{Esc}
   }
-  Return
+Return
+
 ^[:: ; Go to Normal mode (for vim) with IME off even at converting.
   if (VIM_IME_GetConverting(A)) {
     Send,{Esc}
@@ -153,7 +154,9 @@ Esc:: ; Just send Esc at converting.
   } else {
     Send,{Esc}
   }
-  Return
+Return
+
+
 ^m::Send,^m ; Use Ctrl-m as is
 #IfWInActive
 
@@ -172,7 +175,8 @@ Esc:: ; Just send Esc at converting.
   ;Return
   Sleep,200
   MouseClick, Right, 50, 50, 1
-  Return
+Return
+
 #IfWInActive
 #IfWInActive, ahk_class Vim
 !v::Send,{Alt}ep
@@ -183,7 +187,7 @@ Esc:: ; Just send Esc at converting.
 ^v::Send,^q
 !v::
   SendInput %clipboard%
-  Return
+Return
 #IfWInActive
 ; }}} Command Prompt
 
@@ -238,7 +242,8 @@ Esc:: ; Just send Esc at converting.
 j::
   Msgbox, clcl_down
   Send,{Down}
-  Return
+Return
+
 K::Send,{Up}
 #IfWInActive
 ; }}} Explorer
@@ -256,7 +261,8 @@ Return::
   WinActivate, ahk_class EVERYTHING
   Sleep,200
   Send,{Esc}
-  Return
+Return
+
 #IfWInActive
 ; }}} Everything
 
@@ -282,7 +288,8 @@ Alt & Tab::
   }else{
     Send,^{Tab}
   }
-  Return
+Return
+
 ;!m::Send,^m
 ;^m::Send,!m
 ;>^m::Send,!m
@@ -359,19 +366,22 @@ Alt & Tab::
   ;Msgbox, Pos At %X% %Y%
   WinMove, A, ,X-20, Y,
   ;Msgbox, Moved At %X%-20 %Y%
-  Return ; Necessary for mapping which has at least 2 commands
+Return ; Necessary for mapping which has at least 2 commands
+
 ^+u::
   WinGetPos, X, Y, , , A
   WinMove, A, ,X, Y+20
-  Return
+Return
+
 ^+i::
   WinGetPos, X, Y, , , A
   WinMove, A, ,X, Y-20
-  Return
+Return
+
 ^+o::
   WinGetPos, X, Y, , , A
   WinMove, A, ,X+20, Y
-  Return
+Return
 ; }}} Window move
 
 ; Window size {{{
@@ -383,39 +393,44 @@ Alt & Tab::
   WinMove, A, , MWALeft+LMargin, MWATop+TMargin
     , MWARight-MWALeft-LMargin-RMargin
     , MWABottom-MWATop-TMargin-BMargin
-  Return
+Return
+
 ^!+Enter::
   SysGet, MWA, MonitorWorkArea ; w/o Taskbar
   WinMove, A, , MWALeft+LMargin, MWATop+TMargin
     , (MWARight-MWALeft-LMargin-RMargin)*Minsize
     , (MWABottom-MWATop-TMargin-BMargin)*Minsize
-  Return
+Return
+
 !+h::
   SysGet, MWA, MonitorWorkArea ; w/o Taskbar
   WinMove, A, , MWALeft+LMargin, MWATop+TMargin
     , (MWARight-MWALeft-LMargin-RMargin)*0.5
     , MWABottom-MWATop-TMargin-BMargin
-  Return
+Return
+
 !+j::
   SysGet, MWA, MonitorWorkArea ; w/o Taskbar
   WinMove, A, , MWALeft+LMargin
     , MWATop+(MWABottom-MWATop)*0.5
     , MWARight-MWALeft-LMargin-RMargin
     , (MWABottom-MWATop-TMargin-BMargin)*0.5
-  Return
+Return
+
 !+k::
   SysGet, MWA, MonitorWorkArea ; w/o Taskbar
   WinMove, A, , MWALeft+LMargin, MWATop+TMargin
     , MWARight-MWALeft-LMargin-RMargin
     , (MWABottom-MWATop-TMargin-BMargin)*0.5
-  Return
+Return
+
 !+l::
   SysGet, MWA, MonitorWorkArea ; w/o Taskbar
   WinMove, A, , MWALeft+(MWARight-MWALeft)*0.5
     , MWATop+TMargin
     , (MWARight-MWALeft-LMargin-RMargin)*0.5
     , MWABottom-MWATop-TMargin-BMargin
-  Return
+Return
 ; }}} Window size
 ; }}} Cursor, Mouse, Window move
 ; }}} Global Settings

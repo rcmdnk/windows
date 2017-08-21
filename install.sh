@@ -5,9 +5,9 @@ if [[ ! "$OSTYPE" =~ cygwin ]];then
   exit
 fi
 
-files=("AutoHotkey.ahk" "submodules/vim_ahk/vim.ahk" "Microsoft.PowerShell_profile.ps1")
+files=("AutoHotkey.ahk" "Microsoft.PowerShell_profile.ps1")
 documents="/cygdrive/c/Users/$USER/Documents"
-instdirs=("$documents" "$documents" "$documents/WindowsPowerShell/")
+instdirs=("$documents" "$documents/WindowsPowerShell/")
 
 backup="bak"
 overwrite=1
