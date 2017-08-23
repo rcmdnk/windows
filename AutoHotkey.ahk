@@ -33,6 +33,8 @@ GroupAdd TerminalVim, ahk_class Vim
 VimIcon := 1
 #Include %A_ScriptDir%\vim.ahk
 
+#Include %A_ScriptDir%\AutoCorrect.ahk
+
 Return
 ; }}}
 
