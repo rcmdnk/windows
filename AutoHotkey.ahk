@@ -30,13 +30,19 @@ GroupAdd Terminal, ahk_exe vim.exe
 GroupAdd TerminalVim, ahk_group Terminal
 GroupAdd TerminalVim, ahk_class Vim
 
+;HotKey, a, Inactive
+
+; Vim mode
 VimIcon := 1
-#Include %A_ScriptDir%\vim.ahk
+#Include %A_LineFile%\..\submodules\vim_ahk\vim.ahk
 
-#Include %A_ScriptDir%\AutoCorrect.ahk
-
+; Auto correct
+#Include %A_LineFile%\..\AutoCorrect.ahk
 Return
 ; }}}
+
+Inactive:
+Return
 
 ; Basic Settings, HotKeys, Functions {{{
 ; Settings
