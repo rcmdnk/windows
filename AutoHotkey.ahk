@@ -30,21 +30,17 @@ GroupAdd Terminal, ahk_exe vim.exe
 GroupAdd TerminalVim, ahk_group Terminal
 GroupAdd TerminalVim, ahk_class Vim
 
-;HotKey, a, Inactive
-
 ; Vim mode
 VimIcon := 1
 #Include %A_LineFile%\..\submodules\vim_ahk\vim.ahk
 
 ; Auto correct
 #Include %A_LineFile%\..\AutoCorrect.ahk
+
 Return
 ; }}}
 
-Inactive:
-Return
-
-; Basic Settings, HotKeys, Functions {{{
+;; Basic Settings, HotKeys, Functions {{{
 ; Settings
 
 #UseHook On ; Make it a bit slow, but can avoid infinitude loop
@@ -64,12 +60,12 @@ vkFFsc07b::LCtrl
 
 ;; Ref for IME: http://www6.atwiki.jp/eamat/pages/17.html
 ;; Get IME Status. 0: Off, 1: On
-;IME_GET(WinTitle="A")  {
-;  ControlGet,hwnd,HWND,,,%WinTitle%
+;VIM_IME_GET(WinTitle="A"){
+;  ControlGet, hwnd,HWND , , , %WinTitle%
 ;  if(WinActive(WinTitle)){
 ;    ptrSize := !A_PtrSize ? 4 : A_PtrSize
 ;    VarSetCapacity(stGTI, cbSize:=4+4+(PtrSize*6)+16, 0)
-;    NumPut(cbSize, stGTI,  0, "UInt")   ;   DWORD   cbSize;
+;    NumPut(cbSize, stGTI, 0, "UInt") ; DWORD cbSize;
 ;    hwnd := DllCall("GetGUIThreadInfo", Uint, 0, Uint, &stGTI)
 ;        ? NumGet(stGTI, 8+PtrSize, "UInt") : hwnd
 ;  }
@@ -80,8 +76,9 @@ vkFFsc07b::LCtrl
 ;      ,  Int, 0x0005  ;wParam  : IMC_GETOPENSTATUS
 ;      ,  Int, 0)      ;lParam  : 0
 ;}
+;
 ;; Get input status. 1: Converting, 2: Have converting window, 0: Others
-;IME_GetConverting(WinTitle="A", ConvCls="", CandCls="") {
+;VIM_IME_GetConverting(WinTitle="A", ConvCls="", CandCls=""){
 ;  ; Input windows, candidate windows (Add new IME with "|")
 ;  ConvCls .= (ConvCls ? "|" : "")                 ;--- Input Window ---
 ;    .  "ATOK\d+CompStr"                           ; ATOK
@@ -97,17 +94,17 @@ vkFFsc07b::LCtrl
 ;    .  "|SKKIME\d+\.*\d+UCand"                    ; SKKIME Unicode
 ; CandGCls := "GoogleJapaneseInputCandidateWindow" ; Google IME
 ;
-;  ControlGet,hwnd,HWND,,,%WinTitle%
-;  if(WinActive(WinTitle)) {
+;  ControlGet, hwnd, HWND, , , %WinTitle%
+;  if(WinActive(WinTitle)){
 ;    ptrSize := !A_PtrSize ? 4 : A_PtrSize
 ;    VarSetCapacity(stGTI, cbSize:=4+4+(PtrSize*6)+16, 0)
 ;    NumPut(cbSize, stGTI, 0, "UInt")   ;   DWORD   cbSize;
-;    hwnd := DllCall("GetGUIThreadInfo", Uint,0, Uint, &stGTI)
+;    hwnd := DllCall("GetGUIThreadInfo", Uint, 0, Uint, &stGTI)
 ;      ? NumGet(stGTI, 8+PtrSize, "UInt") : hwnd
 ;  }
 ;
-;  WinGet, pid, PID,% "ahk_id " hwnd
-;  tmm:=A_TitleMatchMode
+;  WinGet, pid, PID, % "ahk_id " hwnd
+;  tmm := A_TitleMatchMode
 ;  SetTitleMatchMode, RegEx
 ;  ret := WinExist("ahk_class " . CandCls . " ahk_pid " pid) ? 2
 ;      :  WinExist("ahk_class " . CandGCls                 ) ? 2
@@ -116,14 +113,15 @@ vkFFsc07b::LCtrl
 ;  SetTitleMatchMode, %tmm%
 ;  Return ret
 ;}
+;
 ;; Set IME, SetSts=0: Off, 1: On, return 0 for success, others for non-success
-;IME_SET(SetSts=0, WinTitle="A")    {
+;VIM_IME_SET(SetSts=0, WinTitle="A"){
 ;  ControlGet, hwnd, HWND, , , %WinTitle%
 ;  if(WinActive(WinTitle)){
 ;    ptrSize := !A_PtrSize ? 4 : A_PtrSize
 ;    VarSetCapacity(stGTI, cbSize:=4+4+(PtrSize*6)+16, 0)
-;    NumPut(cbSize, stGTI, 0, "UInt")   ;   DWORD   cbSize;
-;    hwnd := DllCall("GetGUIThreadInfo", Uint,0, Uint, &stGTI)
+;    NumPut(cbSize, stGTI, 0, "UInt") ; DWORD  cbSize;
+;    hwnd := DllCall("GetGUIThreadInfo", Uint, 0, Uint, &stGTI)
 ;        ? NumGet(stGTI, 8+PtrSize, "UInt") : hwnd
 ;  }
 ;
