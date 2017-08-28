@@ -217,9 +217,9 @@ Return
 ;^+-::Send, ^tp{Enter}
 
 ; Fonts
-^+s::Send, ^tfsymbol{Enter}
-^+a::Send, ^tfarial{Enter}
-^+h::Send, ^tfhelvetica{Enter}
+^!+s::Send, ^tfsymbol{Enter}
+^!+a::Send, ^tfarial{Enter}
+^!+h::Send, ^tfhelvetica{Enter}
 #IfWInActive
 ; }}} Power Point
 
@@ -303,8 +303,8 @@ Return
 ;Ctrl & Right::Send, !{Right}
 
 ; Virtual desktop
-^+h::Send, #^{Left}
-^+l::Send, #^{Right}
+^!+h::Send, #^{Left}
+^!+l::Send, #^{Right}
 
 ; Cortana
 !^f::Send, #s
@@ -317,7 +317,7 @@ Return
 ^Space::Send, {vkF3sc029} ; IME by C-Space
 ;{vkF3sc029}               ; 変換
 ;{vk1Dsc07B}               ; 無変換
-!a::Send, ^{Space}n       ; Minimize window
+!^a::Send, !{Space}n       ; Minimize window
 !4::Send, !{F4}           ; Close window
 ^4::Send, !{F4}           ; Close window
 !d::Send, {Del}           ; Always Delete with A-d
@@ -351,14 +351,14 @@ Return
 
 ; Mouse {{{
 ; Mouse Move
-!^y::MouseMove, -10, 0, 0, R
-!^u::MouseMove, 0, 10, 0, R
-!^i::MouseMove, 0, -10, 0, R
-!^o::MouseMove, 10, 0, 0, R
+^+h::MouseMove, -10, 0, 0, R
+^+j::MouseMove, 0, 10, 0, R
+^+k::MouseMove, 0, -10, 0, R
+^+l::MouseMove, 10, 0, 0, R
 
 ; Click
-!^n::MouseClick, Left
-!^p::MouseClick, Right
+^+n::MouseClick, Left
+^+p::MouseClick, Right
 ; Right click on current window
 
 ; Mouse wheel
@@ -367,12 +367,12 @@ Return
 ; }}} Mouse
 
 ; Window move {{{
+
+; Move a little
 ^+y::
   WinGetPos, X, Y, , , A ;A for Active Window
-  ;Msgbox, Pos At %X% %Y%
   WinMove, A, ,X-20, Y,
-  ;Msgbox, Moved At %X%-20 %Y%
-Return ; Necessary for mapping which has at least 2 commands
+Return
 
 ^+u::
   WinGetPos, X, Y, , , A
@@ -388,10 +388,18 @@ Return
   WinGetPos, X, Y, , , A
   WinMove, A, , X+20, Y
 Return
+
+; Move to a different screen
+!^+y:: Send, #+{Left}
+!^+u:: Send, #+{Down}
+!^+i:: Send, #+{Up}
+!^+o:: Send, #+{Right}
+
 ; }}} Window move
 
 ; Window size {{{
 ^!Enter::
+!+Enter::
   ;WinGetPos, X, Y, W, H, Program Manager ; Full Desktop
   ;Msgbox, Pos At %X% %Y% %W% %H%
   SysGet, MWA, MonitorWorkArea ; w/o Taskbar
@@ -437,6 +445,28 @@ Return
     , (MWARight-MWALeft-LMargin-RMargin)*0.5
     , MWABottom-MWATop-TMargin-BMargin
 Return
+
+; Resize
+!+y::
+  WinGetPos, X, Y, W, H, A
+  WinMove, A, ,X, Y, W-20, H
+Return
+
+!+u::
+  WinGetPos, X, Y, W, H, A
+  WinMove, A, ,X, Y, W, H+20
+Return
+
+!+i::
+  WinGetPos, X, Y, W, H, A
+  WinMove, A, ,X, Y, W, H-20
+Return
+
+!+o::
+  WinGetPos, X, Y, W, H, A
+  WinMove, A, ,X, Y, W+20, H
+Return
+
 ; }}} Window size
 ; }}} Cursor, Mouse, Window move
 ; }}} Global Settings
