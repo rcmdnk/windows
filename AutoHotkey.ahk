@@ -206,8 +206,6 @@ Return
 
 ; Power Point {{{
 #IfWInActive, ahk_class PP12FrameClass
-; Select one character
-^Space::Send, {Right}+{Left}
 
 ; Subscript/Superscript
 ^=::Send, ^tb{Enter}
@@ -225,7 +223,6 @@ Return
 
 ; Word {{{
 #IfWInActive, ahk_class OpusApp
-^Space::Send, {Right}+{Left}
 ^=::Send, ^tb{Enter}
 ^+=::Send, ^tp{Enter}
 ; for JP keyboards
@@ -398,6 +395,8 @@ Return
 ; }}} Window move
 
 ; Window size {{{
+
+; Almost full
 ^!Enter::
 !+Enter::
   ;WinGetPos, X, Y, W, H, Program Manager ; Full Desktop
@@ -409,6 +408,7 @@ Return
     , MWABottom-MWATop-TMargin-BMargin
 Return
 
+; Minsize
 ^!+Enter::
   SysGet, MWA, MonitorWorkArea ; w/o Taskbar
   WinMove, A, , MWALeft+LMargin, MWATop+TMargin
@@ -416,6 +416,7 @@ Return
     , (MWABottom-MWATop-TMargin-BMargin)*Minsize
 Return
 
+; Half size
 !+h::
   SysGet, MWA, MonitorWorkArea ; w/o Taskbar
   WinMove, A, , MWALeft+LMargin, MWATop+TMargin
