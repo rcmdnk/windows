@@ -51,7 +51,6 @@ Return
 #HotkeyInterval 1000 ; Hotkey inteval (default 2000 milliseconds).
 #MaxHotkeysPerInterval 100 ; Max hotkeys perinterval (default 50).
 
-
 ; For HHKB
 ;vkFFsc079::RAlt
 ;vkFFsc07b::LAlt
