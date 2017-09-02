@@ -283,14 +283,24 @@ Return
 ;  Suspend, Toggle
 ;  Return
 ; For Alt-Ctrl Swap (swapped by KeySwap)
-LCtrl & Tab::AltTab
-Alt & Tab::
-  if GetKeyState("Shift","P"){
-    Send, ^+{taB} ; dosen't work ()
-  }else{
-    Send, ^{Tab}
-  }
-Return
+<^Tab::AltTab
+;<+<^Tab::ShiftAltTab ; can not assigned...
+;LCtrl & Tab::
+;  if GetKeyState("Shift","P"){
+;    Send, {ShiftAltTab}
+;  }else{
+;    Send, {AltTab}
+;  }
+;Return
+;Alt & Tab::
+;  if GetKeyState("Shift","P"){
+;    Send, ^+{taB}
+;  }else{
+;    Send, ^{Tab}
+;  }
+;Return
+!Tab::Send, ^{Tab}
+!+Tab::Send, ^+{Tab}
 
 ;!m::Send, ^m
 ;^m::Send, !m
