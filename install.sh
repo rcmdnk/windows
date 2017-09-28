@@ -9,21 +9,20 @@ files=("AutoHotkey.ahk" "Microsoft.PowerShell_profile.ps1")
 documents="/cygdrive/c/Users/$USER/Documents"
 instdirs=("$documents" "$documents/WindowsPowerShell/")
 
-backup="bak"
+backup=""
 overwrite=1
 dryrun=0
 newlink=()
 exist=()
-curdir=`pwd -P`
+curdir=$(pwd -P)
 # help
 HELP="Usage: $0 [-nd] [-b <backup file postfix>] [-e <exclude file>]
 
 Make links of windows related files/directories
 
 Arguments:
-      -b  Set backup postfix (default: make *.bak file)
-          Set \"\" if backups are not necessary
-      -e  Set additional exclude file (default: ${exclude[@]})
+      -b  Set backup postfix, like \"bak\" (default: \"\": no back up is made)
+      -e  Set additional exclude file (default: ${exclude[*]})
       -n  Don't overwrite if file is already exist
       -d  Dry run, don't install anything
       -h  Print Help (this message) and exit
@@ -54,7 +53,7 @@ if [[ "$OSTYPE" =~ "cygwin" ]];then
     if [ $# -eq 2 ];then
       link="$2"
     elif [ $# -eq 1 ];then
-      link=`basename "$target"`
+      link=$(basename "$target")
     else
       echo "usage: ln [-s] <target> [<link>]"
       echo "       -s for symbolic link, otherwise make hard link"
@@ -88,15 +87,15 @@ fi
 i=0
 while [ $i -lt ${#files[@]} ];do
   f=${files[$i]}
-  f_name=$(basename ${files[$i]})
+  f_name=$(basename "${files[$i]}")
   d=${instdirs[$i]}
   i=$((i+1))
-  echo install $f to \"$d\"
+  echo "install $f to $d"
   install=1
   if [ $dryrun -eq 1 ];then
     install=0
   fi
-  if [ "`ls "$d/$f_name" 2>/dev/null`" != "" ];then
+  if [ "$(ls "$d/$f_name" 2>/dev/null)" != "" ];then
     exist=(${exist[@]} "$f_name")
     if [ $dryrun -eq 1 ];then
       echo -n ""
@@ -121,7 +120,7 @@ if [ $dryrun -eq 1 ];then
 else
   echo "Following files were newly installed:"
 fi
-echo "  ${newlink[@]}"
+echo "  ${newlink[*]}"
 echo
 echo -n "Following files existed"
 if [ $dryrun -eq 1 ];then
@@ -133,7 +132,7 @@ elif [ "$backup" != "" ];then
 else
   echo "Following files existed, replaced old one:"
 fi
-echo "  ${exist[@]}"
+echo "  ${exist[*]}"
 echo
 if [ $dryrun -eq 1 ];then
   echo "*********************************************"
