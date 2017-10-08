@@ -182,6 +182,7 @@ Return
 ;  Suspend, Toggle
 ;  Return
 ; For Alt-Ctrl Swap (swapped by KeySwap)
+; To assign ^Tab, need to add < or > to choose left or right
 <^Tab::AltTab
 ;<+<^Tab::ShiftAltTab ; can not assigned...
 ;LCtrl & Tab::
@@ -230,7 +231,7 @@ Return
 ;^i::Send,!{Right}         ; Go to nexe page
 ^Space::!`                ; IME
 
-^h::Send, {BS}            ; Always BS with C-h
+;^h::Send, {BS}            ; Always BS with C-h
 ;^h::
 ;  While GetKeyState("h","p"){
 ;    Send {BS}
