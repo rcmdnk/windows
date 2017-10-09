@@ -231,7 +231,7 @@ Return
 ;^i::Send,!{Right}         ; Go to nexe page
 ^Space::!`                ; IME
 
-;^h::Send, {BS}            ; Always BS with C-h
+^h::Send, {BS}            ; Always BS with C-h
 ;^h::
 ;  While GetKeyState("h","p"){
 ;    Send {BS}
