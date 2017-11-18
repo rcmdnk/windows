@@ -28,6 +28,12 @@ GroupAdd Terminal, ahk_exe vim.exe
 GroupAdd TerminalVim, ahk_group Terminal
 GroupAdd TerminalVim, ahk_class Vim
 
+; For browsers
+GroupAdd, Browser, ahk_exe chrome.exe
+GroupAdd, Browser, ahk_exe firefox.exe
+GroupAdd, Browser, ahk_exe ApplicationFrameHost.exe ; Edge
+
+; Other files
 VimIcon := 1
 #Include %A_LineFile%\..\submodules\vim_ahk\vim.ahk
 #Include %A_LineFile%\..\AutoCorrect.ahk
@@ -158,7 +164,7 @@ K::Send, {Up}
 ; }}} Explorer
 
 ; Everthing {{{
-#IfWInActive, ahk_class EVERYTHING
+#IfWinActive, ahk_class EVERYTHING
 Return::
   Send, {Enter}
   Sleep, 200
@@ -172,6 +178,13 @@ Return::
   Send, {Esc}
 Return
 ; }}} Everything
+
+; Firefox/Chrome {{{
+#IfWinActive, ahk_group Browser
+^n::Send, !n
+!n::Send, ^n
+
+; }}} Firefox/Chrome
 
 ; Global Settings {{{
 #if
