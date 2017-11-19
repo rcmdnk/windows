@@ -181,8 +181,8 @@ Return
 
 ; Firefox/Chrome {{{
 #IfWinActive, ahk_group Browser
-^n::Send, !n
-!n::Send, ^n
+;^n::Send, !n
+;!n::Send, ^n
 
 ; }}} Firefox/Chrome
 
