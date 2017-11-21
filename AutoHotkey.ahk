@@ -33,7 +33,11 @@ GroupAdd, Browser, ahk_exe chrome.exe
 GroupAdd, Browser, ahk_exe firefox.exe
 GroupAdd, Browser, ahk_exe ApplicationFrameHost.exe ; Edge
 
-; Other files
+; Mouse Gestures
+GroupAdd, MouseGesture, ahk_group Broser
+GroupAdd, MouseGesture, ahk_exe explorer.exe
+
+; External files
 VimIcon := 1
 #Include %A_LineFile%\..\submodules\vim_ahk\vim.ahk
 #Include %A_LineFile%\..\AutoCorrect.ahk
@@ -179,10 +183,18 @@ Return::
 Return
 ; }}} Everything
 
-; Firefox/Chrome {{{
+; Firefox/Chrome/Edge {{{
 #IfWinActive, ahk_group Browser
-;^n::Send, !n
-;!n::Send, ^n
+;^WheelDown::Send, {WheelDown}
+;^WheelUp::Send, {WheelUp}
+^WheelDown::Return
+^WheelUp::Return
+; }}} Firefox/Chrome
+
+; Mouse Gestures {{{
+#IfWinActive, ahk_group MouseGesture
+;LButton & RButton::Send, ^{Tab}
+;RButton & LButton::Send, ^+{Tab}
 
 ; }}} Firefox/Chrome
 
