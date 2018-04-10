@@ -57,8 +57,8 @@ Return
 #MaxHotkeysPerInterval 100 ; Max hotkeys perinterval (default 50).
 
 ; For HHKB
-vkFFsc079::RCtrl
-vkFFsc07b::LCtrl
+;vkFFsc079::RCtrl
+;vkFFsc07b::LCtrl
 ; }}}
 
 ; Terminal/Vim {{{
