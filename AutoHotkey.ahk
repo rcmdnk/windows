@@ -111,14 +111,6 @@ Return
 #IfWInActive, ahk_class Vim
 !v::Send, {Alt}ep
 
-; Command Promp, PowerShell, Bash on Ubuntu on Windows {{{
-#IfWinActive ahk_class ConsoleWindowClass
-^v::Send, ^q
-!v::
-  SendInput %clipboard%
-Return
-; }}} Command Prompt
-
 ; Other than Terminal/Vim
 #IfWInNotActive, ahk_group TerminalVim
 ^[::Send, {Esc}             ; Always C-[ to ESC, like vim
