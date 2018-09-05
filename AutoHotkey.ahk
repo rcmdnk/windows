@@ -262,6 +262,11 @@ Return
 ; For HHKB
 ; ESC to ` like normal keyboard (ESC is placed on the left of 1 in HHKB)
 !1::!`                ; IME
+
+; Disable alt to menu
+~LAlt Up::
+~LAlt::
+return
 ; }}} Basic Settings
 
 ; Cursor, Mouse, Window move/size {{{
