@@ -69,17 +69,17 @@ if [[ "$OSTYPE" =~ "cygwin" ]];then
 # }}}
 fi
 
-echo "**********************************************"
-echo "Update submodules"
-echo "**********************************************"
-echo
-if which git >&/dev/null;then
-  git submodule update --init
-else
-  echo "git is not installed, please install git or get following submodules directly:"
-  grep url .gitmodules
-fi
-echo
+#echo "**********************************************"
+#echo "Update submodules"
+#echo "**********************************************"
+#echo
+#if which git >&/dev/null;then
+#  git submodule update --init
+#else
+#  echo "git is not installed, please install git or get following submodules directly:"
+#  grep url .gitmodules
+#fi
+#echo
 
 if [ $dryrun -eq 1 ];then
   echo "*********************************************"
