@@ -38,7 +38,6 @@ GroupAdd, MouseGesture, ahk_group Broser
 GroupAdd, MouseGesture, ahk_exe explorer.exe
 
 ; External files
-VimIcon := 1
 #Include %A_LineFile%\..\submodules\vim_ahk\vim.ahk
 #Include %A_LineFile%\..\AutoCorrect.ahk
 
