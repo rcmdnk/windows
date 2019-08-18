@@ -151,7 +151,6 @@ Return
 ;#IfWInActive, ahk_class CLCLMain
 #IfWInActive, CLCL ; both window/title do not working...
 j::
-  Msgbox, clcl_down
   Send, {Down}
 Return
 
