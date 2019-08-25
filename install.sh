@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
-if [[ ! "$OSTYPE" =~ cygwin ]];then
-  echo Can be used only in cygwin.
-  exit
-fi
+#if [[ ! "$OSTYPE" =~ cygwin ]];then
+#  echo Can be used only in cygwin.
+#  exit
+#fi
 
 files=("AutoHotkey.ahk" "Microsoft.PowerShell_profile.ps1")
 documents="/cygdrive/c/Users/$USER/Documents"
