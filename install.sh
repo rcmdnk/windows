@@ -1,12 +1,15 @@
 #!/usr/bin/env bash
 
-if [[ ! "$OSTYPE" =~ cygwin ]];then
-  echo Can be used only in cygwin.
-  exit
+documents="/cygdrive/c/Users/$USER/Documents"
+if [[ ! -d "$documents" ]];then
+  documents="/mnt/c/Users/$USER/Documents"
+  if [[ ! -d "$documents" ]];then
+    echo "Run in Cygwin or Windows Subsystem for Linux"
+    exit 1
+  fi
 fi
 
 files=("AutoHotkey.ahk" "Microsoft.PowerShell_profile.ps1")
-documents="/cygdrive/c/Users/$USER/Documents"
 instdirs=("$documents" "$documents/WindowsPowerShell/")
 
 backup=""
