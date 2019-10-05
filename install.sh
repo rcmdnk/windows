@@ -5,7 +5,7 @@ if [[ ! -d "$documents" ]];then
   documents="/mnt/c/Users/$USER/Documents"
   if [[ ! -d "$documents" ]];then
     echo "Run in Cygwin or Windows Subsystem for Linux"
-    exit 1
+    exit
   fi
 fi
 
