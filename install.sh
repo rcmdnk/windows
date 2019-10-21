@@ -1,11 +1,10 @@
 #!/usr/bin/env bash
 
-winuser="$(cmd.exe /c echo %USERNAME%|tr -d '\r')"
+winuser="$(cmd.exe /c echo %USERNAME% 2>/dev/null|tr -d '\r')"
 documents="/cygdrive/c/Users/$winuser/Documents"
 if [[ ! -d "$documents" ]];then
   documents="/mnt/c/Users/$winuser/Documents"
   if [[ ! -d "$documents" ]];then
-	  echo $documents
     echo "Run in Cygwin or Windows Subsystem for Linux"
     exit
   fi
