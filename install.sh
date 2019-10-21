@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+echo "No installation is valid for this windows repository"
+exit
+
 winuser="$(cmd.exe /c echo %USERNAME% 2>/dev/null|tr -d '\r')"
 documents="/cygdrive/c/Users/$winuser/Documents"
 if [[ ! -d "$documents" ]];then
