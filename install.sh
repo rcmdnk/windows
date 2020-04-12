@@ -1,8 +1,10 @@
 #!/usr/bin/env bash
 
+is_wsl=0
 winuser="$(cmd.exe /c echo %USERNAME% 2>/dev/null|tr -d '\r')"
 documents="/cygdrive/c/Users/$winuser/Documents"
 if [[ ! -d "$documents" ]];then
+  is_wsl=1
   documents="/mnt/c/Users/$winuser/Documents"
   if [[ ! -d "$documents" ]];then
     echo "Run in Cygwin or Windows Subsystem for Linux"
@@ -10,8 +12,8 @@ if [[ ! -d "$documents" ]];then
   fi
 fi
 
-files=("AutoHotkey.ahk" "Microsoft.PowerShell_profile.ps1")
-instdirs=("$documents" "$documents/WindowsPowerShell/")
+files=("AutoHotkey.ahk" "AutoCorrect.ahk" "submodules/vim_ahk" "Microsoft.PowerShell_profile.ps1")
+instdirs=("$documents" "$documents" "$documents/submodules" "$documents/WindowsPowerShell/")
 
 backup=""
 overwrite=1
@@ -45,8 +47,8 @@ while getopts b:e:ndsh OPT;do
   esac
 done
 
+# ln wrapper{{{
 if [[ "$OSTYPE" =~ "cygwin" ]];then
-  # ln wrapper{{{
   function ln {
     opt="/H"
     if [ "$1" = "-s" ];then
@@ -70,8 +72,15 @@ if [[ "$OSTYPE" =~ "cygwin" ]];then
     t_link=$(cygpath -w -a "$link")
     cmd /c mklink $opt "$t_link" "$t_winpath" > /dev/null
   }
-# }}}
+elif [ $is_wsl = 1 ];then
+  function ln {
+    if [ "$1" = "-s" ];then
+      shift
+    fi
+    cp -r "$@"
+  }
 fi
+# }}}
 
 #echo "**********************************************"
 #echo "Update submodules"
@@ -117,7 +126,6 @@ while [ $i -lt ${#files[@]} ];do
     newlink=(${newlink[@]} "$f_name")
   fi
   if [ $install -eq 1 ];then
-    echo ln -s "$curdir/$f" "$d/$f_name"
     mkdir -p "$d"
     ln -s "$curdir/$f" "$d/$f_name"
   fi
