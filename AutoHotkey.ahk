@@ -37,12 +37,14 @@ GroupAdd, Browser, ahk_exe ApplicationFrameHost.exe ; Edge
 GroupAdd, MouseGesture, ahk_group Broser
 GroupAdd, MouseGesture, ahk_exe explorer.exe
 
-; External files
+; External files (Only 1 file, at last of Auto execute section"
 #Include %A_LineFile%\..\submodules\vim_ahk\vim.ahk
-#Include %A_LineFile%\..\AutoCorrect.ahk
 
 Return
 ; }}}
+
+; External files w/o Auto execute section
+#Include %A_LineFile%\..\AutoCorrect.ahk
 
 ;; Basic Settings, HotKeys, Functions {{{
 ; Settings

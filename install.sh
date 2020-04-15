@@ -120,7 +120,7 @@ while [ $i -lt ${#files[@]} ];do
     elif [ "$backup" != "" ];then
       mv "$d/$f_name" "$d/${f_name}.$backup"
     else
-      rm "$d/$f_name"
+      rm -rf "$d/$f_name"
     fi
   else
     newlink=(${newlink[@]} "$f_name")
