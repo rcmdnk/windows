@@ -27,6 +27,9 @@ GroupAdd Terminal, ahk_exe powershell.exe
 GroupAdd Terminal, ahk_exe vim.exe
 GroupAdd TerminalVim, ahk_group Terminal
 GroupAdd TerminalVim, ahk_class Vim
+GroupAdd TerminalVim, ahk_class mintty
+GroupAdd TerminalVim, ahk_class CASCADIA_HOSTING_WINDOW_CLASS
+GroupAdd TerminalVim, ahk_exe WindowsTerminal.exe
 
 ; For browsers
 GroupAdd, Browser, ahk_exe chrome.exe
