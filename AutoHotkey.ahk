@@ -267,9 +267,8 @@ Return
 !1::!`                ; IME
 
 ; Disable alt to menu
-~LAlt Up::
-~LAlt::
-return
+Alt::KeyWait, Alt
+LAlt Up::Return
 ; }}} Basic Settings
 
 ; Cursor, Mouse, Window move/size {{{
