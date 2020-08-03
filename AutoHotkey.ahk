@@ -68,17 +68,18 @@ Return
 ; Terminal/Vim {{{
 ; ESC + IME
 #IfWInActive, ahk_group TerminalVim
-Esc:: ; Just send Esc at converting.
-  if(VIM_IME_GET(A)){
-    if(VIM_IME_GetConverting(A)){
-      Send, {Esc}
-    }else{
-      VIM_IME_SET()
-    }
-  }else{
-    Send, {Esc}
-  }
-Return
+; Use ESC as ` or ESC with long push, especially for HHKB
+;Esc:: ; Just send Esc at converting.
+;  if(VIM_IME_GET(A)){
+;    if(VIM_IME_GetConverting(A)){
+;      Send, {Esc}
+;    }else{
+;      VIM_IME_SET()
+;    }
+;  }else{
+;    Send, {Esc}
+;  }
+;Return
 
 ^[:: ; Go to Normal mode (for vim) with IME off even at converting.
   if(VIM_IME_GetConverting(A)){
@@ -264,7 +265,16 @@ Return
 
 ; For HHKB
 ; ESC to ` like normal keyboard (ESC is placed on the left of 1 in HHKB)
-!1::!`                ; IME
+Esc::
+  KeyWait, Esc, T0.3
+  If (ErrorLevel){
+    Send, {Esc}
+    KeyWait, Esc
+  }else{
+    Send, ``
+    KeyWait, Esc
+  }
+Return
 
 ; Disable alt to menu
 Alt::KeyWait, Alt
