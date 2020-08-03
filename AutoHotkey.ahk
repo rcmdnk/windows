@@ -85,8 +85,9 @@ Return
   if(VIM_IME_GetConverting(A)){
     Send, {Esc}
     Sleep 1 ; wait 1 ms (Need to stop converting)
-  }
-  if(VIM_IME_GET(A)){
+    VIM_IME_SET()
+    Send, {Esc}
+  }else if(VIM_IME_GET(A)){
     VIM_IME_SET()
     Send, {Esc}
   }else{
