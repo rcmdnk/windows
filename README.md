@@ -13,3 +13,8 @@ Execute below commands in Cygwin:
     git clone --recursive git@github.com:rcmdnk/scripts
     cd scripts
     ./install.sh
+
+## Enable to run PowerShell scripts
+
+* Open PowerShell as Administrator
+* Run `Set-ExecutionPolicy RemoteSigned`

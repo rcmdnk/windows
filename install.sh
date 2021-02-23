@@ -12,8 +12,8 @@ if [[ ! -d "$documents" ]];then
   fi
 fi
 
-files=("AutoHotkey.ahk" "AutoCorrect.ahk" "submodules/vim_ahk" "Microsoft.PowerShell_profile.ps1")
-instdirs=("$documents" "$documents" "$documents/submodules" "$documents/WindowsPowerShell/")
+files=("AutoHotkey.ahk" "AutoCorrect.ahk" "submodules/vim_ahk" "Microsoft.PowerShell_profile.ps1" "wsl.ps1")
+instdirs=("$documents" "$documents" "$documents/submodules" "$documents/WindowsPowerShell/" "$documents")
 
 backup=""
 overwrite=1
