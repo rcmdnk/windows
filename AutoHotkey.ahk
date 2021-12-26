@@ -30,6 +30,7 @@ GroupAdd TerminalVim, ahk_class Vim
 GroupAdd TerminalVim, ahk_class mintty
 GroupAdd TerminalVim, ahk_class CASCADIA_HOSTING_WINDOW_CLASS
 GroupAdd TerminalVim, ahk_exe WindowsTerminal.exe
+GroupAdd TerminalVim, ahk_exe Hyper.exe
 
 ; For browsers
 GroupAdd, Browser, ahk_exe chrome.exe
