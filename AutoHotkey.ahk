@@ -217,10 +217,6 @@ Return
 ;Ctrl & Left::Send, !{Left}
 ;Ctrl & Right::Send, !{Right}
 
-; Virtual desktop
-^!+h::Send, #^{Left}
-^!+l::Send, #^{Right}
-
 ; Cortana
 !^f::Send, #s
 
@@ -324,6 +320,12 @@ Return
 !^+o:: Send, #^{Right}
 
 ; }}} Window move
+
+; Virtual desktop {{{
+^!y::Send, #^{Left}
+^!o::Send, #^{Right}
+; }}} Virtual desktop
+
 
 ; Window size {{{
 
