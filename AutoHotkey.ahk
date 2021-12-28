@@ -23,6 +23,7 @@ GroupAdd Terminal, ahk_class mintty ; cygwin
 GroupAdd Terminal, ahk_class TMobaXtermForm
 GroupAdd Terminal, ahk_class TFormDetachedTab
 GroupAdd Terminal, ahk_class ConsoleWindowClass
+GroupAdd Terminal, ahk_exe Hyper.exe
 GroupAdd Terminal, ahk_exe powershell.exe
 GroupAdd Terminal, ahk_exe vim.exe
 GroupAdd TerminalVim, ahk_group Terminal
@@ -30,16 +31,11 @@ GroupAdd TerminalVim, ahk_class Vim
 GroupAdd TerminalVim, ahk_class mintty
 GroupAdd TerminalVim, ahk_class CASCADIA_HOSTING_WINDOW_CLASS
 GroupAdd TerminalVim, ahk_exe WindowsTerminal.exe
-GroupAdd TerminalVim, ahk_exe Hyper.exe
 
 ; For browsers
 GroupAdd, Browser, ahk_exe chrome.exe
 GroupAdd, Browser, ahk_exe firefox.exe
-GroupAdd, Browser, ahk_exe ApplicationFrameHost.exe ; Edge
-
-; Mouse Gestures
-GroupAdd, MouseGesture, ahk_group Broser
-GroupAdd, MouseGesture, ahk_exe explorer.exe
+GroupAdd, Browser, ahk_exe msedge.exe
 
 ; External files (Only 1 file, at last of Auto execute section"
 #Include %A_LineFile%\..\submodules\vim_ahk\vim.ahk
@@ -156,14 +152,13 @@ Return
 ; }}} Explorer
 
 ; CLCL {{{
-;#IfWInActive, ahk_class CLCLMain
-#IfWInActive, CLCL ; both window/title do not working...
+#IfWInActive, ahk_exe CLCL.exe ; does not work...
 j::
   Send, {Down}
 Return
 
-K::Send, {Up}
-; }}} Explorer
+k::Send, {Up}
+; }}} CLCL
 
 ; Everthing {{{
 #IfWinActive, ahk_class EVERYTHING
@@ -183,18 +178,9 @@ Return
 
 ; Firefox/Chrome/Edge {{{
 #IfWinActive, ahk_group Browser
-;^WheelDown::Send, {WheelDown}
-;^WheelUp::Send, {WheelUp}
-^WheelDown::Return
-^WheelUp::Return
-; }}} Firefox/Chrome
-
-; Mouse Gestures {{{
-#IfWinActive, ahk_group MouseGesture
-;LButton & RButton::Send, ^{Tab}
-;RButton & LButton::Send, ^+{Tab}
-
-; }}} Firefox/Chrome
+^WheelDown::Send, {WheelDown}
+^WheelUp::Send, {WheelUp}
+; }}} Firefox/Chrome/Edge
 
 ; Global Settings {{{
 #if
@@ -332,10 +318,10 @@ Return
 Return
 
 ; Move to a different screen
-!^+y:: Send, #+{Left}
-!^+u:: Send, #+{Down}
-!^+i:: Send, #+{Up}
-!^+o:: Send, #+{Right}
+!^+y:: Send, #^{Left}
+!^+u:: Send, #^{Down}
+!^+i:: Send, #^{Up}
+!^+o:: Send, #^{Right}
 
 ; }}} Window move
 
