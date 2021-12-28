@@ -231,7 +231,7 @@ Return
 !^a::Send, !{Space}n       ; Minimize window
 !4::Send, !{F4}           ; Close window
 ^4::Send, !{F4}           ; Close window
-!d::Send, {Del}           ; Always Delete with A-d
+!d::Send, {Del}           ; Always Delete with A-d: Does not work on Windows 11?
 ;^o::Send,!{Left}          ; Go to previous page
 ;^i::Send,!{Right}         ; Go to nexe page
 ^Space::!`                ; IME
