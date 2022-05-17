@@ -152,11 +152,11 @@ Return
 ; }}} Explorer
 
 ; CLCL {{{
+#c::Send, !c
 #IfWInActive, ahk_exe CLCL.exe ; does not work...
 j::
   Send, {Down}
 Return
-
 k::Send, {Up}
 ; }}} CLCL
 
@@ -219,9 +219,6 @@ Return
 
 ; Cortana
 !^f::Send, #s
-
-; CLCL
-#c::Send, !c
 
 ; Other basic settings
 !Space::Send, {vkF3sc029} ; IME by A-Space
