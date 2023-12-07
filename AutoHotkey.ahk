@@ -182,8 +182,33 @@ Return
 ^WheelUp::Send, {WheelUp}
 ; }}} Firefox/Chrome/Edge
 
+; Chrome {{{
+#IfWinActive, ahk_exe chrome.exe
+!+c::
+  Send, ^+z
+  WinActivate, ahk_exe chrome.exe
+  Send, !+c
+  Sleep, 1000
+  Send, ^+z
+  WinActivate, ahk_exe chrome.exe
+Return
+; }}} Chrome
+
+; Obsidian {{{
+#IfWinActive, ahk_exe Obsidian.exe
+^+e::
+  Send, ^+f
+Return
+#IfWinNotActive, ahk_exe Obsidian.exe
+^+e::
+  Send, ^+z
+  Send, ^+f
+Return
+
+; }}} Obsidian
+
 ; Global Settings {{{
-#if
+#If
 ; Basic Settings {{{
 
 ; Suspend
