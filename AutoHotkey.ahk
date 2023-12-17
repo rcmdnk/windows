@@ -198,7 +198,13 @@ Return
 #IfWinActive, ahk_exe Obsidian.exe
 ^+e::
   Send, ^+f
-Return
+
+; Disable window move (want to use Ctrl+Shift+i as is)
+^+y::Send, ^+y
+^+u::Send, ^+u
+^+i::Send, ^+i
+^+o::Send, ^+o
+
 #IfWinNotActive, ahk_exe Obsidian.exe
 ^+e::
   Send, ^+z
