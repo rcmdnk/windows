@@ -207,7 +207,7 @@ Return
 
 #IfWinNotActive, ahk_exe Obsidian.exe
 ^+e::
-  Send, ^+z
+  Send, ^+q
   Send, ^+f
 Return
 
