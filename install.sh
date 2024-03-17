@@ -12,8 +12,8 @@ if [[ ! -d "$documents" ]];then
   fi
 fi
 
-files=("AutoHotkey.ahk" "AutoCorrect.ahk" "submodules/vim_ahk" "Microsoft.PowerShell_profile.ps1" "wsl.ps1")
-instdirs=("$documents" "$documents" "$documents/submodules" "$documents/WindowsPowerShell/" "$documents")
+files=("AutoHotkey.ahk" "AutoCorrect.ahk" "submodules/vim_ahk" "Microsoft.PowerShell_profile.ps1" "wsl.ps1" "wsl.config")
+instdirs=("$documents" "$documents" "$documents/submodules" "$documents/WindowsPowerShell/" "$documents" "/etc")
 
 backup=""
 overwrite=1
@@ -126,8 +126,12 @@ while [ $i -lt ${#files[@]} ];do
     newlink=(${newlink[@]} "$f_name")
   fi
   if [ $install -eq 1 ];then
-    mkdir -p "$d"
-    ln -s "$curdir/$f" "$d/$f_name"
+    if [ "$d" == "/etc" ];then
+      sudo ln -s "$curdir/$f" "$d/$f_name"
+    else
+      mkdir -p "$d"
+      ln -s "$curdir/$f" "$d/$f_name"
+    fi
   fi
 done
 if [ $dryrun -eq 1 ];then
