@@ -197,7 +197,10 @@ Return
 ; Obsidian {{{
 #IfWinActive, ahk_exe Obsidian.exe
 ^+e::
+^!e::
   Send, ^+f
+Return
+^!q::Send, ^+q
 
 ; Disable window move (want to use Ctrl+Shift+i as is)
 ^+y::Send, ^+y
@@ -207,9 +210,12 @@ Return
 
 #IfWinNotActive, ahk_exe Obsidian.exe
 ^+e::
+^!e::
   Send, ^+q
   Send, ^+f
 Return
+
+^!q::Send, ^+q
 
 ; }}} Obsidian
 
@@ -260,8 +266,8 @@ Return
 !4::Send, !{F4}           ; Close window
 ^4::Send, !{F4}           ; Close window
 !d::Send, {Del}           ; Always Delete with A-d: Does not work on Windows 11?
-;^o::Send,!{Left}          ; Go to previous page
-;^i::Send,!{Right}         ; Go to nexe page
+^o::Send,!{Left}          ; Go to previous page
+^i::Send,!{Right}         ; Go to nexe page
 ^Space::!`                ; IME
 
 ^h::Send, {BS}            ; Always BS with C-h
