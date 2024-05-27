@@ -215,6 +215,11 @@ Return
   Send, ^+f
 Return
 
+^!d::
+  Send, ^+q
+  Send, ^!d
+Return
+
 ^!q::Send, ^+q
 
 ; }}} Obsidian
