@@ -147,8 +147,8 @@ Return
 ; Explorer {{{
 #IfWInActive, ahk_class CabinetWClass
 ; Next/Previous page
-^i::Send, !{Right}
-^o::Send, !{Left}
+!o::Send,!{Left}          ; Go to previous page
+!i::Send,!{Right}         ; Go to nexe page
 ; }}} Explorer
 
 ; CLCL {{{
@@ -207,6 +207,10 @@ Return
 ^+u::Send, ^+u
 ^+i::Send, ^+i
 ^+o::Send, ^+o
+
+; Go to previous page, Go to nexe page
+!o::Send,^!{Left}
+!i::Send,^!{Right}
 
 #IfWinNotActive, ahk_exe Obsidian.exe
 ^+e::
@@ -271,8 +275,8 @@ Return
 !4::Send, !{F4}           ; Close window
 ^4::Send, !{F4}           ; Close window
 !d::Send, {Del}           ; Always Delete with A-d: Does not work on Windows 11?
-^o::Send,!{Left}          ; Go to previous page
-^i::Send,!{Right}         ; Go to nexe page
+;^o::Send,!{Left}          ; Go to previous page
+;^i::Send,!{Right}         ; Go to nexe page ; do no set global, as Ctrl-i is used to change to katakana
 ^Space::!`                ; IME
 
 ^h::Send, {BS}            ; Always BS with C-h
