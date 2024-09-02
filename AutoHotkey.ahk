@@ -23,8 +23,9 @@ GroupAdd Terminal, ahk_class mintty ; cygwin
 GroupAdd Terminal, ahk_class TMobaXtermForm
 GroupAdd Terminal, ahk_class TFormDetachedTab
 GroupAdd Terminal, ahk_class ConsoleWindowClass
-GroupAdd Terminal, ahk_exe Hyper.exe
+GroupAdd Terminal, ahk_exe WindowsTerminal.exe
 GroupAdd Terminal, ahk_exe powershell.exe
+GroupAdd Terminal, ahk_exe Hyper.exe
 GroupAdd Terminal, ahk_exe vim.exe
 GroupAdd TerminalVim, ahk_group Terminal
 GroupAdd TerminalVim, ahk_class Vim
