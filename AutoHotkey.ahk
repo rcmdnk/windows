@@ -74,8 +74,8 @@ Return
 ; Use ESC as ` or ESC with long push, especially for HHKB
 ;Esc:: ; Just send Esc at converting.
 ;{
-;  if(VIM_IME_GET(A)){
-;    if(VIM_IME_GetConverting(A)){
+;  if(VIM_IME_GET("A")){
+;    if(VIM_IME_GetConverting("A")){
 ;      Send "{Esc}"
 ;    }else{
 ;      VIM_IME_SET()
@@ -87,12 +87,12 @@ Return
 
 ^[:: ; Go to Normal mode (for vim) with IME off even at converting.
 {
-  if(VIM_IME_GetConverting(A)){
+  if(VIM_IME_GetConverting("A")){
     Send "{Esc}"
     Sleep(1) ; wait 1 ms (Need to stop converting)
     VIM_IME_SET()
     Send "{Esc}"
-  }else if(VIM_IME_GET(A)){
+  }else if(VIM_IME_GET("A")){
     VIM_IME_SET()
     Send "{Esc}"
   }else{
