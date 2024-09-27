@@ -16,7 +16,7 @@ TMargin := 5
 BMargin := 5
 LMargin := 5
 RMargin := 5 ; sidebar = 150px
-MinSize := 0.5
+MinSize := 0.7
 MouseMoveSize := 10
 MouseWheelSize := 2
 WinMoveSize := 20
@@ -311,7 +311,6 @@ Enter::
 ; ESC to ` like normal keyboard (ESC is placed on the left of 1 in HHKB)
 Esc::
 {
-  Result := KeyWait "Esc", "T0.3"
   If (KeyWait("Esc", "T0.3")){
     Send "{Esc}"
     KeyWait "Esc"
@@ -322,8 +321,8 @@ Esc::
 }
 
 ; Disable alt to menu
-Alt::KeyWait "Alt"
-LAlt Up::Enter
+;Alt::KeyWait "Alt"
+;LAlt Up::Enter
 ; }}} Basic Settings
 
 ; Cursor, Mouse, Window move/size {{{
@@ -422,7 +421,8 @@ LAlt Up::Enter
 !+h::
 {
   MonitorGetWorkArea(, &MWALeft, &MWATop, &MWARight, &MWABottom) ; w/o Taskbar
-  WinMove MWALeft + LMargin, MWATop + TMargin
+  WinMove MWALeft + LMargin
+    , MWATop + TMargin
     , (MWARight - MWALeft - LMargin - RMargin) * 0.5
     , MWABottom - MWATop - TMargin - BMargin
     , "A"
@@ -441,7 +441,8 @@ LAlt Up::Enter
 !+k::
 {
   MonitorGetWorkArea(, &MWALeft, &MWATop, &MWARight, &MWABottom) ; w/o Taskbar
-  WinMove MWALeft + LMargin, MWATop + TMargin
+  WinMove MWALeft + LMargin
+    , MWATop + TMargin
     , MWARight - MWALeft - LMargin - RMargin
     , (MWABottom - MWATop - TMargin - BMargin) * 0.5
     , "A"
@@ -454,6 +455,47 @@ LAlt Up::Enter
     , MWATop + TMargin
     , (MWARight - MWALeft - LMargin - RMargin) * 0.5
     , MWABottom - MWATop - TMargin - BMargin
+    , "A"
+}
+
+; Half Half size
+^!+h::
+{
+  MonitorGetWorkArea(, &MWALeft, &MWATop, &MWARight, &MWABottom) ; w/o Taskbar
+  WinMove MWALeft + LMargin
+    , MWATop + TMargin
+    , (MWARight - MWALeft - LMargin - RMargin) * 0.5
+    , (MWABottom - MWATop - TMargin - BMargin) * 0.5
+    , "A"
+}
+
+^!+j::
+{
+  MonitorGetWorkArea(, &MWALeft, &MWATop, &MWARight, &MWABottom) ; w/o Taskbar
+  WinMove MWALeft + LMargin
+    , MWATop + (MWABottom - MWATop) * 0.5
+    , (MWARight - MWALeft - LMargin - RMargin) * 0.5
+    , (MWABottom - MWATop - TMargin - BMargin) * 0.5
+    , "A"
+}
+
+^!+k::
+{
+  MonitorGetWorkArea(, &MWALeft, &MWATop, &MWARight, &MWABottom) ; w/o Taskbar
+  WinMove MWALeft + (MWARight - MWALeft) * 0.5
+    , MWATop + TMargin
+    , (MWARight - MWALeft - LMargin - RMargin) * 0.5
+    , (MWABottom - MWATop - TMargin - BMargin) * 0.5
+    , "A"
+}
+
+^!+l::
+{
+  MonitorGetWorkArea(, &MWALeft, &MWATop, &MWARight, &MWABottom) ; w/o Taskbar
+  WinMove MWALeft + (MWARight - MWALeft) * 0.5
+    , MWATop + (MWABottom - MWATop) * 0.5
+    , (MWARight - MWALeft - LMargin - RMargin) * 0.5
+    , (MWABottom - MWATop - TMargin - BMargin) * 0.5
     , "A"
 }
 
