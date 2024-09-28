@@ -88,19 +88,19 @@ Return
 ^[:: ; Go to Normal mode (for vim) with IME off even at converting.
 {
   if(VIM_IME_GetConverting("A")){
-    Send "{Esc}"
+    SendInput "{Esc}"
     Sleep(1) ; wait 1 ms (Need to stop converting)
     VIM_IME_SET()
-    Send "{Esc}"
+    SendInput "{Esc}"
   }else if(VIM_IME_GET("A")){
     VIM_IME_SET()
-    Send "{Esc}"
+    SendInput "{Esc}"
   }else{
-    Send "{Esc}"
+    SendInput "{Esc}"
   }
 }
 
-^m::Send "^m" ; Use Ctrl-m as is
+^m::SendInput "^m" ; Use Ctrl-m as is
 
 ; Paste
 #HotIf WinActive("ahk_group Terminal")
@@ -120,87 +120,87 @@ Return
 }
 
 #HotIf WinActive("ahk_class Vim")
-!v::Send "{Alt}ep"
+!v::SendInput "{Alt}ep"
 
 ; Other than Terminal/Vim
 #HotIf not WinActive("ahk_group TerminalVim")
-^[::Send "{Esc}"             ; Always C-[ to ESC, like vim
-^d::Send "{Del}"             ; Always Delete with C-d
+^[::SendInput "{Esc}"             ; Always C-[ to ESC, like vim
+^d::SendInput "{Del}"             ; Always Delete with C-d
 ; }}} Terminal/Vim
 
 ; Power Point {{{
 #HotIf WinActive("ahk_class PP12FrameClass")
 ; Subscript/Superscript
-^=::Send "^tb{Enter}"
-^+=::Send "^tp{Enter}"
+^=::SendInput "^tb{Enter}"
+^+=::SendInput "^tp{Enter}"
 ; For JP keyboards
-;^-::Send "^tb{Enter}"
-;^+-::Send "^tp{Enter}"
+;^-::SendInput "^tb{Enter}"
+;^+-::SendInput "^tp{Enter}"
 
 ; Fonts
-^!+s::Send "^tfsymbol{Enter}"
-^!+a::Send "^tfarial{Enter}"
-^!+h::Send "^tfhelvetica{Enter}"
+^!+s::SendInput "^tfsymbol{Enter}"
+^!+a::SendInput "^tfarial{Enter}"
+^!+h::SendInput "^tfhelvetica{Enter}"
 ; }}} Power Point
 
 ; Word {{{
 #HotIf WinActive("ahk_class OpusApp")
-^=::Send "^tb{Enter}"
-^+=::Send "^tp{Enter}"
+^=::SendInput "^tb{Enter}"
+^+=::SendInput "^tp{Enter}"
 ; for JP keyboards
-;^-::Send "^tb{Enter}"
-;^+-::Send "^tp{Enter}"
+;^-::SendInput "^tb{Enter}"
+;^+-::SendInput "^tp{Enter}"
 ; }}} Word
 
 ; Explorer {{{
 #HotIf WinActive("ahk_class CabinetWClass")
 ; Next/Previous page
-!o::Send "!{Left}"          ; Go to previous page
-!i::Send "!{Right}"         ; Go to nexe page
+!o::SendInput "!{Left}"          ; Go to previous page
+!i::SendInput "!{Right}"         ; Go to nexe page
 ; }}} Explorer
 
 ; CLCL {{{
 #HotIf
-#c::Send "!c"
+#c::SendInput "!c"
 #HotIf WinActive("ahk_exe CLCL.exe") ; does not work...
 j::
 {
-  Send "{Down}"
+  SendInput "{Down}"
 }
-k::Send "{Up}"
+k::SendInput "{Up}"
 ; }}} CLCL
 
 ; Everthing {{{
 #HotIf WinActive("ahk_class EVERYTHING")
 Enter::
 {
-  Send "{Enter}"
+  SendInput "{Enter}"
   Sleep(200)
   if WinActive("ahk_class EVERYTHING") {
-    Send "{Enter}"
+    SendInput "{Enter}"
     Sleep(500)
   }
   WinActivate("ahk_class EVERYTHING")
   Sleep(200)
-  Send "{Esc}"
+  SendInput "{Esc}"
 }
 ; }}} Everything
 
 ; Firefox/Chrome/Edge {{{
 #HotIf WinActive("ahk_group Browser")
-^WheelDown::Send "{WheelDown}"
-^WheelUp::Send "{WheelUp}"
+^WheelDown::SendInput "{WheelDown}"
+^WheelUp::SendInput "{WheelUp}"
 ; }}} Firefox/Chrome/Edge
 
 ; Chrome {{{
 #HotIf WinActive("ahk_exe chrome.exe")
 !+c::
 {
-  Send "^+q"
+  SendInput "^+q"
   WinActivate("ahk_exe chrome.exe")
-  Send "!+c"
+  SendInput "!+c"
   Sleep(1000)
-  Send "^+q"
+  SendInput "^+q"
   WinActivate("ahk_exe chrome.exe")
 }
 ; }}} Chrome
@@ -210,35 +210,35 @@ Enter::
 ^+e::
 ^!e::
 {
-  Send "^+f"
+  SendInput "^+f"
 }
-^!q::Send "^+q"
+^!q::SendInput "^+q"
 
 ; Disable window move (want to use Ctrl+Shift+i as is)
-^+y::Send "^+y"
-^+u::Send "^+u"
-^+i::Send "^+i"
-^+o::Send "^+o"
+^+y::SendInput "^+y"
+^+u::SendInput "^+u"
+^+i::SendInput "^+i"
+^+o::SendInput "^+o"
 
 ; Go to previous page, Go to nexe page
-!o::Send "^!{Left}"
-!i::Send "^!{Right}"
+!o::SendInput "^!{Left}"
+!i::SendInput "^!{Right}"
 
 #HotIf not WinActive("ahk_exe Obsidian.exe")
 ^+e::
 ^!e::
 {
-  Send "^+q"
-  Send "^+f"
+  SendInput "^+q"
+  SendInput "^+f"
 }
 
 ^!d::
 {
-  Send "^+q"
-  Send "^!d"
+  SendInput "^+q"
+  SendInput "^!d"
 }
 
-^!q::Send "^+q"
+^!q::SendInput "^+q"
 
 ; }}} Obsidian
 
@@ -258,79 +258,79 @@ Enter::
 ;LCtrl & Tab::
 ;{
 ;  if GetKeyState("Shift","P"){
-;    Send "{ShiftAltTab}"
+;    SendInput "{ShiftAltTab}"
 ;  }else{
-;    Send "{AltTab}"
+;    SendInput "{AltTab}"
 ;  }
 ;}
 ;Alt & Tab::
 ;{
 ;  if GetKeyState("Shift","P"){
-;    Send "^+{taB}"
+;    SendInput "^+{taB}"
 ;  }else{
-;    Send "^{Tab}"
+;    SendInput "^{Tab}"
 ;  }
 ;}
-!Tab::Send "^{Tab}"
-!+Tab::Send "^+{Tab}"
+!Tab::SendInput "^{Tab}"
+!+Tab::SendInput "^+{Tab}"
 
-;!m::Send "^m"
-;^m::Send "!m"
-;>^m::Send "!m"
-;Ctrl & Left::Send "!{Left}"
-;Ctrl & Right::Send "!{Right}"
+;!m::SendInput "^m"
+;^m::SendInput "!m"
+;>^m::SendInput "!m"
+;Ctrl & Left::SendInput "!{Left}"
+;Ctrl & Right::SendInput "!{Right}"
 
 ; Cortana
-!^f::Send "#s"
+!^f::SendInput "#s"
 
 ; Other basic settings
-!Space::Send "{vkF3sc029}" ; IME by A-Space
-^Space::Send "{vkF3sc029}" ; IME by C-Space
+!Space::SendInput "{vkF3sc029}" ; IME by A-Space
+^Space::SendInput "{vkF3sc029}" ; IME by C-Space
 ;{vkF3sc029}               ; 変換
 ;{vk1Dsc07B}               ; 無変換
-!^a::Send "!{Space}n"      ; Minimize window
-!4::Send "!{F4}"           ; Close window
-^4::Send "!{F4}"           ; Close window
-!d::Send "{Del}"           ; Always Delete with A-d: Does not work on Windows 11?
-;^o::Send "!{Left}"        ; Go to previous page
-;^i::Send "!{Right}"       ; Go to nexe page ; do no set global, as Ctrl-i is used to change to katakana
+!^a::SendInput "!{Space}n"      ; Minimize window
+!4::SendInput "!{F4}"           ; Close window
+^4::SendInput "!{F4}"           ; Close window
+!d::SendInput "{Del}"           ; Always Delete with A-d: Does not work on Windows 11?
+;^o::SendInput "!{Left}"        ; Go to previous page
+;^i::SendInput "!{Right}"       ; Go to nexe page ; do no set global, as Ctrl-i is used to change to katakana
 ^Space::!`                 ; IME
-^h::Send "{BS}"            ; Always BS with C-h
+^h::SendInput "{BS}"            ; Always BS with C-h
 ;^h::
 ;{
 ;  While GetKeyState("h","p"){
-;    Send "{BS}"
+;    SendInput "{BS}"
 ;    TrayTip,Start:,%n%,10,,
 ;    Sleep(50)
 ;  }
 ;}
 
-;^j::Send "{Enter}"      ; C-j to Enter
+;^j::SendInput "{Enter}"      ; C-j to Enter
 
 ; For HHKB
 ; ESC to ` like normal keyboard (ESC is placed on the left of 1 in HHKB)
 Esc::
 {
   If (KeyWait("Esc", "T0.3")){
-    Send "{Esc}"
+    SendInput "{Esc}"
     KeyWait "Esc"
   }else{
-    Send "``"
+    SendInput "``"
     KeyWait "Esc"
   }
 }
 
 ; Disable alt to menu
 Alt::KeyWait "Alt"
-LAlt Up::Send "{Enter}"
+LAlt Up::SendInput "{Enter}"
 ; }}} Basic Settings
 
 ; Cursor, Mouse, Window move/size {{{
 ; Cursor {{{
-!^h::Send "{Left}"
-!^j::Send "{Down}"
-!^k::Send "{Up}"
-!^l::Send "{Right}"
+!^h::SendInput "{Left}"
+!^j::SendInput "{Down}"
+!^k::SendInput "{Up}"
+!^l::SendInput "{Right}"
 ; }}} Cursor
 
 ; Mouse {{{
@@ -378,16 +378,16 @@ LAlt Up::Send "{Enter}"
 }
 
 ; Move to a different screen
-!^+y:: Send "#^{Left}"
-!^+u:: Send "#^{Down}"
-!^+i:: Send "#^{Up}"
-!^+o:: Send "#^{Right}"
+!^+y:: SendInput "#^{Left}"
+!^+u:: SendInput "#^{Down}"
+!^+i:: SendInput "#^{Up}"
+!^+o:: SendInput "#^{Right}"
 
 ; }}} Window move
 
 ; Virtual desktop {{{
-^!y::Send "#^{Left}"
-^!o::Send "#^{Right}"
+^!y::SendInput "#^{Left}"
+^!o::SendInput "#^{Right}"
 ; }}} Virtual desktop
 
 

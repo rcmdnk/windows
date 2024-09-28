@@ -91,7 +91,7 @@ Return
 ; current clipboard contents to be restored later.
 ClipboardOld := %ClipboardAll%
 Clipboard := "" ; Must start off blank for detection to work.
-Send "^c"
+SendInput "^c"
 if !ClipWait(1) ; ClipWait timed out.
   return
 ; Replace CRLF and/or LF with `n for use in a "send-raw" hotstring:
@@ -127,7 +127,7 @@ MoveCaret()
   If not WinActive("New Hotstring")
     return
   ; Otherwise, move the InputBox's insertion point to where the user will type the abbreviation.
-  Send "{HOME}"
+  SendInput "{HOME}"
   Loop StrLen(Hotstring) + 4
     SendInput "{Right}"
   SetTimer(MoveCaret, 0)
