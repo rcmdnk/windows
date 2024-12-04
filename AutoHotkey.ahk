@@ -320,9 +320,9 @@ Esc::
   }
 }
 
-; Disable alt to menu
-Alt::KeyWait "Alt"
-LAlt Up::SendInput "{Enter}"
+;; Disable alt to menu
+;Alt::KeyWait "Alt"
+;LAlt Up::SendInput "{Enter}"
 ; }}} Basic Settings
 
 ; Cursor, Mouse, Window move/size {{{
