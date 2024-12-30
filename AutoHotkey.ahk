@@ -27,6 +27,34 @@ InstallKeybdHook(true) ; For checking key history
 A_HotkeyInterval := 1000 ; Hotkey inteval (default 2000 milliseconds).
 A_MaxHotkeysPerInterval := 100 ; Max hotkeys perinterval (default 50).
 
+; ToggleApp
+LaunchApp(winName, appPath) {
+    Run(appPath)
+    WinWait(winName)
+    WinActivate(winName)
+}
+
+prevApp(winName) {
+    Send("!{Tab}")
+    Send("{Alt Up}")
+}
+
+ToggleApp(key, winName, appPath) {
+    HotIfWinActive(winName)
+    Hotkey(key, (*) => prevApp(winName))
+    HotIfWinExist(winName)
+    Hotkey(key, (*) => WinActivate(winName))
+    HotIf
+    Hotkey(key, (*) => LaunchApp(winName, appPath))
+    HotIf
+}
+
+obsidian_app : "C:\Users\" A_UserName "\AppData\Local\obsidian\Obsidian.exe"
+
+ToggleApp("^!c", "ahk_exe chrome.exe", A_ProgramFiles "\Google\Chrome\Application\chrome.exe")
+ToggleApp("^!s", "ahk_exe slack.exe", A_ProgramFiles "\Slack\Slack.exe")
+ToggleApp("^!t", "ahk_exe Hyper.exe", "C:\Users\" A_UserName "\AppData\Local\Programs\Hyper.exe")
+ToggleApp("^!q", "ahk_exe Obsidian.exe", obsidian_app)
 
 ; For Terminal/Vim
 GroupAdd "Terminal", "ahk_class PuTTY"
@@ -154,9 +182,6 @@ Return
 
 ; Explorer {{{
 #HotIf WinActive("ahk_class CabinetWClass")
-; Next/Previous page
-!o::SendInput "!{Left}"          ; Go to previous page
-!i::SendInput "!{Right}"         ; Go to nexe page
 ; }}} Explorer
 
 ; CLCL {{{
@@ -192,53 +217,49 @@ Enter::
 ^WheelUp::SendInput "{WheelUp}"
 ; }}} Firefox/Chrome/Edge
 
-; Chrome {{{
-#HotIf WinActive("ahk_exe chrome.exe")
-!+c::
-{
-  SendInput "^+q"
-  WinActivate("ahk_exe chrome.exe")
-  SendInput "!+c"
-  Sleep(1000)
-  SendInput "^+q"
-  WinActivate("ahk_exe chrome.exe")
-}
-; }}} Chrome
-
 ; Obsidian {{{
 #HotIf WinActive("ahk_exe Obsidian.exe")
-^+e::
+; Search
 ^!e::
 {
   SendInput "^+f"
 }
-^!q::SendInput "^+q"
 
-; Disable window move (want to use Ctrl+Shift+i as is)
-^+y::SendInput "^+y"
-^+u::SendInput "^+u"
-^+i::SendInput "^+i"
-^+o::SendInput "^+o"
+; Open inspector
+!+i::SendInput "^+i"
 
-; Go to previous page, Go to nexe page
-!o::SendInput "^!{Left}"
-!i::SendInput "^!{Right}"
-
-#HotIf not WinActive("ahk_exe Obsidian.exe")
-^+e::
+#HotIf not WinExist("ahk_exe Obsidian.exe")
+; Search
 ^!e::
 {
-  SendInput "^+q"
+  LaunchApp(obsidian_app)
+  Sleep(10000)
   SendInput "^+f"
 }
 
+; Open Daily Note
 ^!d::
 {
-  SendInput "^+q"
+  LaunchApp(obsidian_app)
+  Sleep(10000)
   SendInput "^!d"
 }
 
-^!q::SendInput "^+q"
+#HotIf not WinActive("ahk_exe Obsidian.exe")
+; Search
+^!e::
+{
+  WinActivate("ahk_exe Obsidian.exe")
+  SendInput "^+f"
+}
+
+; Open Daily Note
+^!d::
+{
+  WinActivate("ahk_exe Obsidian.exe")
+  SendInput "^+q"
+  SendInput "^!d"
+}
 
 ; }}} Obsidian
 
@@ -292,9 +313,9 @@ Enter::
 !4::SendInput "!{F4}"           ; Close window
 ^4::SendInput "!{F4}"           ; Close window
 !d::SendInput "{Del}"           ; Always Delete with A-d: Does not work on Windows 11?
-;^o::SendInput "!{Left}"        ; Go to previous page
-;^i::SendInput "!{Right}"       ; Go to nexe page ; do no set global, as Ctrl-i is used to change to katakana
-^Space::!`                 ; IME
+!o::SendInput "!{Left}"         ; Go to previous page
+!i::SendInput "!{Right}"        ; Go to next page ; Use Alt-i instead of Ctrl-i to avoid to disable Ctrl-i for katakana
+^Space::!`                      ; IME
 ^h::SendInput "{BS}"            ; Always BS with C-h
 ;^h::
 ;{
