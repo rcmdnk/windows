@@ -49,7 +49,7 @@ ToggleApp(key, winName, appPath) {
     HotIf
 }
 
-obsidian_app : "C:\Users\" A_UserName "\AppData\Local\obsidian\Obsidian.exe"
+obsidian_app := "C:\Users\" A_UserName "\AppData\Local\obsidian\Obsidian.exe"
 
 ToggleApp("^!c", "ahk_exe chrome.exe", A_ProgramFiles "\Google\Chrome\Application\chrome.exe")
 ToggleApp("^!s", "ahk_exe slack.exe", A_ProgramFiles "\Slack\Slack.exe")
@@ -232,7 +232,7 @@ Enter::
 ; Search
 ^!e::
 {
-  LaunchApp(obsidian_app)
+  LaunchApp("ahk_exe Obsidian.exe", obsidian_app)
   Sleep(10000)
   SendInput "^+f"
 }
@@ -240,7 +240,7 @@ Enter::
 ; Open Daily Note
 ^!d::
 {
-  LaunchApp(obsidian_app)
+  LaunchApp("ahk_exe Obsidian.exe", obsidian_app)
   Sleep(10000)
   SendInput "^!d"
 }
@@ -377,7 +377,7 @@ Esc::
 ^+y::
 {
   WinGetPos &X, &Y, , , "A" ; A for Active Window
-  WinMove X - WinMoveSize, Y, , "A"
+  WinMove X - WinMoveSize, Y, , , "A"
 }
 
 ^+u::
@@ -395,14 +395,14 @@ Esc::
 ^+o::
 {
   WinGetPos &X, &Y, , , "A"
-  WinMove X + WinMoveSize, Y, , "A"
+  WinMove X + WinMoveSize, Y, , , "A"
 }
 
 ; Move to a different screen
-!^+y:: SendInput "#^{Left}"
-!^+u:: SendInput "#^{Down}"
-!^+i:: SendInput "#^{Up}"
-!^+o:: SendInput "#^{Right}"
+!^+y:: SendInput "#+{Left}"
+!^+u:: SendInput "#+{Down}"
+!^+i:: SendInput "#+{Up}"
+!^+o:: SendInput "#+{Right}"
 
 ; }}} Window move
 
