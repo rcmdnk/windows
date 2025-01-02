@@ -408,8 +408,8 @@ Esc::
 ; Note: ctrl-alt-shit -> win + X mapping is recognized as ctrl-alt-shit-win,
 ; which opens Microsoft 365 app. win + X is also executed, but app is also
 ; launched. This can not be disabled by default, may need registory edit.
-^!+y::SendInput "#^{Left}"
-^!+o::SendInput "#^{Right}"
+^!+y::SendInput "{Alt up}{Shift up}#^{Left}"
+^!+o::SendInput "{Alt up}{Shift up}#^{Right}"
 ; }}} Virtual desktop
 
 
