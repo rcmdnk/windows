@@ -399,16 +399,17 @@ Esc::
 }
 
 ; Move to a different screen
-!^+y:: SendInput "#+{Left}"
-!^+u:: SendInput "#+{Down}"
-!^+i:: SendInput "#+{Up}"
-!^+o:: SendInput "#+{Right}"
+^!y:: SendInput "#+{Left}"
+^!o:: SendInput "#+{Right}"
 
 ; }}} Window move
 
 ; Virtual desktop {{{
-^!y::SendInput "#^{Left}"
-^!o::SendInput "#^{Right}"
+; Note: ctrl-alt-shit -> win + X mapping is recognized as ctrl-alt-shit-win,
+; which opens Microsoft 365 app. win + X is also executed, but app is also
+; launched. This can not be disabled by default, may need registory edit.
+^!+y::SendInput "#^{Left}"
+^!+o::SendInput "#^{Right}"
 ; }}} Virtual desktop
 
 
