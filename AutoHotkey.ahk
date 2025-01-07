@@ -16,7 +16,8 @@ TMargin := 5
 BMargin := 5
 LMargin := 5
 RMargin := 5 ; sidebar = 150px
-MinSize := 0.7
+MiniSizeHorizontal := 0.5
+MiniSizeVertical := 1.0
 MouseMoveSize := 10
 MouseWheelSize := 2
 WinMoveSize := 20
@@ -28,33 +29,55 @@ A_HotkeyInterval := 1000 ; Hotkey inteval (default 2000 milliseconds).
 A_MaxHotkeysPerInterval := 100 ; Max hotkeys perinterval (default 50).
 
 ; ToggleApp
-LaunchApp(winName, appPath) {
-    Run(appPath)
-    WinWait(winName)
-    WinActivate(winName)
+LaunchApp(WinName, AppPath) {
+    Run(AppPath)
+    WinWait(WinName)
+    WinActivate(WinName)
 }
 
-prevApp(winName) {
+PrevApp() {
     Send("!{Tab}")
     Send("{Alt Up}")
 }
 
-ToggleApp(key, winName, appPath) {
-    HotIfWinActive(winName)
-    Hotkey(key, (*) => prevApp(winName))
-    HotIfWinExist(winName)
-    Hotkey(key, (*) => WinActivate(winName))
+ToggleApp(Key, WinName, AppPath) {
+    HotIfWinActive(WinName)
+    Hotkey(Key, (*) => PrevApp())
+    HotIfWinExist(WinName)
+    Hotkey(Key, (*) => WinActivate(WinName))
     HotIf
-    Hotkey(key, (*) => LaunchApp(winName, appPath))
+    Hotkey(Key, (*) => LaunchApp(WinName, AppPath))
     HotIf
 }
 
-obsidian_app := "C:\Users\" A_UserName "\AppData\Local\obsidian\Obsidian.exe"
+ObsidianApp := "C:\Users\" A_UserName "\AppData\Local\obsidian\Obsidian.exe"
 
 ToggleApp("^!c", "ahk_exe chrome.exe", A_ProgramFiles "\Google\Chrome\Application\chrome.exe")
 ToggleApp("^!s", "ahk_exe slack.exe", A_ProgramFiles "\Slack\Slack.exe")
 ToggleApp("^!t", "ahk_exe Hyper.exe", "C:\Users\" A_UserName "\AppData\Local\Programs\Hyper.exe")
-ToggleApp("^!q", "ahk_exe Obsidian.exe", obsidian_app)
+ToggleApp("^!q", "ahk_exe Obsidian.exe", ObsidianApp)
+
+
+; Monitor functions
+GetActiveMonitorWorkArea(&Left, &Top, &Right, &Bottom) {
+  WinGetPos(&X, &Y, &W, &H, "A")
+  CenterX := X + W // 2
+  CenterY := Y + H // 2
+
+  Monitor := DllCall("MonitorFromPoint", "int64", CenterX | CenterY << 32, "uint", 2, "ptr")
+
+  Buf := Buffer(40, 0) ; MONITORINFO structure
+  NumPut("UInt", 40, Buf)
+  if DllCall("GetMonitorInfoW", "ptr", Monitor, "ptr", Buf) {
+    ; Get rcWork  (ReCtangle of the WORK area of the monitor)
+    Left := NumGet(Buf, 20, "Int")
+    Top := NumGet(Buf, 24, "Int")
+    Right := NumGet(Buf, 28, "Int")
+    Bottom := NumGet(Buf, 32, "Int")
+  } else {
+    Left := Top := Right := Bottom := -1
+  }
+}
 
 ; For Terminal/Vim
 GroupAdd "Terminal", "ahk_class PuTTY"
@@ -232,7 +255,7 @@ Enter::
 ; Search
 ^!e::
 {
-  LaunchApp("ahk_exe Obsidian.exe", obsidian_app)
+  LaunchApp("ahk_exe Obsidian.exe", ObsidianApp)
   Sleep(10000)
   SendInput "^+f"
 }
@@ -240,7 +263,7 @@ Enter::
 ; Open Daily Note
 ^!d::
 {
-  LaunchApp("ahk_exe Obsidian.exe", obsidian_app)
+  LaunchApp("ahk_exe Obsidian.exe", ObsidianApp)
   Sleep(10000)
   SendInput "^!d"
 }
@@ -419,30 +442,29 @@ Esc::
 ^!Enter::
 !+Enter::
 {
-  ;WinGetPos &X, &Y, &W, &H, Program Manager ; Full Desktop
-  ;Msgbox "Pos At " X ", " Y ", " W ", " H
-  MonitorGetWorkArea(, &MWALeft, &MWATop, &MWARight, &MWABottom) ; w/o Taskbar
-  ;Msgbox MWALeft ", " MWATop ", " MWARight ", " MWABottom
+  GetActiveMonitorWorkArea(&MWALeft, &MWATop, &MWARight, &MWABottom)
   WinMove MWALeft + LMargin, MWATop + TMargin
     , MWARight - MWALeft - LMargin - RMargin
     , MWABottom - MWATop - TMargin - BMargin
     , "A"
 }
 
-; Minsize
+; MiniSize
 ^!+Enter::
 {
-  MonitorGetWorkArea(, &MWALeft, &MWATop, &MWARight, &MWABottom) ; w/o Taskbar
-  WinMove MWALeft + LMargin, MWATop + TMargin
-    , (MWARight - MWALeft - LMargin - RMargin) * Minsize
-    , (MWABottom - MWATop - TMargin - BMargin) * Minsize
+  GetActiveMonitorWorkArea(&MWALeft, &MWATop, &MWARight, &MWABottom)
+  HorizontalMargin := (MWARight - MWALeft - LMargin - RMargin) * (1 - MiniSizeHorizontal)
+  VerticalMargin := (MWABottom - MWATop - TMargin - BMargin) * (1 - MiniSizeVertical)
+  WinMove MWALeft + LMargin + HorizontalMargin / 2, MWATop + TMargin + VerticalMargin / 2
+    , MWARight - MWALeft - LMargin - RMargin - HorizontalMargin
+    , MWABottom - MWATop - TMargin - BMargin - VerticalMargin
     , "A"
 }
 
 ; Half size
 !+h::
 {
-  MonitorGetWorkArea(, &MWALeft, &MWATop, &MWARight, &MWABottom) ; w/o Taskbar
+  GetActiveMonitorWorkArea(&MWALeft, &MWATop, &MWARight, &MWABottom)
   WinMove MWALeft + LMargin
     , MWATop + TMargin
     , (MWARight - MWALeft - LMargin - RMargin) * 0.5
@@ -452,7 +474,7 @@ Esc::
 
 !+j::
 {
-  MonitorGetWorkArea(, &MWALeft, &MWATop, &MWARight, &MWABottom) ; w/o Taskbar
+  GetActiveMonitorWorkArea(&MWALeft, &MWATop, &MWARight, &MWABottom)
   WinMove MWALeft + LMargin
     , MWATop + (MWABottom - MWATop) * 0.5
     , MWARight - MWALeft - LMargin - RMargin
@@ -462,7 +484,7 @@ Esc::
 
 !+k::
 {
-  MonitorGetWorkArea(, &MWALeft, &MWATop, &MWARight, &MWABottom) ; w/o Taskbar
+  GetActiveMonitorWorkArea(&MWALeft, &MWATop, &MWARight, &MWABottom)
   WinMove MWALeft + LMargin
     , MWATop + TMargin
     , MWARight - MWALeft - LMargin - RMargin
@@ -472,7 +494,7 @@ Esc::
 
 !+l::
 {
-  MonitorGetWorkArea(, &MWALeft, &MWATop, &MWARight, &MWABottom) ; w/o Taskbar
+  GetActiveMonitorWorkArea(&MWALeft, &MWATop, &MWARight, &MWABottom)
   WinMove MWALeft + (MWARight - MWALeft) * 0.5
     , MWATop + TMargin
     , (MWARight - MWALeft - LMargin - RMargin) * 0.5
@@ -483,7 +505,7 @@ Esc::
 ; Half Half size
 ^!+h::
 {
-  MonitorGetWorkArea(, &MWALeft, &MWATop, &MWARight, &MWABottom) ; w/o Taskbar
+  GetActiveMonitorWorkArea(&MWALeft, &MWATop, &MWARight, &MWABottom)
   WinMove MWALeft + LMargin
     , MWATop + TMargin
     , (MWARight - MWALeft - LMargin - RMargin) * 0.5
@@ -493,7 +515,7 @@ Esc::
 
 ^!+j::
 {
-  MonitorGetWorkArea(, &MWALeft, &MWATop, &MWARight, &MWABottom) ; w/o Taskbar
+  GetActiveMonitorWorkArea(&MWALeft, &MWATop, &MWARight, &MWABottom)
   WinMove MWALeft + LMargin
     , MWATop + (MWABottom - MWATop) * 0.5
     , (MWARight - MWALeft - LMargin - RMargin) * 0.5
@@ -503,7 +525,7 @@ Esc::
 
 ^!+k::
 {
-  MonitorGetWorkArea(, &MWALeft, &MWATop, &MWARight, &MWABottom) ; w/o Taskbar
+  GetActiveMonitorWorkArea(&MWALeft, &MWATop, &MWARight, &MWABottom)
   WinMove MWALeft + (MWARight - MWALeft) * 0.5
     , MWATop + TMargin
     , (MWARight - MWALeft - LMargin - RMargin) * 0.5
@@ -513,7 +535,7 @@ Esc::
 
 ^!+l::
 {
-  MonitorGetWorkArea(, &MWALeft, &MWATop, &MWARight, &MWABottom) ; w/o Taskbar
+  GetActiveMonitorWorkArea(&MWALeft, &MWATop, &MWARight, &MWABottom)
   WinMove MWALeft + (MWARight - MWALeft) * 0.5
     , MWATop + (MWABottom - MWATop) * 0.5
     , (MWARight - MWALeft - LMargin - RMargin) * 0.5
