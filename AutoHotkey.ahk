@@ -333,8 +333,9 @@ Enter::
 ;{vkF3sc029}               ; 変換
 ;{vk1Dsc07B}               ; 無変換
 !^a::SendInput "!{Space}n"      ; Minimize window
-!4::SendInput "!{F4}"           ; Close window
-^4::SendInput "!{F4}"           ; Close window
+;!4::SendInput "!{F4}"           ; Close window
+;^4::SendInput "!{F4}"           ; Close window
+^!4::SendInput "!{F4}"           ; Close window
 !d::SendInput "{Del}"           ; Always Delete with A-d: Does not work on Windows 11?
 !o::SendInput "!{Left}"         ; Go to previous page
 !i::SendInput "!{Right}"        ; Go to next page ; Use Alt-i instead of Ctrl-i to avoid to disable Ctrl-i for katakana
