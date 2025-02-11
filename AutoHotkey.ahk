@@ -108,6 +108,7 @@ Return
 
 ; External files w/o Auto execute section
 #Include %A_LineFile%\..\AutoCorrect.ahk
+#Include %A_LineFile%\..\Private.ahk
 
 ;; Basic Settings, HotKeys, Functions {{{
 ; Settings
@@ -333,8 +334,8 @@ Enter::
 ;{vkF3sc029}               ; 変換
 ;{vk1Dsc07B}               ; 無変換
 !^a::SendInput "!{Space}n"      ; Minimize window
-;!4::SendInput "!{F4}"           ; Close window
-;^4::SendInput "!{F4}"           ; Close window
+!4::SendInput "!{F4}"           ; Close window
+^4::SendInput "!{F4}"           ; Close window
 ^!4::SendInput "!{F4}"           ; Close window
 !d::SendInput "{Del}"           ; Always Delete with A-d: Does not work on Windows 11?
 !o::SendInput "!{Left}"         ; Go to previous page
