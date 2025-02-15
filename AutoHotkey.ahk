@@ -248,6 +248,8 @@ Enter::
 {
   SendInput "^+f"
 }
+^4::SendInput "!{Space}n"      ; Minimize window
+!4::SendInput "!{Space}n"      ; Minimize window
 
 ; Open inspector
 !+i::SendInput "^+i"
