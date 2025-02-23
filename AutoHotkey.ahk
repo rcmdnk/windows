@@ -38,6 +38,7 @@ LaunchApp(WinName, AppPath) {
 PrevApp() {
     Send("!{Tab}")
     Send("{Alt Up}")
+    Send("{Tab Up}")
 }
 
 ToggleApp(Key, WinName, AppPath) {
@@ -248,8 +249,8 @@ Enter::
 {
   SendInput "^+f"
 }
-^4::SendInput "!{Space}n"      ; Minimize window
-!4::SendInput "!{Space}n"      ; Minimize window
+^4::WinMinimize "A"
+!4::WinMinimize "A"
 
 ; Open inspector
 !+i::SendInput "^+i"
@@ -335,7 +336,7 @@ Enter::
 ^Space::SendInput "{vkF3sc029}" ; IME by C-Space
 ;{vkF3sc029}               ; 変換
 ;{vk1Dsc07B}               ; 無変換
-!^a::SendInput "!{Space}n"      ; Minimize window
+!^a::WinMinimize "A"
 !4::SendInput "!{F4}"           ; Close window
 ^4::SendInput "!{F4}"           ; Close window
 ^!4::SendInput "!{F4}"           ; Close window
