@@ -108,7 +108,6 @@ Return
 ; }}}
 
 ; External files w/o Auto execute section
-#Include %A_LineFile%\..\AutoCorrect.ahk
 #Include %A_LineFile%\..\Private.ahk
 
 ;; Basic Settings, HotKeys, Functions {{{
