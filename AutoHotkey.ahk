@@ -237,8 +237,11 @@ Enter::
 
 ; Firefox/Chrome/Edge {{{
 #HotIf WinActive("ahk_group Browser")
+; Do not zoom/unzoom with Ctrl-+/- in Firefox/Chrome/Edge
 ^WheelDown::SendInput "{WheelDown}"
 ^WheelUp::SendInput "{WheelUp}"
+; <C-n> cant not be mapped by Vimium
+^n::SendInput "^{Tab}"
 ; }}} Firefox/Chrome/Edge
 
 ; Obsidian {{{
