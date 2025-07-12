@@ -241,7 +241,9 @@ Enter::
 ^WheelDown::SendInput "{WheelDown}"
 ^WheelUp::SendInput "{WheelUp}"
 ; <C-n> cant not be mapped by Vimium
+; <C-p> can be mapped, but better to map here as vimum does not work on such Chrome Web Store page
 ^n::SendInput "^{Tab}"
+^p::SendInput "^+{Tab}"
 ; }}} Firefox/Chrome/Edge
 
 ; Obsidian {{{
