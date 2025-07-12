@@ -240,10 +240,7 @@ Enter::
 ; Do not zoom/unzoom with Ctrl-+/- in Firefox/Chrome/Edge
 ^WheelDown::SendInput "{WheelDown}"
 ^WheelUp::SendInput "{WheelUp}"
-; <C-n> cant not be mapped by Vimium
-; <C-p> can be mapped, but better to map here as vimum does not work on such Chrome Web Store page
-^n::SendInput "^{Tab}"
-^p::SendInput "^+{Tab}"
+!f::SendInput "!fff"
 ; }}} Firefox/Chrome/Edge
 
 ; Obsidian {{{
@@ -343,10 +340,11 @@ Enter::
 !^a::WinMinimize "A"
 !4::SendInput "!{F4}"           ; Close window
 ^4::SendInput "!{F4}"           ; Close window
-^!4::SendInput "!{F4}"           ; Close window
+^!4::SendInput "!{F4}"          ; Close window
 !d::SendInput "{Del}"           ; Always Delete with A-d: Does not work on Windows 11?
-!o::SendInput "!{Left}"         ; Go to previous page
-!i::SendInput "!{Right}"        ; Go to next page ; Use Alt-i instead of Ctrl-i to avoid to disable Ctrl-i for katakana
+^o::SendInput "!{Left}"         ; Go to previous page
+^i::SendInput "!{Right}"        ; Go to next page
+!i::^i                          ; katakana
 ^Space::!`                      ; IME
 ^h::SendInput "{BS}"            ; Always BS with C-h
 ;^h::
