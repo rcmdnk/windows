@@ -90,6 +90,7 @@ GroupAdd "Terminal", "ahk_exe WindowsTerminal.exe"
 GroupAdd "Terminal", "ahk_exe powershell.exe"
 GroupAdd "Terminal", "ahk_exe Hyper.exe"
 GroupAdd "Terminal", "ahk_exe vim.exe"
+GroupAdd "Terminal", "ahk_exe wezterm-gui.exe"
 GroupAdd "TerminalVim", "ahk_group Terminal"
 GroupAdd "TerminalVim", "ahk_class Vim"
 GroupAdd "TerminalVim", "ahk_class mintty"
@@ -155,7 +156,7 @@ Return
 ^m::SendInput "^m" ; Use Ctrl-m as is
 
 ; Paste
-#HotIf WinActive("ahk_group Terminal")
+#HotIf WinActive("ahk_group Terminal") and not WinActive("ahk_exe wezterm-gui.exe")
 !v::
 {
   ;StringSplit, strout, clipboard, `n
